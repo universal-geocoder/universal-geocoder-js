@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Universal Geocoder</title>
+
+        <link rel="stylesheet" href="/universal-geocoder/vendor/bootswatch/dist/flatly/bootstrap.min.css">
+        <link rel="stylesheet" href="/universal-geocoder/vendor/components-font-awesome/css/all.min.css">
+        <link rel="stylesheet" href="/universal-geocoder/vendor/highlight/build/styles/dracula.min.css">
+        <link rel="stylesheet" href="/universal-geocoder/css/main.css">
+    </head>
+
+    <body>
+
+        <header class="navbar navbar-dark bg-primary sticky-top">
+
+            <a class="navbar-brand" href="/universal-geocoder/">
+                Universal Geocoder
+                <small class="d-none d-sm-none d-md-block d-xl-inline">
+                    A universal JavaScript library for client-side geocoding applications with multiple built-in providers
+                </small>
+            </a>
+
+                            <a href="https://github.com/universal-geocoder/universal-geocoder-js" target="_blank" class="btn btn-secondary d-none d-sm-block" role="button"><i class="fab fa-github"></i> View on GitHub</a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+                        <ul class="nav nav-pills flex-column">
+                                                            <li class="nav-item">
+                                    <a href="/universal-geocoder/" class="nav-link ">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li class="nav-item">
+                                    <a href="/universal-geocoder/docs/provider_usage.html" class="nav-link ">
+                                        Provider Usage
+                                    </a>
+                                </li>
+                                                    </ul>
+                    </nav>
+                
+                <section id="content" class="col-sm-9 offset-sm-3 col-lg-10 offset-lg-2">
+                    <h1 id="changelog">Changelog</h1>
+<h2 id="024">0.2.4</h2>
+<ul>
+<li>[Nominatim] Fix error when no result is received</li>
+</ul>
+<h2 id="023">0.2.3</h2>
+<ul>
+<li>Fix TypeScript types for the library to be usable in a TS project</li>
+</ul>
+<h2 id="022">0.2.2</h2>
+<ul>
+<li>Use relative paths for build files</li>
+</ul>
+<h2 id="021">0.2.1</h2>
+<ul>
+<li>Missing types folder when publishing</li>
+</ul>
+<h2 id="020">0.2.0</h2>
+<ul>
+<li>Better Nominatim support</li>
+<li>Better GeoJSON support</li>
+</ul>
+<h2 id="010">0.1.0</h2>
+<ul>
+<li>Library rewritten in TypeScript</li>
+<li>Library can be used as a module as well</li>
+<li>Add Mapbox provider</li>
+<li>Formatted address, bounds and country support</li>
+<li>Better handling of provider options (JSONP, SSL)</li>
+<li>The methods <code>geocode</code> and <code>geodecode</code> can take an object or a <code>Query</code></li>
+</ul>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    made with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/universal-geocoder/vendor/jquery/dist/js/jquery.min.js"></script>
+        <script src="/universal-geocoder/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/universal-geocoder/vendor/highlight/build/highlight.min.js"></script>
+
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+
+    </body>
+</html>

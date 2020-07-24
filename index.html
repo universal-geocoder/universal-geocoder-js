@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Universal Geocoder</title>
+
+        <link rel="stylesheet" href="/universal-geocoder/vendor/bootswatch/dist/flatly/bootstrap.min.css">
+        <link rel="stylesheet" href="/universal-geocoder/vendor/components-font-awesome/css/all.min.css">
+        <link rel="stylesheet" href="/universal-geocoder/vendor/highlight/build/styles/dracula.min.css">
+        <link rel="stylesheet" href="/universal-geocoder/css/main.css">
+    </head>
+
+    <body>
+
+        <header class="navbar navbar-dark bg-primary sticky-top">
+
+            <a class="navbar-brand" href="/universal-geocoder/">
+                Universal Geocoder
+                <small class="d-none d-sm-none d-md-block d-xl-inline">
+                    A universal JavaScript library for client-side geocoding applications with multiple built-in providers
+                </small>
+            </a>
+
+                            <a href="https://github.com/universal-geocoder/universal-geocoder-js" target="_blank" class="btn btn-secondary d-none d-sm-block" role="button"><i class="fab fa-github"></i> View on GitHub</a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+                        <ul class="nav nav-pills flex-column">
+                                                            <li class="nav-item">
+                                    <a href="/universal-geocoder/" class="nav-link active">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li class="nav-item">
+                                    <a href="/universal-geocoder/docs/provider_usage.html" class="nav-link ">
+                                        Provider Usage
+                                    </a>
+                                </li>
+                                                    </ul>
+                    </nav>
+                
+                <section id="content" class="col-sm-9 offset-sm-3 col-lg-10 offset-lg-2">
+                    <p><img src="https://raw.githubusercontent.com/universal-geocoder/universal-geocoder-js/main/assets/logo.svg" alt="Universal Geocoder Logo" /></p>
+<h1 id="universal-geocoder">Universal Geocoder</h1>
+<p>Universal Geocoder is a universal JavaScript library for client-side geocoding applications with multiple built-in providers.</p>
+<p>Need geocoding 🌍️ in your website or application? Don't want to be vendor-locked to a service? ✨️ Universal Geocoder ✨️ is for you!</p>
+<p>Universal Geocoder is a TypeScript fork of <a href="https://github.com/geocoder-php/geocoder-js">GeocoderJS</a>, itself a port of the <a href="https://geocoder-php.org/">Geocoder PHP</a> library.</p>
+<p>This library is platform agnostic: it is available either server-side (Node) or client-side (browsers, React Native).</p>
+<h2 id="installation">Installation</h2>
+<p>Add the library to your project:</p>
+<pre><code class="language-shell">npm install --save universal-geocoder</code></pre>
+<blockquote>
+<p>⚠️ <strong>Warning</strong>: If you need to use this library in an environment not supporting the Promise API such as Internet Explorer, you must install an ES6 Promise compatible polyfill like <a href="https://github.com/jakearchibald/es6-promise">es6-promise</a>.</p>
+</blockquote>
+<h2 id="usage">Usage</h2>
+<p>You can either use Universal Geocoder as a module or as a direct dependency.</p>
+<p>As a module:</p>
+<pre><code class="language-javascript">import UniversalGeocoder from "universal-geocoder";
+
+const openStreetMapGeocoder = UniversalGeocoder.createGeocoder("openstreetmap");
+
+openStreetMapGeocoder.geocode("1600 Pennsylvania Ave NW, Washington, DC", (result) =&gt; {
+  console.log(result);
+});</code></pre>
+<p>If you want to use the library as a direct dependecy, copy <code>dist/universal-geocoder.js</code> or <code>dist/universal-geocoder.min.js</code> to your dependencies.</p>
+<p>Universal Geocoder will be available in the global environment:</p>
+<pre><code class="language-javascript">const openStreetMapGeocoder = UniversalGeocoder.createGeocoder("openstreetmap");
+
+openStreetMapGeocoder.geodecode("44.915", "-93.21", (result) =&gt; {
+  console.log(result);
+});</code></pre>
+<p>For a more advanced usage, see the example below:</p>
+<pre><code class="language-javascript">import UniversalGeocoder, { ReverseQuery } from "universal-geocoder";
+
+const googleGeocoder = UniversalGeocoder.createGeocoder({
+  provider: "google",
+  apiKey: "YOUR_API_KEY",
+  useSsl: true,
+  useJsonp: false,
+  // other specific provider options
+});
+
+googleGeocoder.geocode({
+  text: "1600 Pennsylvania Ave, Washington, DC",
+  locale: "FR",
+  limit: 10,
+  // other specific provider parameters
+}, (result) =&gt; {
+  console.log(result);
+});
+
+const reverseQuery = ReverseQuery.create({
+  latitude: "44.915",
+  longitude: "-93.21",
+})
+.withLocale("FR")
+.withLimit(7);
+googleGeocoder.geodecode(reverseQuery, (result) =&gt; {
+  console.log(result);
+});</code></pre>
+<h3 id="common-options-">Common Options (<code>createGeocoder</code> method)</h3>
+<ul>
+<li><code>useSsl</code>: boolean to use the HTTPS API of the providers</li>
+<li><code>useJsonp</code>: boolean to use JSONP</li>
+<li><code>apiKey</code>: the API key to use for the provider</li>
+</ul>
+<h3 id="common">Common <code>geocode</code> parameters (<code>GeocodeQuery</code> object)</h3>
+<ul>
+<li><code>text</code>: what is searched</li>
+<li><code>south</code>, <code>west</code>, <code>north</code>, <code>east</code> (<code>withBounds</code> method): the bounds to use</li>
+<li><code>locale</code>: the locale to use for the query</li>
+<li><code>limit</code>: the maximum number of results to have</li>
+</ul>
+<h3 id="common-1">Common <code>geodecode</code> parameters (<code>ReverseQuery</code> object)</h3>
+<ul>
+<li><code>latitude</code>, <code>longitude</code> (<code>withCoordinates</code> method): the coordinates to search for</li>
+<li><code>locale</code>: the locale to use for the query</li>
+<li><code>limit</code>: the maximum number of results to have</li>
+</ul>
+<h3 id="common-result-properties-">Common Result Properties (<code>Geocoded</code> object)</h3>
+<p>The result of a query is a <code>Geocoded</code> object which maps the following common information:</p>
+<ul>
+<li>Coordinates (latitute and longitude)</li>
+<li>Bounds (south, west, north, east)</li>
+<li>Formatted address</li>
+<li>Address details: street number, street name, (sub) locality, postal code, region, administration levels, country (with its code)</li>
+</ul>
+<p>You can either use getter methods to retrieve them or use the <code>toObject</code> method to manipulate an object containing the properties.</p>
+<h2 id="providers">Providers</h2>
+<p>Universal Geocoder comes with modules to integrate with various geocoding providers.</p>
+<p>The following table summarizes the features of each:</p>
+<div class="table-hover table-responsive"><table class="table"><thead><tr><th>Provider</th>
+      <th>Name</th>
+      <th>Works in browsers?</th>
+      <th>Works in Node?</th>
+      <th>Supports reverse geocoding?</th>
+    </tr></thead><tbody><tr><td>OpenStreetMap (Nominatim)</td>
+      <td>openstreetmap or nominatim</td>
+      <td>✅️ yes</td>
+      <td>❓️ untested</td>
+      <td>✅️ yes</td>
+    </tr><tr><td>Google API</td>
+      <td>google</td>
+      <td>✅️ yes</td>
+      <td>✅️ yes</td>
+      <td>✅️ yes</td>
+    </tr><tr><td>Mapbox</td>
+      <td>mapbox</td>
+      <td>✅️ yes</td>
+      <td>❓️ untested</td>
+      <td>✅️ yes</td>
+    </tr><tr><td>MapQuest</td>
+      <td>mapquest</td>
+      <td>✅️ yes</td>
+      <td>❓️ untested</td>
+      <td>✅️ yes</td>
+    </tr><tr><td>Bing</td>
+      <td>bing</td>
+      <td>✅️ yes</td>
+      <td>❓️ untested</td>
+      <td>✅️ yes</td>
+    </tr><tr><td>Yandex</td>
+      <td>yandex</td>
+      <td>✅️ yes</td>
+      <td>❓️ untested</td>
+      <td>✅️ yes</td>
+    </tr></tbody></table></div>
+<h3 id="specific-provider-usage">Specific Provider Usage</h3>
+<p>The documentation for specific provider options, parameters and results can be found <a href="docs/provider_usage.html">here</a>.</p>
+<h2 id="dumpers">Dumpers</h2>
+<p>Dumpers transform a <code>Geocoded</code> object to another format.</p>
+<h3 id="geojson">GeoJSON</h3>
+<p><a href="https://geojson.org/">GeoJSON</a> is a format for encoding a variety of geographic data structures.</p>
+<h4 id="usage-1">Usage</h4>
+<pre><code class="language-javascript">import UniversalGeocoder, { GeoJsonDumper } from "universal-geocoder";
+
+const nominatimGeocoder = UniversalGeocoder.createGeocoder("nominatim");
+
+nominatimGeocoder.geocode("1600 Pennsylvania Ave, Washington, DC", (result) =&gt; {
+  console.log(result);
+  console.log("GeoJSON:", GeoJsonDumper.dump(result[0]));
+});</code></pre>
+<h2 id="building">Building</h2>
+<pre><code class="language-shell">npm run build</code></pre>
+<h2 id="testing">Testing</h2>
+<p>Unit tests are handled by Jasmine. To run unit tests from the command line, use:</p>
+<pre><code class="language-shell">npm test</code></pre>
+<p>You can also check if the examples are running correctly:</p>
+<pre><code class="language-shell">npm run serve</code></pre>
+<p>Then go to <a href="http://localhost:8080/example">http://localhost:8080/example</a>, choose a provider and open the console.</p>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    made with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/universal-geocoder/vendor/jquery/dist/js/jquery.min.js"></script>
+        <script src="/universal-geocoder/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/universal-geocoder/vendor/highlight/build/highlight.min.js"></script>
+
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+
+    </body>
+</html>
