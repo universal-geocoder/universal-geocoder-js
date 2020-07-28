@@ -56,7 +56,7 @@
 </ul>
 <h3><code>geocode</code> parameters</h3>
 <ul>
-<li><code>countryCodes</code>: a list of country codes to limit the results to one or more countries</li>
+<li><code>countryCodes</code>: to restrict the results to one or more countries (ISO 3166 alpha 2 country codes)</li>
 <li><code>excludePlaceIds</code>: for excluding some OpenStreetMap objects from the results</li>
 <li><code>viewBox</code> ([longitude 1, latitude 1, longitude 2, latitude 2]): the preferred area to find search results</li>
 <li><code>bounded</code> (only if <code>viewBox</code> is used): boolean to restrict the results to items within the view box</li>
@@ -72,22 +72,57 @@
 <li><code>category</code>, <code>type</code>: key and value of the main OpenStreetMap tag</li>
 <li><code>attribution</code>: OpenStreetMap licensing information</li>
 </ul>
-<h2 id="mapbox">Mapbox</h2>
+<h2 id="opencage">OpenCage</h2>
 <h3 id="options-1">Options</h3>
 <ul>
-<li><code>geocodingMode</code> (default: &quot;mapbox.places&quot;): the geocoding mode to use</li>
-<li><code>country</code>: to limit the results to one or more countries (ISO 3166 alpha 2 country codes separated by commas)</li>
+<li><code>countryCodes</code>: to restrict the results to one or more countries (ISO 3166 alpha 2 country codes)</li>
 </ul>
 <h3><code>geocode</code> parameters</h3>
 <ul>
+<li><code>countryCodes</code>: to restrict the results to one or more countries (ISO 3166 alpha 2 country codes)</li>
+<li><code>proximity</code>: to provide a hint to bias results in favour of those closer to the specified location</li>
+<li><code>minConfidence</code> (from 1 to 10): only results with at least this confidence will be returned</li>
+<li><code>noRecord</code>: boolean to ask for the query to not be logged</li>
+</ul>
+<h3><code>geodecode</code> parameters</h3>
+<ul>
+<li><code>countryCodes</code>: to restrict the results to one or more countries (ISO 3166 alpha 2 country codes)</li>
+<li><code>minConfidence</code> (from 1 to 10): only results with at least this confidence will be returned</li>
+<li><code>noRecord</code>: boolean to ask for the query to not be logged</li>
+</ul>
+<h3><code>Geocoded</code> properties</h3>
+<ul>
+<li><code>callingCode</code>: the international telephone calling code for the country of the result</li>
+<li><code>flag</code>: emoji flag of the country of the result</li>
+<li><code>mgrs</code>: Military Grid Reference System code for the center point of the result</li>
+<li><code>maidenhead</code>: Maidenhead location reference for the center point of the result</li>
+<li><code>geohash</code>: Geohash for the center point of the result</li>
+<li><code>what3words</code>: key words whose value is a 3 words address (3wa)</li>
+</ul>
+<h2 id="mapbox">Mapbox</h2>
+<h3 id="options-2">Options</h3>
+<ul>
+<li><code>geocodingMode</code> (default: &quot;mapbox.places&quot;): the geocoding mode to use</li>
+<li><code>countryCodes</code>: to restrict the results to one or more countries (ISO 3166 alpha 2 country codes)</li>
+</ul>
+<h3><code>geocode</code> parameters</h3>
+<ul>
+<li><code>countryCodes</code>: to restrict the results to one or more countries (ISO 3166 alpha 2 country codes)</li>
+<li><code>proximity</code>: to bias the response to favor results that are closer to the specified location</li>
 <li><code>locationTypes</code> (possible values: &quot;country&quot;, &quot;region&quot;, &quot;postcode&quot;, &quot;district&quot;, &quot;place&quot;, &quot;locality&quot;, &quot;neighborhood&quot;, &quot;address&quot;, &quot;poi&quot;): to filter the results to a subset of location types</li>
 </ul>
 <h3><code>geodecode</code> parameters</h3>
 <ul>
+<li><code>countryCodes</code>: to restrict the results to one or more countries (ISO 3166 alpha 2 country codes)</li>
+<li><code>reverseMode</code> (&quot;distance&quot; or &quot;score&quot;, default: &quot;distance&quot;): how results are sorted</li>
 <li><code>locationTypes</code> (possible values: &quot;country&quot;, &quot;region&quot;, &quot;postcode&quot;, &quot;district&quot;, &quot;place&quot;, &quot;locality&quot;, &quot;neighborhood&quot;, &quot;address&quot;, &quot;poi&quot;): to filter the results to a subset of location types</li>
 </ul>
+<h3><code>Geocoded</code> properties</h3>
+<ul>
+<li><code>resultType</code>: an array of result types</li>
+</ul>
 <h2 id="yandex">Yandex</h2>
-<h3 id="options-2">Options</h3>
+<h3 id="options-3">Options</h3>
 <ul>
 <li><code>toponym</code>: the type of toponym (&quot;house&quot;, &quot;street&quot;, &quot;metro&quot;, &quot;district&quot;, &quot;locality&quot;)</li>
 </ul>

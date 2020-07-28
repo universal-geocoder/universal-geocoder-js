@@ -131,6 +131,7 @@ googleGeocoder.geodecode(reverseQuery, (result) =&gt; {
 <li>Bounds (south, west, north, east)</li>
 <li>Formatted address</li>
 <li>Address details: street number, street name, (sub) locality, postal code, region, administration levels, country (with its code)</li>
+<li>Time zone</li>
 </ul>
 <p>You can either use getter methods to retrieve them or use the <code>toObject</code> method to manipulate an object containing the properties.</p>
 <h2 id="providers">Providers</h2>
@@ -143,6 +144,11 @@ googleGeocoder.geodecode(reverseQuery, (result) =&gt; {
       <th>Supports reverse geocoding?</th>
     </tr></thead><tbody><tr><td>OpenStreetMap (Nominatim)</td>
       <td>openstreetmap or nominatim</td>
+      <td>✅️ yes</td>
+      <td>❓️ untested</td>
+      <td>✅️ yes</td>
+    </tr><tr><td>OpenCage</td>
+      <td>opencage</td>
       <td>✅️ yes</td>
       <td>❓️ untested</td>
       <td>✅️ yes</td>
