@@ -31,19 +31,49 @@
             <div class="row">
 
                                     <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
-                        <ul class="nav nav-pills flex-column">
-                                                            <li class="nav-item">
-                                    <a href="/universal-geocoder-js/" class="nav-link active">
-                                        Home
-                                    </a>
-                                </li>
-                                                            <li class="nav-item">
-                                    <a href="/universal-geocoder-js/docs/provider_usage.html" class="nav-link ">
-                                        Provider Usage
-                                    </a>
-                                </li>
-                                                    </ul>
-                    </nav>
+                                                                                <ul class="nav nav-pills flex-column">
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/" class="nav-link active">
+                                            🌏️ Home
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage.html" class="nav-link ">
+                                            🔎️ Provider Usage
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                                                                    <p class="text-muted">
+                                    Provider
+                                </p>
+                                                        <ul class="nav nav-pills flex-column">
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/nominatim.html" class="nav-link ">
+                                            📌️ OpenStreetMap (Nominatim)
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/opencage.html" class="nav-link ">
+                                            📌️ OpenCage
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/googlemaps.html" class="nav-link ">
+                                            📌️ Google Maps (Geocoding API)
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/mapbox.html" class="nav-link ">
+                                            📌️ Mapbox
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/yandex.html" class="nav-link ">
+                                            📌️ Yandex
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                            </nav>
                 
                 <section id="content" class="col-sm-9 offset-sm-3 col-lg-10 offset-lg-2">
                     <p><img src="https://raw.githubusercontent.com/universal-geocoder/universal-geocoder-js/main/assets/logo.svg" alt="Universal Geocoder Logo" /></p>
@@ -52,7 +82,7 @@
 <p>Universal Geocoder is a universal JavaScript library for client-side geocoding applications with multiple built-in providers.</p>
 <p>Need geocoding 🌍️ in your website or application? Don't want to be vendor-locked to a service? ✨️ Universal Geocoder ✨️ is for you!</p>
 <p>Universal Geocoder is a TypeScript fork of <a href="https://github.com/geocoder-php/geocoder-js">GeocoderJS</a>, itself a port of the <a href="https://geocoder-php.org/">Geocoder PHP</a> library.</p>
-<p>This library is platform agnostic: it is available either server-side (Node) or client-side (browsers, React Native).</p>
+<p>This library is platform agnostic: it is available either server-side (Node) or client-side (browsers, React Native, Electron).</p>
 <h2 id="installation">Installation</h2>
 <p>Add the library to your project:</p>
 <pre><code class="language-shell">npm install --save universal-geocoder</code></pre>
@@ -69,7 +99,7 @@ const openStreetMapGeocoder = UniversalGeocoder.createGeocoder("openstreetmap");
 openStreetMapGeocoder.geocode("1600 Pennsylvania Ave NW, Washington, DC", (result) =&gt; {
   console.log(result);
 });</code></pre>
-<p>If you want to use the library as a direct dependecy, copy <code>dist/universal-geocoder.js</code> or <code>dist/universal-geocoder.min.js</code> to your dependencies.</p>
+<p>If you want to use the library as a direct dependecy (for browsers only), copy <code>dist/universal-geocoder.js</code> or <code>dist/universal-geocoder.min.js</code> to your dependencies.</p>
 <p>Universal Geocoder will be available in the global environment:</p>
 <pre><code class="language-javascript">const openStreetMapGeocoder = UniversalGeocoder.createGeocoder("openstreetmap");
 
@@ -80,7 +110,7 @@ openStreetMapGeocoder.geodecode("44.915", "-93.21", (result) =&gt; {
 <pre><code class="language-javascript">import UniversalGeocoder, { ReverseQuery } from "universal-geocoder";
 
 const googleGeocoder = UniversalGeocoder.createGeocoder({
-  provider: "google",
+  provider: "googlemaps",
   apiKey: "YOUR_API_KEY",
   useSsl: true,
   useJsonp: false,
@@ -141,40 +171,56 @@ googleGeocoder.geodecode(reverseQuery, (result) =&gt; {
       <th>Name</th>
       <th>Works in browsers?</th>
       <th>Works in Node?</th>
+      <th>Works in React Native?</th>
+      <th>Works in Electron?</th>
       <th>Supports reverse geocoding?</th>
     </tr></thead><tbody><tr><td>OpenStreetMap (Nominatim)</td>
       <td>openstreetmap or nominatim</td>
       <td>✅️ yes</td>
+      <td>✅️ yes</td>
+      <td>❓️ untested</td>
       <td>❓️ untested</td>
       <td>✅️ yes</td>
     </tr><tr><td>OpenCage</td>
       <td>opencage</td>
       <td>✅️ yes</td>
+      <td>✅️ yes</td>
+      <td>❓️ untested</td>
       <td>❓️ untested</td>
       <td>✅️ yes</td>
-    </tr><tr><td>Google API</td>
-      <td>google</td>
+    </tr><tr><td>Google Maps (Geocoding API)</td>
+      <td>google or googlemaps</td>
       <td>✅️ yes</td>
       <td>✅️ yes</td>
+      <td>❓️ untested</td>
+      <td>❓️ untested</td>
       <td>✅️ yes</td>
     </tr><tr><td>Mapbox</td>
       <td>mapbox</td>
       <td>✅️ yes</td>
+      <td>✅️ yes</td>
+      <td>❓️ untested</td>
       <td>❓️ untested</td>
       <td>✅️ yes</td>
     </tr><tr><td>MapQuest</td>
       <td>mapquest</td>
       <td>✅️ yes</td>
+      <td>✅️ yes</td>
+      <td>❓️ untested</td>
       <td>❓️ untested</td>
       <td>✅️ yes</td>
     </tr><tr><td>Bing</td>
       <td>bing</td>
       <td>✅️ yes</td>
+      <td>✅️ yes</td>
+      <td>❓️ untested</td>
       <td>❓️ untested</td>
       <td>✅️ yes</td>
     </tr><tr><td>Yandex</td>
       <td>yandex</td>
       <td>✅️ yes</td>
+      <td>✅️ yes</td>
+      <td>❓️ untested</td>
       <td>❓️ untested</td>
       <td>✅️ yes</td>
     </tr></tbody></table></div>
@@ -198,9 +244,12 @@ nominatimGeocoder.geocode("1600 Pennsylvania Ave, Washington, DC", (result) =&gt
 <h2 id="testing">Testing</h2>
 <p>Unit tests are handled by Jasmine. To run unit tests from the command line, use:</p>
 <pre><code class="language-shell">npm test</code></pre>
-<p>You can also check if the examples are running correctly:</p>
+<p>You can also check if the examples are running correctly.</p>
+<p>For the Web:</p>
 <pre><code class="language-shell">npm run serve</code></pre>
-<p>Then go to <a href="http://localhost:8080/example">http://localhost:8080/example</a>, choose a provider and open the console.</p>
+<p>Then go to <a href="http://localhost:8080/example/web">http://localhost:8080/example/web</a>, choose a provider and open the console.</p>
+<p>For Node:</p>
+<pre><code class="language-shell">npm run ts-node -- example/node/provider.ts</code></pre>
                 </section>
 
             </div>

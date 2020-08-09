@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Universal Geocoder</title>
+
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/bootswatch/dist/flatly/bootstrap.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/components-font-awesome/css/all.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/highlight/build/styles/dracula.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/css/main.css">
+    </head>
+
+    <body>
+
+        <header class="navbar navbar-dark bg-primary sticky-top">
+
+            <a class="navbar-brand" href="/universal-geocoder-js/">
+                Universal Geocoder
+                <small class="d-none d-sm-none d-md-block d-xl-inline">
+                    A universal JavaScript library for client-side geocoding applications with multiple built-in providers
+                </small>
+            </a>
+
+                            <a href="https://github.com/universal-geocoder/universal-geocoder-js" target="_blank" class="btn btn-secondary d-none d-sm-block" role="button"><i class="fab fa-github"></i> View on GitHub</a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+                                                                                <ul class="nav nav-pills flex-column">
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/" class="nav-link ">
+                                            🌏️ Home
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage.html" class="nav-link ">
+                                            🔎️ Provider Usage
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                                                                    <p class="text-muted">
+                                    Provider
+                                </p>
+                                                        <ul class="nav nav-pills flex-column">
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/nominatim.html" class="nav-link ">
+                                            📌️ OpenStreetMap (Nominatim)
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/opencage.html" class="nav-link ">
+                                            📌️ OpenCage
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/googlemaps.html" class="nav-link active">
+                                            📌️ Google Maps (Geocoding API)
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/mapbox.html" class="nav-link ">
+                                            📌️ Mapbox
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/yandex.html" class="nav-link ">
+                                            📌️ Yandex
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                            </nav>
+                
+                <section id="content" class="col-sm-9 offset-sm-3 col-lg-10 offset-lg-2">
+                    <h1 id="google-maps-geocoding-api-usage">Google Maps (Geocoding API) Usage</h1>
+<h2 id="options">Options</h2>
+<ul>
+<li><code>countryCodes</code>: to restrict the results to one or more countries (ccTLD country codes)</li>
+<li><code>clientId</code>: to use a client ID instead of the API key (Premium only)</li>
+<li><code>secret</code>: the URL signing secret to use to digitally sign the request (Premium only and only server-side)</li>
+</ul>
+<h2><code>geocode</code> parameters</h2>
+<ul>
+<li><code>countryCodes</code>: to restrict the results to one or more countries (ccTLD country codes)</li>
+<li><code>components</code> (array of objects with <code>name</code> and <code>value</code> properties): to filter the results by components</li>
+<li><code>channel</code>: channel to use for this request (Premium only)</li>
+</ul>
+<h2><code>geodecode</code> parameters</h2>
+<ul>
+<li><code>resultTypes</code>: to filter the results by address types</li>
+<li><code>locationTypes</code> (possible values: &quot;ROOFTOP&quot;, &quot;RANGE_INTERPOLATED&quot;, &quot;GEOMETRIC_CENTER&quot;, &quot;APPROXIMATE&quot;): to filter the results by location types</li>
+<li><code>channel</code>: channel to use for this request (Premium only)</li>
+</ul>
+<h2><code>Geocoded</code> properties</h2>
+<ul>
+<li><code>placeId</code>: a unique identifier used with other Google APIs</li>
+<li><code>partialMatch</code>: to indicate the geocoder did not return an exact match</li>
+<li><code>resultType</code>: an array of result types</li>
+<li><code>locationType</code>: a type representing the precision of the result</li>
+<li><code>streetAddress</code>: the street number with the street name</li>
+<li><code>intersection</code>, <code>political</code>, <code>colloquialArea</code>, <code>ward</code>, <code>neighborhood</code>, <code>premise</code>, <code>subpremise</code>, <code>naturalFeature</code>, <code>airport</code>, <code>park</code>, <code>pointOfInterest</code>, <code>establishment</code>, <code>postalCodeSuffix</code>: additional address components</li>
+<li><code>subLocalityLevels</code>: levels for the sublocality</li>
+</ul>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    made with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/universal-geocoder-js/vendor/jquery/dist/js/jquery.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/highlight/build/highlight.min.js"></script>
+
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+
+    </body>
+</html>

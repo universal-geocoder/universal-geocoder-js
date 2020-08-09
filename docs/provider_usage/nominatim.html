@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Universal Geocoder</title>
+
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/bootswatch/dist/flatly/bootstrap.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/components-font-awesome/css/all.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/highlight/build/styles/dracula.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/css/main.css">
+    </head>
+
+    <body>
+
+        <header class="navbar navbar-dark bg-primary sticky-top">
+
+            <a class="navbar-brand" href="/universal-geocoder-js/">
+                Universal Geocoder
+                <small class="d-none d-sm-none d-md-block d-xl-inline">
+                    A universal JavaScript library for client-side geocoding applications with multiple built-in providers
+                </small>
+            </a>
+
+                            <a href="https://github.com/universal-geocoder/universal-geocoder-js" target="_blank" class="btn btn-secondary d-none d-sm-block" role="button"><i class="fab fa-github"></i> View on GitHub</a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+                                                                                <ul class="nav nav-pills flex-column">
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/" class="nav-link ">
+                                            🌏️ Home
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage.html" class="nav-link ">
+                                            🔎️ Provider Usage
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                                                                    <p class="text-muted">
+                                    Provider
+                                </p>
+                                                        <ul class="nav nav-pills flex-column">
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/nominatim.html" class="nav-link active">
+                                            📌️ OpenStreetMap (Nominatim)
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/opencage.html" class="nav-link ">
+                                            📌️ OpenCage
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/googlemaps.html" class="nav-link ">
+                                            📌️ Google Maps (Geocoding API)
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/mapbox.html" class="nav-link ">
+                                            📌️ Mapbox
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/yandex.html" class="nav-link ">
+                                            📌️ Yandex
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                            </nav>
+                
+                <section id="content" class="col-sm-9 offset-sm-3 col-lg-10 offset-lg-2">
+                    <h1 id="openstreetmap-nominatim-usage">OpenStreetMap (Nominatim) Usage</h1>
+<h2 id="options">Options</h2>
+<ul>
+<li><code>userAgent</code> (required if default host): a User-Agent identifying your application is needed to use Nominatim (see <a href="https://operations.osmfoundation.org/policies/nominatim/">https://operations.osmfoundation.org/policies/nominatim/</a>)</li>
+<li><code>referer</code>: if you want to set a Referer as well</li>
+<li><code>host</code> (default: &quot;nominatim.openstreetmap.org&quot;): to use another host</li>
+</ul>
+<h2><code>geocode</code> parameters</h2>
+<ul>
+<li><code>countryCodes</code>: to restrict the results to one or more countries (ISO 3166 alpha 2 country codes)</li>
+<li><code>excludePlaceIds</code>: for excluding some OpenStreetMap objects from the results</li>
+<li><code>viewBox</code> ([longitude 1, latitude 1, longitude 2, latitude 2]): the preferred area to find search results</li>
+<li><code>bounded</code> (only if <code>viewBox</code> is used): boolean to restrict the results to items within the view box</li>
+</ul>
+<h2><code>geodecode</code> parameters</h2>
+<ul>
+<li><code>zoom</code> (default: 18, from 0 to 18): the level of details required for the address</li>
+</ul>
+<h2><code>Geocoded</code> properties</h2>
+<ul>
+<li><code>displayName</code>: full comma-separated address</li>
+<li><code>osmId</code>, <code>osmType</code>: reference to the OpenStreetMap object</li>
+<li><code>category</code>, <code>type</code>: key and value of the main OpenStreetMap tag</li>
+<li><code>attribution</code>: OpenStreetMap licensing information</li>
+</ul>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    made with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/universal-geocoder-js/vendor/jquery/dist/js/jquery.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/highlight/build/highlight.min.js"></script>
+
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+
+    </body>
+</html>

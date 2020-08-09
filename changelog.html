@@ -31,22 +31,61 @@
             <div class="row">
 
                                     <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
-                        <ul class="nav nav-pills flex-column">
-                                                            <li class="nav-item">
-                                    <a href="/universal-geocoder-js/" class="nav-link ">
-                                        Home
-                                    </a>
-                                </li>
-                                                            <li class="nav-item">
-                                    <a href="/universal-geocoder-js/docs/provider_usage.html" class="nav-link ">
-                                        Provider Usage
-                                    </a>
-                                </li>
-                                                    </ul>
-                    </nav>
+                                                                                <ul class="nav nav-pills flex-column">
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/" class="nav-link ">
+                                            🌏️ Home
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage.html" class="nav-link ">
+                                            🔎️ Provider Usage
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                                                                    <p class="text-muted">
+                                    Provider
+                                </p>
+                                                        <ul class="nav nav-pills flex-column">
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/nominatim.html" class="nav-link ">
+                                            📌️ OpenStreetMap (Nominatim)
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/opencage.html" class="nav-link ">
+                                            📌️ OpenCage
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/googlemaps.html" class="nav-link ">
+                                            📌️ Google Maps (Geocoding API)
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/mapbox.html" class="nav-link ">
+                                            📌️ Mapbox
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/yandex.html" class="nav-link ">
+                                            📌️ Yandex
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                            </nav>
                 
                 <section id="content" class="col-sm-9 offset-sm-3 col-lg-10 offset-lg-2">
                     <h1 id="changelog">Changelog</h1>
+<h2 id="040">0.4.0</h2>
+<ul>
+<li>[Google] Better Google Maps provider</li>
+<li>[Nominatim] Better handling of geodecode errors</li>
+<li>[ExternalLoader] Add <code>getOptions</code> method to interface</li>
+<li>[ExternalLoader] Rename <code>JSONPCallback</code> in params to <code>jsonpCallback</code></li>
+<li>Rename <code>GoogleAPIProvider</code> to <code>GoogleMapsProvider</code></li>
+<li>Add Node examples</li>
+</ul>
 <h2 id="030">0.3.0</h2>
 <ul>
 <li>Add OpenCage Provider</li>
