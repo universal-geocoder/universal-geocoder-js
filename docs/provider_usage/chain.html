@@ -38,7 +38,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="/universal-geocoder-js/docs/provider_usage.html" class="nav-link active">
+                                        <a href="/universal-geocoder-js/docs/provider_usage.html" class="nav-link ">
                                             🔎️ Provider Usage
                                         </a>
                                     </li>
@@ -48,7 +48,7 @@
                                 </p>
                                                         <ul class="nav nav-pills flex-column">
                                                                     <li class="nav-item">
-                                        <a href="/universal-geocoder-js/docs/provider_usage/chain.html" class="nav-link ">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/chain.html" class="nav-link active">
                                             ⛓️ Chain
                                         </a>
                                     </li>
@@ -86,15 +86,12 @@
                                             </nav>
                 
                 <section id="content" class="col-sm-9 offset-sm-3 col-lg-10 offset-lg-2">
-                    <h1 id="specific-provider-usage">Specific Provider Usage</h1>
-<p>Each provider has its own options, parameters or results because of its specific features.</p>
+                    <h1 id="special-chain-provider-usage">Special Chain Provider Usage</h1>
+<h2 id="options">Options</h2>
 <ul>
-<li><a href="provider_usage/chain.html">Chain (special provider)</a></li>
-<li><a href="provider_usage/nominatim.html">OpenStreetMap (Nominatim)</a></li>
-<li><a href="provider_usage/opencage.html">OpenCage</a></li>
-<li><a href="provider_usage/googlemaps.html">Google Maps (Geocoding API)</a></li>
-<li><a href="provider_usage/mapbox.html">Mapbox</a></li>
-<li><a href="provider_usage/yandex.html">Yandex</a></li>
+<li><code>providers</code>: the list of providers to iterate over</li>
+<li><code>parallelize</code>: if <code>true</code>, the requests to the providers will be sent at the same time (but the responses are checked in the order)</li>
+<li><code>first</code>: if <code>true</code>, the result will be the one of the fastest provider to respond (the order does not matter)</li>
 </ul>
                 </section>
 
