@@ -88,7 +88,8 @@
                 <section id="content" class="col-sm-9 offset-sm-3 col-lg-10 offset-lg-2">
                     <p><img src="https://raw.githubusercontent.com/universal-geocoder/universal-geocoder-js/main/assets/logo.svg" alt="Universal Geocoder Logo" /></p>
 <h1 id="universal-geocoder">Universal Geocoder</h1>
-<p><a href="https://github.com/universal-geocoder/universal-geocoder-js/actions"><img src="https://github.com/universal-geocoder/universal-geocoder-js/workflows/Continuous%20Integration/badge.svg?branch=main&amp;event=push" alt="CI" /></a></p>
+<p><a href="https://github.com/universal-geocoder/universal-geocoder-js/actions"><img src="https://github.com/universal-geocoder/universal-geocoder-js/workflows/Continuous%20Integration/badge.svg?branch=main&amp;event=push" alt="CI" /></a>
+<a href="https://codecov.io/gh/universal-geocoder/universal-geocoder-js"><img src="https://codecov.io/gh/universal-geocoder/universal-geocoder-js/branch/main/graph/badge.svg" alt="codecov" /></a></p>
 <p>Universal Geocoder is a universal JavaScript library for client-side geocoding applications with multiple built-in providers.</p>
 <p>Need geocoding 🌍️ in your website or application? Don't want to be vendor-locked to a service? ✨️ Universal Geocoder ✨️ is for you!</p>
 <p>Universal Geocoder is a TypeScript fork of <a href="https://github.com/geocoder-php/geocoder-js">GeocoderJS</a>, itself a port of the <a href="https://geocoder-php.org/">Geocoder PHP</a> library.</p>
@@ -255,8 +256,10 @@ nominatimGeocoder.geocode("1600 Pennsylvania Ave, Washington, DC", (result) =&gt
 <h2 id="building">Building</h2>
 <pre><code class="language-shell">npm run build</code></pre>
 <h2 id="testing">Testing</h2>
-<p>Unit tests are handled by Jasmine. To run unit tests from the command line, use:</p>
+<p>Unit and functional tests are handled by Jasmine. To run tests from the command line, use:</p>
 <pre><code class="language-shell">npm test</code></pre>
+<p>If you need to record new API calls, use:</p>
+<pre><code class="language-shell">npm run test-record</code></pre>
 <p>You can also check if the examples are running correctly.</p>
 <p>For the Web:</p>
 <pre><code class="language-shell">npm run serve</code></pre>
