@@ -82,6 +82,11 @@
                                             📌️ Yandex
                                         </a>
                                     </li>
+                                                                    <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/geoplugin.html" class="nav-link ">
+                                            📌️ GeoPlugin
+                                        </a>
+                                    </li>
                                                             </ul>
                                             </nav>
                 
@@ -92,8 +97,9 @@
 <a href="https://codecov.io/gh/universal-geocoder/universal-geocoder-js"><img src="https://codecov.io/gh/universal-geocoder/universal-geocoder-js/branch/main/graph/badge.svg" alt="codecov" /></a></p>
 <p>Universal Geocoder is a universal JavaScript library for client-side geocoding applications with multiple built-in providers.</p>
 <p>Need geocoding 🌍️ in your website or application? Don't want to be vendor-locked to a service? ✨️ Universal Geocoder ✨️ is for you!</p>
+<p>Depending of the chosen provider, it can use geocoding, reverse geocoding or IP geolocation.</p>
 <p>Universal Geocoder is a TypeScript fork of <a href="https://github.com/geocoder-php/geocoder-js">GeocoderJS</a>, itself a port of the <a href="https://geocoder-php.org/">Geocoder PHP</a> library.</p>
-<p>This library is platform agnostic: it is available either server-side (Node) or client-side (browsers, React Native, Electron).</p>
+<p>This library is platform agnostic: it is available either server-side (<strong>Node</strong>) or client-side (<strong>browsers</strong>, <strong>React Native</strong>, <strong>Electron</strong>).</p>
 <h2 id="installation">Installation</h2>
 <p>Add the library to your project:</p>
 <pre><code class="language-shell">npm install --save universal-geocoder</code></pre>
@@ -155,6 +161,7 @@ googleGeocoder.geodecode(reverseQuery, (result) =&gt; {
 <h3 id="common">Common <code>geocode</code> parameters (<code>GeocodeQuery</code> object)</h3>
 <ul>
 <li><code>text</code>: what is searched</li>
+<li><code>ip</code>: the IP searched</li>
 <li><code>south</code>, <code>west</code>, <code>north</code>, <code>east</code> (<code>withBounds</code> method): the bounds to use</li>
 <li><code>locale</code>: the locale to use for the query</li>
 <li><code>limit</code>: the maximum number of results to have</li>
@@ -179,60 +186,49 @@ googleGeocoder.geodecode(reverseQuery, (result) =&gt; {
 <p>Universal Geocoder comes with modules to integrate with various geocoding providers.</p>
 <p>The following table summarizes the features of each:</p>
 <div class="table-hover table-responsive"><table class="table"><thead><tr><th>Provider</th>
-      <th>Name</th>
-      <th>Works in browsers?</th>
-      <th>Works in Node?</th>
-      <th>Works in React Native?</th>
-      <th>Works in Electron?</th>
+      <th>Codename</th>
+      <th>Supports location geocoding?</th>
       <th>Supports reverse geocoding?</th>
+      <th>Supports IP geolocation?</th>
     </tr></thead><tbody><tr><td>OpenStreetMap (Nominatim)</td>
       <td>openstreetmap or nominatim</td>
       <td>✅️ yes</td>
       <td>✅️ yes</td>
-      <td>❓️ untested</td>
-      <td>❓️ untested</td>
-      <td>✅️ yes</td>
+      <td>❌️ no</td>
     </tr><tr><td>OpenCage</td>
       <td>opencage</td>
       <td>✅️ yes</td>
       <td>✅️ yes</td>
-      <td>❓️ untested</td>
-      <td>❓️ untested</td>
-      <td>✅️ yes</td>
+      <td>❌️ no</td>
     </tr><tr><td>Google Maps (Geocoding API)</td>
       <td>google or googlemaps</td>
       <td>✅️ yes</td>
       <td>✅️ yes</td>
-      <td>❓️ untested</td>
-      <td>❓️ untested</td>
-      <td>✅️ yes</td>
+      <td>❌️ no</td>
     </tr><tr><td>Mapbox</td>
       <td>mapbox</td>
       <td>✅️ yes</td>
       <td>✅️ yes</td>
-      <td>❓️ untested</td>
-      <td>❓️ untested</td>
-      <td>✅️ yes</td>
+      <td>❌️ no</td>
     </tr><tr><td>MapQuest</td>
       <td>mapquest</td>
       <td>✅️ yes</td>
       <td>✅️ yes</td>
-      <td>❓️ untested</td>
-      <td>❓️ untested</td>
-      <td>✅️ yes</td>
+      <td>❌️ no</td>
     </tr><tr><td>Bing</td>
       <td>bing</td>
       <td>✅️ yes</td>
       <td>✅️ yes</td>
-      <td>❓️ untested</td>
-      <td>❓️ untested</td>
-      <td>✅️ yes</td>
+      <td>❌️ no</td>
     </tr><tr><td>Yandex</td>
       <td>yandex</td>
       <td>✅️ yes</td>
       <td>✅️ yes</td>
-      <td>❓️ untested</td>
-      <td>❓️ untested</td>
+      <td>❌️ no</td>
+    </tr><tr><td>GeoPlugin</td>
+      <td>geoplugin</td>
+      <td>❌️ no</td>
+      <td>❌️ no</td>
       <td>✅️ yes</td>
     </tr></tbody></table></div>
 <h3 id="specific-provider-usage">Specific Provider Usage</h3>
