@@ -33,13 +33,6 @@ interface MapboxRequestParams {
   readonly types?: string;
 }
 
-export interface MapboxResponse {
-  type: "FeatureCollection";
-  query: string[];
-  features: MapboxResult[];
-  attribution: string;
-}
-
 interface MapboxFeatureContextProperties {
   id: string;
   text: string;
@@ -99,6 +92,14 @@ export interface MapboxResult {
   };
 }
 
+export interface MapboxResponse {
+  type: "FeatureCollection";
+  query: string[];
+  features: MapboxResult[];
+  attribution: string;
+}
+
+// eslint-disable-next-line no-shadow
 export enum MAPBOX_GEOCODING_MODES {
   GEOCODING_MODE_PLACES = "mapbox.places",
   GEOCODING_MODE_PLACES_PERMANENT = "mapbox.places-permanent",
