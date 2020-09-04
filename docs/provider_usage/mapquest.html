@@ -53,7 +53,7 @@
                                 </p>
                                                         <ul class="nav nav-pills flex-column">
                                                                     <li class="nav-item">
-                                        <a href="/universal-geocoder-js/docs/provider_usage/chain.html" class="nav-link active">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/chain.html" class="nav-link ">
                                             ⛓️ Chain
                                         </a>
                                     </li>
@@ -83,7 +83,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="/universal-geocoder-js/docs/provider_usage/mapquest.html" class="nav-link ">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/mapquest.html" class="nav-link active">
                                             📌️ MapQuest
                                         </a>
                                     </li>
@@ -101,12 +101,22 @@
                                             </nav>
                 
                 <section id="content" class="col-sm-9 offset-sm-3 col-lg-10 offset-lg-2">
-                    <h1 id="special-chain-provider-usage">Special Chain Provider Usage</h1>
+                    <h1 id="mapquest-usage">MapQuest Usage</h1>
 <h2 id="options">Options</h2>
 <ul>
-<li><code>providers</code>: the list of providers to iterate over</li>
-<li><code>parallelize</code>: if <code>true</code>, the requests to the providers will be sent at the same time (but the responses are checked in the order)</li>
-<li><code>first</code>: if <code>true</code>, the result will be the one of the fastest provider to respond (the order does not matter)</li>
+<li><code>method</code> (&quot;GET&quot; or &quot;POST&quot;, default: &quot;GET&quot;): the HTTP method to use when executing the query</li>
+<li><code>openDomain</code> (default: false): boolean to use the Open Geocoding API (relies solely on data contributed to OpenStreetMap)</li>
+</ul>
+<h2><code>geocode</code> parameters</h2>
+<ul>
+<li><code>location</code>: use this parameter to use an advanced location. You can specify it using the MapQuest format or the Geocoded class or format.</li>
+</ul>
+<h2><code>Geocoded</code> properties</h2>
+<ul>
+<li><code>precision</code>: the quality of the geocoding result</li>
+<li><code>precisionCode</code>: the quality code of the geocoding result</li>
+<li><code>mapUrl</code>: the URL to a static map thumbnail image for the location being geocoded</li>
+<li><code>attribution</code>: MapQuest copyright information</li>
 </ul>
                 </section>
 
