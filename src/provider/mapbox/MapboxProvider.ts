@@ -18,7 +18,7 @@ import {
   defaultProviderOptions,
 } from "provider";
 import { Box } from "types";
-import AdminLevel from "AdminLevel";
+import AdminLevel, { ADMIN_LEVEL_CODES } from "AdminLevel";
 
 interface MapboxRequestParams {
   [param: string]: string | undefined;
@@ -300,7 +300,7 @@ export default class MapboxProvider
           locality = feature.text;
           adminLevels.push(
             AdminLevel.create({
-              level: 2,
+              level: ADMIN_LEVEL_CODES.COUNTY_CODE,
               name: locality,
             })
           );
@@ -316,7 +316,7 @@ export default class MapboxProvider
           }
           adminLevels.push(
             AdminLevel.create({
-              level: 1,
+              level: ADMIN_LEVEL_CODES.STATE_CODE,
               name: region,
               code: adminLevelCode,
             })
