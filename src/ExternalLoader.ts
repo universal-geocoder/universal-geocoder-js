@@ -12,7 +12,7 @@ export interface ExternalLoaderOptions {
 }
 
 export interface ExternalLoaderBody {
-  [param: string]: string | undefined;
+  [param: string]: ExternalLoaderBody | string | number | undefined;
 }
 
 export interface ExternalLoaderParams {
