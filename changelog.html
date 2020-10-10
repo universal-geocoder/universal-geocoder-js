@@ -6,9 +6,9 @@
 
         <title>Universal Geocoder</title>
 
-        <link rel="stylesheet" href="/universal-geocoder-js/vendor/bootswatch/dist/flatly/bootstrap.min.css">
-        <link rel="stylesheet" href="/universal-geocoder-js/vendor/components-font-awesome/css/all.min.css">
-        <link rel="stylesheet" href="/universal-geocoder-js/vendor/highlight/build/styles/dracula.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/flatly-bootstrap.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/font-awesome.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/highlight-dracula.min.css">
         <link rel="stylesheet" href="/universal-geocoder-js/css/main.css">
     </head>
 
@@ -102,6 +102,16 @@
                 
                 <section id="content" class="col-sm-9 offset-sm-3 col-lg-10 offset-lg-2">
                     <h1 id="changelog">Changelog</h1>
+<h2 id="070"> 0.7.0</h2>
+<ul>
+<li>[Yandex] Better Yandex provider</li>
+<li>[Nominatim] Remove <code>viewBox</code> parameter in <code>GeocodeQuery</code> to use <code>bounds</code> instead</li>
+<li>[GeoJsonDumper] Use <code>bbox</code> member for <code>bounds</code>.</li>
+<li>The <code>bounds</code> parameter in <code>GeocodeQuery</code> is now an object with <code>latitudeSW</code>, <code>longitudeSW</code>, <code>latitudeNE</code>, <code>longitudeNE</code> keys.</li>
+<li>The <code>latitude</code> and <code>longitude</code> parameters in <code>GeocodeQuery</code> are replaced by a <code>coordinates</code> parameter (an object with <code>latitude</code> and <code>longitude</code> keys).</li>
+<li><code>Geocoded</code> returns an object with <code>latitudeSW</code>, <code>longitudeSW</code>, <code>latitudeNE</code>, <code>longitudeNE</code> keys for the <code>bounds</code>.</li>
+<li>The <code>latitude</code> and <code>longitude</code> parameters in <code>Geocoded</code> are replaced by a <code>coordinates</code> parameter (an object with <code>latitude</code> and <code>longitude</code> keys).</li>
+</ul>
 <h2 id="060">0.6.0</h2>
 <ul>
 <li>[MapQuest] Better MapQuest provider</li>
@@ -175,9 +185,9 @@
             </div>
         </footer>
 
-        <script src="/universal-geocoder-js/vendor/jquery/dist/js/jquery.min.js"></script>
-        <script src="/universal-geocoder-js/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="/universal-geocoder-js/vendor/highlight/build/highlight.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/jquery.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/bootstrap.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/highlight.min.js"></script>
 
         <script>
             hljs.initHighlightingOnLoad();

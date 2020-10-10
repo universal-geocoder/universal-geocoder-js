@@ -6,9 +6,9 @@
 
         <title>Universal Geocoder</title>
 
-        <link rel="stylesheet" href="/universal-geocoder-js/vendor/bootswatch/dist/flatly/bootstrap.min.css">
-        <link rel="stylesheet" href="/universal-geocoder-js/vendor/components-font-awesome/css/all.min.css">
-        <link rel="stylesheet" href="/universal-geocoder-js/vendor/highlight/build/styles/dracula.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/flatly-bootstrap.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/font-awesome.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/highlight-dracula.min.css">
         <link rel="stylesheet" href="/universal-geocoder-js/css/main.css">
     </head>
 
@@ -112,8 +112,7 @@
 <ul>
 <li><code>countryCodes</code>: to restrict the results to one or more countries (ISO 3166 alpha 2 country codes)</li>
 <li><code>excludePlaceIds</code>: for excluding some OpenStreetMap objects from the results</li>
-<li><code>viewBox</code> ([longitude 1, latitude 1, longitude 2, latitude 2]): the preferred area to find search results</li>
-<li><code>bounded</code> (only if <code>viewBox</code> is used): boolean to restrict the results to items within the view box</li>
+<li><code>bounded</code> (only if <code>bounds</code> is used): boolean to restrict the results to items within the bounds</li>
 </ul>
 <h2><code>geodecode</code> parameters</h2>
 <ul>
@@ -139,9 +138,9 @@
             </div>
         </footer>
 
-        <script src="/universal-geocoder-js/vendor/jquery/dist/js/jquery.min.js"></script>
-        <script src="/universal-geocoder-js/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="/universal-geocoder-js/vendor/highlight/build/highlight.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/jquery.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/bootstrap.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/highlight.min.js"></script>
 
         <script>
             hljs.initHighlightingOnLoad();

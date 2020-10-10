@@ -6,9 +6,9 @@
 
         <title>Universal Geocoder</title>
 
-        <link rel="stylesheet" href="/universal-geocoder-js/vendor/bootswatch/dist/flatly/bootstrap.min.css">
-        <link rel="stylesheet" href="/universal-geocoder-js/vendor/components-font-awesome/css/all.min.css">
-        <link rel="stylesheet" href="/universal-geocoder-js/vendor/highlight/build/styles/dracula.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/flatly-bootstrap.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/font-awesome.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/highlight-dracula.min.css">
         <link rel="stylesheet" href="/universal-geocoder-js/css/main.css">
     </head>
 
@@ -129,6 +129,47 @@ const openStreetMapGeocoder = UniversalGeocoder.createGeocoder("openstreetmap");
 openStreetMapGeocoder.geocode("1600 Pennsylvania Ave NW, Washington, DC", (result) =&gt; {
   console.log(result);
 });</code></pre>
+<p>For this example, the output will be something like this:</p>
+<pre><code class="language-javascript">[
+  NominatimGeocoded {
+    coordinates: { latitude: 38.8976998, longitude: -77.03655348862276 },
+    bounds: {
+      latitudeSW: 38.8974898,
+      longitudeSW: -77.0368542,
+      latitudeNE: 38.897911,
+      longitudeNE: -77.0362526
+    },
+    formattedAddress: undefined,
+    streetNumber: '1600',
+    streetName: 'Pennsylvania Avenue Northwest',
+    subLocality: undefined,
+    locality: 'Washington',
+    postalCode: '20500',
+    region: 'District of Columbia',
+    adminLevels: [
+      AdminLevel {
+        level: 1,
+        name: 'District of Columbia',
+        code: undefined
+      },
+      AdminLevel {
+        level: 2,
+        name: 'Washington',
+        code: undefined
+      }
+    ],
+    country: 'United States of America',
+    countryCode: 'us',
+    timezone: undefined,
+    displayName: 'White House, 1600, Pennsylvania Avenue Northwest, Washington, District of Columbia, 20500, United States of America',
+    osmId: 238241022,
+    osmType: 'way',
+    category: 'historic',
+    type: 'castle',
+    attribution: 'Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright'
+  },
+  // ... (other results)
+]</code></pre>
 <p>If you want to use the library as a direct dependecy (for browsers only), copy <code>dist/universal-geocoder.js</code> or <code>dist/universal-geocoder.min.js</code> to your dependencies.</p>
 <p>Universal Geocoder will be available in the global environment:</p>
 <pre><code class="language-javascript">const openStreetMapGeocoder = UniversalGeocoder.createGeocoder("openstreetmap");
@@ -157,8 +198,10 @@ googleGeocoder.geocode({
 });
 
 const reverseQuery = ReverseQuery.create({
-  latitude: "44.915",
-  longitude: "-93.21",
+  coordinates: {
+    latitude: "44.915",
+    longitude: "-93.21",
+  },
 })
 .withLocale("FR")
 .withLimit(7);
@@ -175,21 +218,21 @@ googleGeocoder.geodecode(reverseQuery, (result) =&gt; {
 <ul>
 <li><code>text</code>: what is searched</li>
 <li><code>ip</code>: the IP searched</li>
-<li><code>south</code>, <code>west</code>, <code>north</code>, <code>east</code> (<code>withBounds</code> method): the bounds to use</li>
+<li><code>bounds</code> (object with <code>latitudeSW</code>, <code>longitudeSW</code>, <code>latitudeNE</code> and <code>longitudeNE</code> keys): the bounds to use (either bias or filter the results)</li>
 <li><code>locale</code>: the locale to use for the query</li>
 <li><code>limit</code>: the maximum number of results to have</li>
 </ul>
 <h3 id="common-1">Common <code>geodecode</code> parameters (<code>ReverseQuery</code> object)</h3>
 <ul>
-<li><code>latitude</code>, <code>longitude</code> (<code>withCoordinates</code> method): the coordinates to search for</li>
+<li><code>coordinates</code> (object with <code>latitude</code>, <code>longitude</code> keys): the coordinates to search for</li>
 <li><code>locale</code>: the locale to use for the query</li>
 <li><code>limit</code>: the maximum number of results to have</li>
 </ul>
 <h3 id="common-result-properties-">Common Result Properties (<code>Geocoded</code> object)</h3>
 <p>The result of a query is a <code>Geocoded</code> object which maps the following common information:</p>
 <ul>
-<li>Coordinates (latitute and longitude)</li>
-<li>Bounds (south, west, north, east)</li>
+<li>Coordinates (object with <code>latitute</code> and <code>longitude</code> keys)</li>
+<li>Bounds (object with <code>latitudeSW</code>, <code>longitudeSW</code>, <code>latitudeNE</code>, <code>longitudeNE</code> keys)</li>
 <li>Formatted address</li>
 <li>Address details: street number, street name, (sub) locality, postal code, region, administration levels, country (with its code)</li>
 <li>Time zone</li>
@@ -288,9 +331,9 @@ nominatimGeocoder.geocode("1600 Pennsylvania Ave, Washington, DC", (result) =&gt
             </div>
         </footer>
 
-        <script src="/universal-geocoder-js/vendor/jquery/dist/js/jquery.min.js"></script>
-        <script src="/universal-geocoder-js/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="/universal-geocoder-js/vendor/highlight/build/highlight.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/jquery.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/bootstrap.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/highlight.min.js"></script>
 
         <script>
             hljs.initHighlightingOnLoad();

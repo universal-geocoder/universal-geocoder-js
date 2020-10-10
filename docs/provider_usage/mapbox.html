@@ -6,9 +6,9 @@
 
         <title>Universal Geocoder</title>
 
-        <link rel="stylesheet" href="/universal-geocoder-js/vendor/bootswatch/dist/flatly/bootstrap.min.css">
-        <link rel="stylesheet" href="/universal-geocoder-js/vendor/components-font-awesome/css/all.min.css">
-        <link rel="stylesheet" href="/universal-geocoder-js/vendor/highlight/build/styles/dracula.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/flatly-bootstrap.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/font-awesome.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/highlight-dracula.min.css">
         <link rel="stylesheet" href="/universal-geocoder-js/css/main.css">
     </head>
 
@@ -110,7 +110,7 @@
 <h2><code>geocode</code> parameters</h2>
 <ul>
 <li><code>countryCodes</code>: to restrict the results to one or more countries (ISO 3166 alpha 2 country codes)</li>
-<li><code>proximity</code>: to bias the response to favor results that are closer to the specified location</li>
+<li><code>proximity</code> (object with <code>latitude</code> and <code>longitude</code> keys): to bias the response to favor results that are closer to the specified location</li>
 <li><code>locationTypes</code> (possible values: &quot;country&quot;, &quot;region&quot;, &quot;postcode&quot;, &quot;district&quot;, &quot;place&quot;, &quot;locality&quot;, &quot;neighborhood&quot;, &quot;address&quot;, &quot;poi&quot;): to filter the results to a subset of location types</li>
 </ul>
 <h2><code>geodecode</code> parameters</h2>
@@ -136,9 +136,9 @@
             </div>
         </footer>
 
-        <script src="/universal-geocoder-js/vendor/jquery/dist/js/jquery.min.js"></script>
-        <script src="/universal-geocoder-js/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="/universal-geocoder-js/vendor/highlight/build/highlight.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/jquery.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/bootstrap.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/highlight.min.js"></script>
 
         <script>
             hljs.initHighlightingOnLoad();

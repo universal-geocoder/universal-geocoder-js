@@ -6,9 +6,9 @@
 
         <title>Universal Geocoder</title>
 
-        <link rel="stylesheet" href="/universal-geocoder-js/vendor/bootswatch/dist/flatly/bootstrap.min.css">
-        <link rel="stylesheet" href="/universal-geocoder-js/vendor/components-font-awesome/css/all.min.css">
-        <link rel="stylesheet" href="/universal-geocoder-js/vendor/highlight/build/styles/dracula.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/flatly-bootstrap.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/font-awesome.min.css">
+        <link rel="stylesheet" href="/universal-geocoder-js/vendor/highlight-dracula.min.css">
         <link rel="stylesheet" href="/universal-geocoder-js/css/main.css">
     </head>
 
@@ -102,9 +102,22 @@
                 
                 <section id="content" class="col-sm-9 offset-sm-3 col-lg-10 offset-lg-2">
                     <h1 id="yandex-usage">Yandex Usage</h1>
-<h2 id="options">Options</h2>
+<h2><code>geocode</code> parameters</h2>
 <ul>
-<li><code>toponym</code>: the type of toponym (&quot;house&quot;, &quot;street&quot;, &quot;metro&quot;, &quot;district&quot;, &quot;locality&quot;)</li>
+<li><code>bounded</code> (only if <code>bounds</code> or <code>proximity</code> is used): boolean to restrict the results to items within the bounds</li>
+<li><code>proximity</code> (object with <code>latitude</code> and <code>longitude</code> keys): center of the search area</li>
+<li><code>span</code> (object with <code>spanLatitude</code> and <code>spanLongitude</code> keys): span of the search area</li>
+<li><code>skip</code>: the number of items to skip in the response</li>
+</ul>
+<h2><code>geodecode</code> parameters</h2>
+<ul>
+<li><code>locationTypes</code> (possible values: &quot;house&quot;, &quot;street&quot;, &quot;metro&quot;, &quot;district&quot;, &quot;locality&quot;, ...): to filter the results by location types</li>
+<li><code>skip</code>: the number of items to skip in the response</li>
+</ul>
+<h2><code>Geocoded</code> properties</h2>
+<ul>
+<li><code>locationType</code>: the type of location</li>
+<li><code>precision</code>: the quality of the geocoding result</li>
 </ul>
                 </section>
 
@@ -119,9 +132,9 @@
             </div>
         </footer>
 
-        <script src="/universal-geocoder-js/vendor/jquery/dist/js/jquery.min.js"></script>
-        <script src="/universal-geocoder-js/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="/universal-geocoder-js/vendor/highlight/build/highlight.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/jquery.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/bootstrap.min.js"></script>
+        <script src="/universal-geocoder-js/vendor/highlight.min.js"></script>
 
         <script>
             hljs.initHighlightingOnLoad();
