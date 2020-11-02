@@ -88,6 +88,11 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/bing.html" class="nav-link ">
+                                            📌️ Bing Maps
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
                                         <a href="/universal-geocoder-js/docs/provider_usage/yandex.html" class="nav-link ">
                                             📌️ Yandex
                                         </a>
@@ -110,6 +115,7 @@
 <li><a href="provider_usage/googlemaps.html">Google Maps (Geocoding API)</a></li>
 <li><a href="provider_usage/mapbox.html">Mapbox</a></li>
 <li><a href="provider_usage/mapquest.html">MapQuest</a></li>
+<li><a href="provider_usage/bing.html">Bing Maps</a></li>
 <li><a href="provider_usage/yandex.html">Yandex</a></li>
 <li><a href="provider_usage/geoplugin.html">GeoPlugin</a></li>
 </ul>
@@ -175,8 +181,8 @@
       <td>Bias or filter the response to favor results that are closer to the specified span</td>
       <td>Yandex</td>
     </tr><tr><td>geocode</td>
-      <td>minConfidence</td>
-      <td>Only results with at least this confidence will be returned</td>
+      <td>minPrecision</td>
+      <td>Only results with at least this precision will be returned</td>
       <td>OpenCage</td>
     </tr><tr><td>geocode</td>
       <td>components</td>
@@ -207,8 +213,8 @@
       <td>Restrict the results to one or more countries</td>
       <td>Mapbox, OpenCage</td>
     </tr><tr><td>geodecode</td>
-      <td>minConfidence</td>
-      <td>Only results with at least this confidence will be returned</td>
+      <td>minPrecision</td>
+      <td>Only results with at least this precision will be returned</td>
       <td>OpenCage</td>
     </tr><tr><td>geodecode</td>
       <td>locationTypes</td>
@@ -241,11 +247,11 @@
     </tr><tr><td>geocoded</td>
       <td>attribution</td>
       <td>Credit information</td>
-      <td>GeoPlugin, MapQuest, Nominatim</td>
+      <td>Bing, GeoPlugin, MapQuest, Nominatim</td>
     </tr><tr><td>geocoded</td>
       <td>precision</td>
       <td>Quality of the geocoding result</td>
-      <td>MapQuest, Yandex</td>
+      <td>Bing, MapQuest, Yandex</td>
     </tr><tr><td>geocoded</td>
       <td>precisionCode</td>
       <td>Quality code of the geocoding result</td>
