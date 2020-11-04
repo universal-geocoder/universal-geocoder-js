@@ -15,7 +15,7 @@ jobs:
       - name: Setup Node (npm registry)
         uses: actions/setup-node@v2-beta
         with:
-          node-version: "14"
+          node-version: "15"
           registry-url: https://registry.npmjs.org
       - name: Install dependencies
         run: npm install
@@ -35,7 +35,7 @@ jobs:
       - name: Setup Node (GitHub registry)
         uses: actions/setup-node@v2-beta
         with:
-          node-version: "14"
+          node-version: "15"
           registry-url: https://npm.pkg.github.com
       - name: Change package name
         uses: datamonsters/replace-action@v2
