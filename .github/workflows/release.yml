@@ -22,7 +22,7 @@ jobs:
       - name: Run tests
         run: npm test
       - name: Generate changelog
-        uses: scottbrenner/generate-changelog-action@v1
+        uses: scottbrenner/generate-changelog-action@1.0.2
         id: changelog
         env:
           REPO: ${{ github.repository }}
