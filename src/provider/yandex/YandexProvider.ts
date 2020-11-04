@@ -170,9 +170,9 @@ export default class YandexProvider
 
   public geocode(
     query: string | YandexGeocodeQuery | YandexGeocodeQueryObject,
-    callback: YandexGeocodedResultsCallback,
+    callback?: YandexGeocodedResultsCallback,
     errorCallback?: ErrorCallback
-  ): void {
+  ): void | Promise<YandexGeocoded[]> {
     const geocodeQuery = ProviderHelpers.getGeocodeQueryFromParameter(
       query,
       YandexGeocodeQuery
@@ -222,7 +222,18 @@ export default class YandexProvider
       <YandexGeocodeQuery>geocodeQuery
     );
 
-    this.executeRequest(params, callback, {}, {}, errorCallback);
+    if (!callback) {
+      return new Promise((resolve, reject) =>
+        this.executeRequest(
+          params,
+          (results) => resolve(results),
+          {},
+          {},
+          (error) => reject(error)
+        )
+      );
+    }
+    return this.executeRequest(params, callback, {}, {}, errorCallback);
   }
 
   public geodecode(
@@ -231,10 +242,10 @@ export default class YandexProvider
       | string
       | YandexReverseQuery
       | YandexReverseQueryObject,
-    longitudeOrCallback: number | string | YandexGeocodedResultsCallback,
+    longitudeOrCallback?: number | string | YandexGeocodedResultsCallback,
     callbackOrErrorCallback?: YandexGeocodedResultsCallback | ErrorCallback,
     errorCallback?: ErrorCallback
-  ): void {
+  ): void | Promise<YandexGeocoded[]> {
     const reverseQuery = ProviderHelpers.getReverseQueryFromParameters(
       latitudeOrQuery,
       longitudeOrCallback,
@@ -268,7 +279,24 @@ export default class YandexProvider
       <YandexReverseQuery>reverseQuery
     );
 
-    this.executeRequest(params, reverseCallback, {}, {}, reverseErrorCallback);
+    if (!reverseCallback) {
+      return new Promise((resolve, reject) =>
+        this.executeRequest(
+          params,
+          (results) => resolve(results),
+          {},
+          {},
+          (error) => reject(error)
+        )
+      );
+    }
+    return this.executeRequest(
+      params,
+      reverseCallback,
+      {},
+      {},
+      reverseErrorCallback
+    );
   }
 
   private withCommonParams(

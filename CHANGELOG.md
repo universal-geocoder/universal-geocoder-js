@@ -7,7 +7,7 @@
 * [OpenCage] Add `precision` to `OpenCageGeocoded`
 * [OpenCage] Replace `minConfidence` with `minPrecision` for geocode and geodecode
 
-## 0.7.0
+## 0.7.0
 
 * [Yandex] Better Yandex provider
 * [Nominatim] Remove `viewBox` parameter in `GeocodeQuery` to use `bounds` instead

@@ -4,13 +4,14 @@
     <title>Universal Geocoder: Mapquest Example</title>
     <script src="../../dist/universal-geocoder.js"></script>
     <script>
-      var mapQuestGeocoder = UniversalGeocoder.createGeocoder({ provider: "mapquest", apiKey: "Fmjtd|luurnu6al1,bg=o5-9wbg94" });
+      var mapQuestGeocoder = UniversalGeocoder.createGeocoder({ provider: "mapquest" });
+
       mapQuestGeocoder.geocode("1600 Pennsylvania Ave NW, Washington, DC", function(result) {
-        console.log(result);
+        console.log("geocode", result);
       });
 
       mapQuestGeocoder.geodecode("44.915", "-93.21", function(result) {
-        console.log(result);
+        console.log("geodecode", result);
       });
 
       mapQuestGeocoder.geocode({
@@ -20,7 +21,7 @@
           locality: "Washington"
         },
       }, function(result) {
-        console.log(result);
+        console.log("geocode location", result);
       });
 
       mapQuestGeocoder = UniversalGeocoder.createGeocoder({
@@ -29,8 +30,13 @@
         method: "POST",
         openDomain: true
       });
+
       mapQuestGeocoder.geocode("1600 Pennsylvania Ave NW, Washington, DC", function(result) {
-        console.log(result);
+        console.log("geocode POST", result);
+      });
+
+      mapQuestGeocoder.geodecode("44.915", "-93.21", function(result) {
+        console.log("geodecode POST", result);
       });
 
       mapQuestGeocoder.geocode({
@@ -39,7 +45,7 @@
           city: "Washington"
         },
       }, function(result) {
-        console.log(result);
+        console.log("geocode POST location", result);
       });
     </script>
   </head>

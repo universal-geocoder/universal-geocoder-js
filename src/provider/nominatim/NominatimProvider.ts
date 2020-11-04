@@ -127,9 +127,9 @@ export default class NominatimProvider
 
   public geocode(
     query: string | NominatimGeocodeQuery | NominatimGeocodeQueryObject,
-    callback: NominatimGeocodedResultsCallback,
+    callback?: NominatimGeocodedResultsCallback,
     errorCallback?: ErrorCallback
-  ): void {
+  ): void | Promise<NominatimGeocoded[]> {
     const geocodeQuery = ProviderHelpers.getGeocodeQueryFromParameter(
       query,
       NominatimGeocodeQuery
@@ -175,7 +175,24 @@ export default class NominatimProvider
       <NominatimGeocodeQuery>geocodeQuery
     );
 
-    this.executeRequest(params, callback, this.getHeaders(), {}, errorCallback);
+    if (!callback) {
+      return new Promise((resolve, reject) =>
+        this.executeRequest(
+          params,
+          (results) => resolve(results),
+          this.getHeaders(),
+          {},
+          (error) => reject(error)
+        )
+      );
+    }
+    return this.executeRequest(
+      params,
+      callback,
+      this.getHeaders(),
+      {},
+      errorCallback
+    );
   }
 
   public geodecode(
@@ -184,10 +201,10 @@ export default class NominatimProvider
       | string
       | NominatimReverseQuery
       | NominatimReverseQueryObject,
-    longitudeOrCallback: number | string | NominatimGeocodedResultsCallback,
+    longitudeOrCallback?: number | string | NominatimGeocodedResultsCallback,
     callbackOrErrorCallback?: NominatimGeocodedResultsCallback | ErrorCallback,
     errorCallback?: ErrorCallback
-  ): void {
+  ): void | Promise<NominatimGeocoded[]> {
     const reverseQuery = ProviderHelpers.getReverseQueryFromParameters(
       latitudeOrQuery,
       longitudeOrCallback,
@@ -219,7 +236,18 @@ export default class NominatimProvider
       <NominatimReverseQuery>reverseQuery
     );
 
-    this.executeRequest(
+    if (!reverseCallback) {
+      return new Promise((resolve, reject) =>
+        this.executeRequest(
+          params,
+          (results) => resolve(results),
+          this.getHeaders(),
+          {},
+          (error) => reject(error)
+        )
+      );
+    }
+    return this.executeRequest(
       params,
       reverseCallback,
       this.getHeaders(),
