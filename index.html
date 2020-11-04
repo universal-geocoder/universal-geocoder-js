@@ -118,6 +118,7 @@
 <p>Depending of the chosen provider, it can use geocoding, reverse geocoding or IP geolocation.</p>
 <p>Universal Geocoder is a TypeScript fork of <a href="https://github.com/geocoder-php/geocoder-js">GeocoderJS</a>, itself a port of the <a href="https://geocoder-php.org/">Geocoder PHP</a> library.</p>
 <p>This library is platform agnostic: it is available either server-side (<strong>Node</strong>) or client-side (<strong>browsers</strong>, <strong>React Native</strong>, <strong>Electron</strong>).</p>
+<p>It aims to be compatible with a maximum of browsers (even old ones) and provides multiple ways to use it, from an old use (available in global environment, results from callbacks) to the most modern use (available as a module, async / await results).</p>
 <h2 id="installation">Installation</h2>
 <p>Add the library to your project:</p>
 <pre><code class="language-shell">npm install --save universal-geocoder</code></pre>
@@ -131,6 +132,12 @@
 
 const openStreetMapGeocoder = UniversalGeocoder.createGeocoder("openstreetmap");
 
+// async / await syntax
+(async () =&gt;
+  console.log(await openStreetMapGeocoder.geocode("1600 Pennsylvania Ave NW, Washington, DC"))
+)();
+
+// callback syntax
 openStreetMapGeocoder.geocode("1600 Pennsylvania Ave NW, Washington, DC", (result) =&gt; {
   console.log(result);
 });</code></pre>
@@ -193,14 +200,14 @@ const googleGeocoder = UniversalGeocoder.createGeocoder({
   // other specific provider options
 });
 
-googleGeocoder.geocode({
-  text: "1600 Pennsylvania Ave, Washington, DC",
-  locale: "FR",
-  limit: 10,
-  // other specific provider parameters
-}, (result) =&gt; {
-  console.log(result);
-});
+(async () =&gt;
+  console.log(await googleGeocoder.geocode({
+    text: "1600 Pennsylvania Ave, Washington, DC",
+    locale: "FR",
+    limit: 10,
+    // other specific provider parameters
+  }))
+)();
 
 const reverseQuery = ReverseQuery.create({
   coordinates: {
@@ -210,9 +217,9 @@ const reverseQuery = ReverseQuery.create({
 })
 .withLocale("FR")
 .withLimit(7);
-googleGeocoder.geodecode(reverseQuery, (result) =&gt; {
-  console.log(result);
-});</code></pre>
+(async () =&gt;
+  console.log(await googleGeocoder.geodecode(reverseQuery))
+)();</code></pre>
 <h3 id="common-options-">Common Options (<code>createGeocoder</code> method)</h3>
 <ul>
 <li><code>useSsl</code>: boolean to use the HTTPS API of the providers</li>
