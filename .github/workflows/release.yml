@@ -21,6 +21,11 @@ jobs:
         run: npm install
       - name: Run tests
         run: npm test
+      - name: Generate changelog
+        uses: scottbrenner/generate-changelog-action@v1
+        id: changelog
+        env:
+          REPO: ${{ github.repository }}
       - name: Create a GitHub release
         uses: actions/create-release@v1
         env:
@@ -28,6 +33,8 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
+          body: |
+            ${{ steps.changelog.outputs.changelog }}
       - name: Publish to npm
         run: npm publish
         env:
