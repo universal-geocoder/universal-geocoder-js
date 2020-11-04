@@ -98,9 +98,9 @@ export default class GeoPluginProvider
 
   public geocode(
     query: string | GeocodeQuery | GeocodeQueryObject,
-    callback: GeoPluginGeocodedResultsCallback,
+    callback?: GeoPluginGeocodedResultsCallback,
     errorCallback?: ErrorCallback
-  ): void {
+  ): void | Promise<GeoPluginGeocoded[]> {
     const geocodeQuery = ProviderHelpers.getGeocodeQueryFromParameter(query);
 
     if (geocodeQuery.getText()) {
@@ -110,13 +110,14 @@ export default class GeoPluginProvider
     }
 
     if (["127.0.0.1", "::1"].includes(geocodeQuery.getIp() || "")) {
-      callback([
-        GeoPluginGeocoded.create({
-          locality: "localhost",
-          country: "localhost",
-        }),
-      ]);
-      return;
+      const geocoded = GeoPluginGeocoded.create({
+        locality: "localhost",
+        country: "localhost",
+      });
+      if (!callback) {
+        return new Promise((resolve) => resolve([geocoded]));
+      }
+      return callback([geocoded]);
     }
 
     this.externalLoader.setOptions({
@@ -129,7 +130,18 @@ export default class GeoPluginProvider
       ip: geocodeQuery.getIp() || "",
     };
 
-    this.executeRequest(params, callback, {}, {}, errorCallback);
+    if (!callback) {
+      return new Promise((resolve, reject) =>
+        this.executeRequest(
+          params,
+          (results) => resolve(results),
+          {},
+          {},
+          (error) => reject(error)
+        )
+      );
+    }
+    return this.executeRequest(params, callback, {}, {}, errorCallback);
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -137,12 +149,12 @@ export default class GeoPluginProvider
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     latitudeOrQuery: number | string | ReverseQuery | ReverseQueryObject,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    longitudeOrCallback: number | string | GeoPluginGeocodedResultsCallback,
+    longitudeOrCallback?: number | string | GeoPluginGeocodedResultsCallback,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     callbackOrErrorCallback?: GeoPluginGeocodedResultsCallback | ErrorCallback,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     errorCallback?: ErrorCallback
-  ): void {
+  ): void | Promise<GeoPluginGeocoded[]> {
     throw new Error(
       "The GeoPlugin provider does not support reverse geocoding."
     );

@@ -5,12 +5,13 @@
     <script src="../../dist/universal-geocoder.js"></script>
     <script>
       var googleGeocoder = UniversalGeocoder.createGeocoder({ provider: "googlemaps", useSsl: true });
+
       googleGeocoder.geocode("1600 Pennsylvania Ave, Washington, DC", function(result) {
-        console.log(result);
+        console.log("geocode", result);
       });
 
       googleGeocoder.geodecode("44.915", "-93.21", function(result) {
-        console.log(result);
+        console.log("geodecode", result);
       });
     </script>
   </head>

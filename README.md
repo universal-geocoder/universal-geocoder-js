@@ -20,6 +20,8 @@ Universal Geocoder is a TypeScript fork of [GeocoderJS](https://github.com/geoco
 
 This library is platform agnostic: it is available either server-side (**Node**) or client-side (**browsers**, **React Native**, **Electron**).
 
+It aims to be compatible with a maximum of browsers (even old ones) and provides multiple ways to use it, from an old use (available in global environment, results from callbacks) to the most modern use (available as a module, async / await results).
+
 Installation
 ------------
 
@@ -43,6 +45,12 @@ import UniversalGeocoder from "universal-geocoder";
 
 const openStreetMapGeocoder = UniversalGeocoder.createGeocoder("openstreetmap");
 
+// async / await syntax
+(async () =>
+  console.log(await openStreetMapGeocoder.geocode("1600 Pennsylvania Ave NW, Washington, DC"))
+)();
+
+// callback syntax
 openStreetMapGeocoder.geocode("1600 Pennsylvania Ave NW, Washington, DC", (result) => {
   console.log(result);
 });
@@ -118,14 +126,14 @@ const googleGeocoder = UniversalGeocoder.createGeocoder({
   // other specific provider options
 });
 
-googleGeocoder.geocode({
-  text: "1600 Pennsylvania Ave, Washington, DC",
-  locale: "FR",
-  limit: 10,
-  // other specific provider parameters
-}, (result) => {
-  console.log(result);
-});
+(async () =>
+  console.log(await googleGeocoder.geocode({
+    text: "1600 Pennsylvania Ave, Washington, DC",
+    locale: "FR",
+    limit: 10,
+    // other specific provider parameters
+  }))
+)();
 
 const reverseQuery = ReverseQuery.create({
   coordinates: {
@@ -135,9 +143,9 @@ const reverseQuery = ReverseQuery.create({
 })
 .withLocale("FR")
 .withLimit(7);
-googleGeocoder.geodecode(reverseQuery, (result) => {
-  console.log(result);
-});
+(async () =>
+  console.log(await googleGeocoder.geodecode(reverseQuery))
+)();
 ```
 
 ### Common Options (`createGeocoder` method)

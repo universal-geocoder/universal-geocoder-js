@@ -28,7 +28,7 @@ export default class ProviderHelpers {
 
   public static getReverseQueryFromParameters<G extends Geocoded>(
     latitudeOrQuery: number | string | ReverseQuery | ReverseQueryObject,
-    longitudeOrCallback: number | string | GeocodedResultsCallback<G>,
+    longitudeOrCallback?: number | string | GeocodedResultsCallback<G>,
     reverseQuery = ReverseQuery
   ): ReverseQuery {
     if (
@@ -60,9 +60,9 @@ export default class ProviderHelpers {
   }
 
   public static getCallbackFromParameters<G extends Geocoded>(
-    longitudeOrCallback: number | string | GeocodedResultsCallback<G>,
+    longitudeOrCallback?: number | string | GeocodedResultsCallback<G>,
     callbackOrErrorCallback?: GeocodedResultsCallback<G> | ErrorCallback
-  ): GeocodedResultsCallback<G> {
+  ): undefined | GeocodedResultsCallback<G> {
     if (
       !(
         typeof longitudeOrCallback === "number" ||
@@ -75,13 +75,11 @@ export default class ProviderHelpers {
       return <GeocodedResultsCallback<G>>callbackOrErrorCallback;
     }
 
-    throw new Error(
-      "A callback must be set at the last parameter of geodecode"
-    );
+    return undefined;
   }
 
   public static getErrorCallbackFromParameters<G extends Geocoded>(
-    longitudeOrCallback: number | string | GeocodedResultsCallback<G>,
+    longitudeOrCallback?: number | string | GeocodedResultsCallback<G>,
     callbackOrErrorCallback?: GeocodedResultsCallback<G> | ErrorCallback,
     errorCallback?: ErrorCallback
   ): undefined | ErrorCallback {

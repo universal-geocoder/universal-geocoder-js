@@ -209,9 +209,9 @@ export default class GoogleMapsProvider
 
   public geocode(
     query: string | GoogleMapsGeocodeQuery | GoogleMapsGeocodeQueryObject,
-    callback: GoogleMapsGeocodedResultsCallback,
+    callback?: GoogleMapsGeocodedResultsCallback,
     errorCallback?: ErrorCallback
-  ): void {
+  ): void | Promise<GoogleMapsGeocoded[]> {
     const geocodeQuery = ProviderHelpers.getGeocodeQueryFromParameter(
       query,
       GoogleMapsGeocodeQuery
@@ -252,7 +252,18 @@ export default class GoogleMapsProvider
       <GoogleMapsGeocodeQuery>geocodeQuery
     );
 
-    this.executeRequest(params, callback, {}, {}, errorCallback);
+    if (!callback) {
+      return new Promise((resolve, reject) =>
+        this.executeRequest(
+          params,
+          (results) => resolve(results),
+          {},
+          {},
+          (error) => reject(error)
+        )
+      );
+    }
+    return this.executeRequest(params, callback, {}, {}, errorCallback);
   }
 
   public geodecode(
@@ -261,10 +272,10 @@ export default class GoogleMapsProvider
       | string
       | GoogleMapsReverseQuery
       | GoogleMapsReverseQueryObject,
-    longitudeOrCallback: number | string | GoogleMapsGeocodedResultsCallback,
+    longitudeOrCallback?: number | string | GoogleMapsGeocodedResultsCallback,
     callbackOrErrorCallback?: GoogleMapsGeocodedResultsCallback | ErrorCallback,
     errorCallback?: ErrorCallback
-  ): void {
+  ): void | Promise<GoogleMapsGeocoded[]> {
     const reverseQuery = ProviderHelpers.getReverseQueryFromParameters(
       latitudeOrQuery,
       longitudeOrCallback,
@@ -301,7 +312,24 @@ export default class GoogleMapsProvider
       <GoogleMapsReverseQuery>reverseQuery
     );
 
-    this.executeRequest(params, reverseCallback, {}, {}, reverseErrorCallback);
+    if (!reverseCallback) {
+      return new Promise((resolve, reject) =>
+        this.executeRequest(
+          params,
+          (results) => resolve(results),
+          {},
+          {},
+          (error) => reject(error)
+        )
+      );
+    }
+    return this.executeRequest(
+      params,
+      reverseCallback,
+      {},
+      {},
+      reverseErrorCallback
+    );
   }
 
   private withCommonParams(

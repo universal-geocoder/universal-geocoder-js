@@ -129,9 +129,9 @@ export default class MapQuestProvider
 
   public geocode(
     query: string | MapQuestGeocodeQuery | MapQuestGeocodeQueryObject,
-    callback: MapQuestGeocodedResultsCallback,
+    callback?: MapQuestGeocodedResultsCallback,
     errorCallback?: ErrorCallback
-  ): void {
+  ): void | Promise<MapQuestGeocoded[]> {
     const geocodeQuery = ProviderHelpers.getGeocodeQueryFromParameter(
       query,
       MapQuestGeocodeQuery
@@ -207,15 +207,26 @@ export default class MapQuestProvider
           }
         : {};
 
-    this.executeRequest(params, callback, {}, body, errorCallback);
+    if (!callback) {
+      return new Promise((resolve, reject) =>
+        this.executeRequest(
+          params,
+          (results) => resolve(results),
+          {},
+          body,
+          (error) => reject(error)
+        )
+      );
+    }
+    return this.executeRequest(params, callback, {}, body, errorCallback);
   }
 
   public geodecode(
     latitudeOrQuery: number | string | ReverseQuery | ReverseQueryObject,
-    longitudeOrCallback: number | string | MapQuestGeocodedResultsCallback,
+    longitudeOrCallback?: number | string | MapQuestGeocodedResultsCallback,
     callbackOrErrorCallback?: MapQuestGeocodedResultsCallback | ErrorCallback,
     errorCallback?: ErrorCallback
-  ): void {
+  ): void | Promise<MapQuestGeocoded[]> {
     const reverseQuery = ProviderHelpers.getReverseQueryFromParameters(
       latitudeOrQuery,
       longitudeOrCallback
@@ -261,7 +272,18 @@ export default class MapQuestProvider
           }
         : {};
 
-    this.executeRequest(
+    if (!reverseCallback) {
+      return new Promise((resolve, reject) =>
+        this.executeRequest(
+          params,
+          (results) => resolve(results),
+          {},
+          body,
+          (error) => reject(error)
+        )
+      );
+    }
+    return this.executeRequest(
       params,
       reverseCallback,
       {},

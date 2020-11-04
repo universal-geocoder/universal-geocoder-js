@@ -44,15 +44,33 @@ export default class ChainProvider implements ProviderInterface<Geocoded> {
 
   public geocode(
     query: string | GeocodeQuery | GeocodeQueryObject,
-    callback: ChainGeocodedResultsCallback,
+    callback?: ChainGeocodedResultsCallback,
     errorCallback?: ErrorCallback
-  ): void {
+  ): void | Promise<Geocoded[]> {
     if (this.options.parallelize || this.options.first) {
-      this.geocodeAllProviders(query, callback, errorCallback);
-      return;
+      if (!callback) {
+        return new Promise((resolve, reject) =>
+          this.geocodeAllProviders(
+            query,
+            (results) => resolve(results),
+            (error) => reject(error)
+          )
+        );
+      }
+      return this.geocodeAllProviders(query, callback, errorCallback);
     }
 
-    this.geocodeNextProvider(
+    if (!callback) {
+      return new Promise((resolve, reject) =>
+        this.geocodeNextProvider(
+          this.options.providers,
+          query,
+          (results) => resolve(results),
+          (error) => reject(error)
+        )
+      );
+    }
+    return this.geocodeNextProvider(
       this.options.providers,
       query,
       callback,
@@ -62,10 +80,10 @@ export default class ChainProvider implements ProviderInterface<Geocoded> {
 
   public geodecode(
     latitudeOrQuery: number | string | ReverseQuery | ReverseQueryObject,
-    longitudeOrCallback: number | string | ChainGeocodedResultsCallback,
+    longitudeOrCallback?: number | string | ChainGeocodedResultsCallback,
     callbackOrErrorCallback?: ChainGeocodedResultsCallback | ErrorCallback,
     errorCallback?: ErrorCallback
-  ): void {
+  ): void | Promise<Geocoded[]> {
     const reverseQuery = ProviderHelpers.getReverseQueryFromParameters(
       latitudeOrQuery,
       longitudeOrCallback
@@ -81,15 +99,33 @@ export default class ChainProvider implements ProviderInterface<Geocoded> {
     );
 
     if (this.options.parallelize || this.options.first) {
-      this.geodecodeAllProviders(
+      if (!reverseCallback) {
+        return new Promise((resolve, reject) =>
+          this.geodecodeAllProviders(
+            reverseQuery,
+            (results) => resolve(results),
+            (error) => reject(error)
+          )
+        );
+      }
+      return this.geodecodeAllProviders(
         reverseQuery,
         reverseCallback,
         reverseErrorCallback
       );
-      return;
     }
 
-    this.geodecodeNextProvider(
+    if (!reverseCallback) {
+      return new Promise((resolve, reject) =>
+        this.geodecodeNextProvider(
+          this.options.providers,
+          reverseQuery,
+          (results) => resolve(results),
+          (error) => reject(error)
+        )
+      );
+    }
+    return this.geodecodeNextProvider(
       this.options.providers,
       reverseQuery,
       reverseCallback,
