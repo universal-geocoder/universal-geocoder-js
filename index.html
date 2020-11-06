@@ -313,10 +313,11 @@ const reverseQuery = ReverseQuery.create({
 
 const nominatimGeocoder = UniversalGeocoder.createGeocoder("nominatim");
 
-nominatimGeocoder.geocode("1600 Pennsylvania Ave, Washington, DC", (result) =&gt; {
+(async () =&gt; {
+  const result = await nominatimGeocoder.geocode("1600 Pennsylvania Ave NW, Washington, DC");
   console.log(result);
   console.log("GeoJSON:", GeoJsonDumper.dump(result[0]));
-});</code></pre>
+})();</code></pre>
 <h2 id="building">Building</h2>
 <pre><code class="language-shell">npm run build</code></pre>
 <h2 id="testing">Testing</h2>
@@ -330,6 +331,11 @@ nominatimGeocoder.geocode("1600 Pennsylvania Ave, Washington, DC", (result) =&gt
 <p>Then go to <a href="http://localhost:8080/example/web">http://localhost:8080/example/web</a>, choose a provider and open the console.</p>
 <p>For Node:</p>
 <pre><code class="language-shell">npm run ts-node -- example/node/provider.ts</code></pre>
+<h2 id="faq">FAQ</h2>
+<p><strong>Q: When using Universal Geocoder client-side, how to make sure the API key is not stolen?</strong></p>
+<p><strong>A:</strong> First of all, there are some providers that do not use an API key, like OpenStreetMap (Nominatim) or GeoPlugin.</p>
+<p>If you want to use a provider with an API key, the best approach is generally to use Universal Geocoder in the server-side (Node) and to call it from the client-side.
+This way the API key is not exposed directly.</p>
                 </section>
 
             </div>
