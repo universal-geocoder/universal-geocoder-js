@@ -283,10 +283,11 @@ import UniversalGeocoder, { GeoJsonDumper } from "universal-geocoder";
 
 const nominatimGeocoder = UniversalGeocoder.createGeocoder("nominatim");
 
-nominatimGeocoder.geocode("1600 Pennsylvania Ave, Washington, DC", (result) => {
+(async () => {
+  const result = await nominatimGeocoder.geocode("1600 Pennsylvania Ave NW, Washington, DC");
   console.log(result);
   console.log("GeoJSON:", GeoJsonDumper.dump(result[0]));
-});
+})();
 ```
 
 Building
@@ -326,3 +327,13 @@ For Node:
 ```shell
 npm run ts-node -- example/node/provider.ts
 ```
+
+FAQ
+---
+
+**Q: When using Universal Geocoder client-side, how to make sure the API key is not stolen?**
+
+**A:** First of all, there are some providers that do not use an API key, like OpenStreetMap (Nominatim) or GeoPlugin.
+
+If you want to use a provider with an API key, the best approach is generally to use Universal Geocoder in the server-side (Node) and to call it from the client-side.
+This way the API key is not exposed directly.
