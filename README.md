@@ -10,7 +10,7 @@ Universal Geocoder
 [![minified-size](https://img.shields.io/bundlephobia/min/universal-geocoder)](https://bundlephobia.com/result?p=universal-geocoder)
 [![downloads](https://img.shields.io/npm/dw/universal-geocoder)](https://www.npmjs.com/package/universal-geocoder)
 
-Universal Geocoder is a universal JavaScript library for client-side geocoding applications with multiple built-in providers.
+Universal Geocoder is a universal JavaScript library for server-side and client-side geocoding applications with multiple built-in providers.
 
 Need geocoding 🌍️ in your website or application? Don't want to be vendor-locked to a service? ✨️ Universal Geocoder ✨️ is for you!
 

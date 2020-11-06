@@ -1,5 +1,5 @@
 title: Universal Geocoder
-subTitle: A universal JavaScript library for client-side geocoding applications with multiple built-in providers
+subTitle: A universal JavaScript library for server-side and client-side geocoding applications with multiple built-in providers
 
 github:
     user: universal-geocoder
