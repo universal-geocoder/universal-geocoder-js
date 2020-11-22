@@ -12,6 +12,48 @@ export const filterUndefinedObjectValues = <V>(
     return filtered;
   }, {});
 
+type NestedObject<V> = {
+  [key: string]: V | NestedObject<V> | undefined;
+};
+
+export const flattenObject = <S extends string | string[]>(
+  object: NestedObject<S>
+): { [key: string]: S } => {
+  const flattened: { [key: string]: S } = {};
+
+  const isNested = (value: NestedObject<S> | S): value is NestedObject<S> => {
+    const isArray = Array.isArray(value);
+    const type = Object.prototype.toString.call(value);
+    const isObject = type === "[object Object]" || type === "[object Array]";
+
+    if (!isArray && isObject && Object.keys(value).length) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const step = (nestedObject: NestedObject<S>): void => {
+    Object.keys(nestedObject).forEach((key) => {
+      const value = nestedObject[key];
+      if (undefined === value) {
+        return;
+      }
+
+      if (isNested(value)) {
+        step(value);
+        return;
+      }
+
+      flattened[key] = value;
+    });
+  };
+
+  step(object);
+
+  return flattened;
+};
+
 /**
  * Decode from URL-safe base64 to true base64.
  */

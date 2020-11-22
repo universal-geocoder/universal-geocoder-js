@@ -99,9 +99,7 @@ export const defaultNominatimProviderOptions = {
   userAgent: "",
 };
 
-type NominatimGeocodedResultsCallback = GeocodedResultsCallback<
-  NominatimGeocoded
->;
+type NominatimGeocodedResultsCallback = GeocodedResultsCallback<NominatimGeocoded>;
 
 export default class NominatimProvider
   implements ProviderInterface<NominatimGeocoded> {

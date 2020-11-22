@@ -18,6 +18,7 @@ import {
   defaultProviderOptions,
 } from "provider";
 import AdminLevel from "AdminLevel";
+import { flattenObject } from "utils";
 
 export type YandexKind =
   | "house"
@@ -344,7 +345,7 @@ export default class YandexProvider
     const latitude = parseFloat(point[1]);
     const longitude = parseFloat(point[0]);
 
-    const addressDetails: YandexFlattenedAddressDetails = YandexProvider.flattenObject(
+    const addressDetails: YandexFlattenedAddressDetails = flattenObject(
       result.metaDataProperty.GeocoderMetaData.AddressDetails
     );
 
@@ -399,37 +400,5 @@ export default class YandexProvider
     });
 
     return geocoded;
-  }
-
-  private static flattenObject<
-    S extends string | string[],
-    O extends { [key: string]: O[keyof O] | S }
-  >(object: O) {
-    const flattened: { [key: string]: S } = {};
-
-    const step = (nestedObject: O | O[keyof O]): void => {
-      Object.keys(<O>nestedObject).forEach((key) => {
-        const value = (<O>nestedObject)[key];
-        const isArray = Array.isArray(value);
-        const type = Object.prototype.toString.call(value);
-        const isObject =
-          type === "[object Object]" || type === "[object Array]";
-
-        if (
-          !isArray &&
-          isObject &&
-          Object.keys(<Record<string, unknown>>value).length
-        ) {
-          step(<O[keyof O]>value);
-          return;
-        }
-
-        flattened[key] = <S>value;
-      });
-    };
-
-    step(object);
-
-    return flattened;
   }
 }

@@ -169,9 +169,7 @@ export interface GoogleMapsProviderOptionsInterface
   readonly countryCodes?: string[];
 }
 
-type GoogleMapsGeocodedResultsCallback = GeocodedResultsCallback<
-  GoogleMapsGeocoded
->;
+type GoogleMapsGeocodedResultsCallback = GeocodedResultsCallback<GoogleMapsGeocoded>;
 
 export default class GoogleMapsProvider
   implements ProviderInterface<GoogleMapsGeocoded> {

@@ -101,9 +101,7 @@ export const defaultMapQuestProviderOptions: MapQuestProviderOptionsInterface = 
   openDomain: false,
 };
 
-type MapQuestGeocodedResultsCallback = GeocodedResultsCallback<
-  MapQuestGeocoded
->;
+type MapQuestGeocodedResultsCallback = GeocodedResultsCallback<MapQuestGeocoded>;
 
 export default class MapQuestProvider
   implements ProviderInterface<MapQuestGeocoded> {
