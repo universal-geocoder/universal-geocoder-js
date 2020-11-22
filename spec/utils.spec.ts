@@ -1,5 +1,6 @@
 import {
   filterUndefinedObjectValues,
+  flattenObject,
   decodeUrlSafeBase64,
   encodeUrlSafeBase64,
   decodeBase64,
@@ -18,6 +19,23 @@ describe("Utilities", () => {
     expect(filterUndefinedObjectValues(object)).toEqual({
       string: "string",
       boolean: true,
+    });
+  });
+
+  it("can flatten nested objects", () => {
+    const nestedObject = {
+      first: {
+        foo: 4,
+        second: {
+          bar: "bar",
+          third: undefined,
+        },
+      },
+    };
+
+    expect(flattenObject<string | number>(nestedObject)).toEqual({
+      foo: 4,
+      bar: "bar",
     });
   });
 

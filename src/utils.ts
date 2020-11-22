@@ -16,7 +16,7 @@ type NestedObject<V> = {
   [key: string]: V | NestedObject<V> | undefined;
 };
 
-export const flattenObject = <S extends string | string[]>(
+export const flattenObject = <S>(
   object: NestedObject<S>
 ): { [key: string]: S } => {
   const flattened: { [key: string]: S } = {};
