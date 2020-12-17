@@ -298,7 +298,7 @@ Here is a table listing the parameters according to the providers:
       <td>geocoded</td>
       <td>subLocalityLevels</td>
       <td>Levels for the sublocality</td>
-      <td>Google Maps</td>
+      <td>Google Maps, Nominatim</td>
     </tr>
     <tr>
       <td>geocoded</td>
