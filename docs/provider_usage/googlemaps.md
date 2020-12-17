@@ -26,4 +26,4 @@
 - `locationType`: a type representing the precision of the result
 - `streetAddress`: the street number with the street name
 - `intersection`, `political`, `colloquialArea`, `ward`, `neighborhood`, `premise`, `subpremise`, `naturalFeature`, `airport`, `park`, `pointOfInterest`, `establishment`, `postalCodeSuffix`: additional address components
-- `subLocalityLevels`: levels for the sublocality
+- `subLocalityLevels`: levels for the sublocality (greater level number means smaller area)

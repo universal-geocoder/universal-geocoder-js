@@ -22,3 +22,4 @@
 - `osmId`, `osmType`: reference to the OpenStreetMap object
 - `category`, `type`: key and value of the main OpenStreetMap tag
 - `attribution`: OpenStreetMap licensing information
+- `subLocalityLevels`: levels for the sublocality (greater level number means smaller area)

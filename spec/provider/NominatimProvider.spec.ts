@@ -72,6 +72,10 @@ describe("OpenStreetMap / Nominatim Geocoder Provider", () => {
         expect(geocoded.getStreetName()).toEqual("Pennsylvania Avenue");
         expect(geocoded.getSubLocality()).toEqual(undefined);
         expect(geocoded.getLocality()).toEqual("Washington");
+        expect(geocoded.getSubLocalityLevels()).toEqual([
+          AdminLevel.create({ level: 3, name: "Penn Quarter" }),
+          AdminLevel.create({ level: 5, name: "Pennsylvania Avenue" }),
+        ]);
         expect(geocoded.getPostalCode()).toEqual("20045");
         expect(geocoded.getRegion()).toEqual("District of Columbia");
         expect(geocoded.getAdminLevels()).toEqual([
@@ -125,6 +129,9 @@ describe("OpenStreetMap / Nominatim Geocoder Provider", () => {
         expect(geocoded.getStreetName()).toEqual(undefined);
         expect(geocoded.getSubLocality()).toEqual("Quartier du Père-Lachaise");
         expect(geocoded.getLocality()).toEqual("Paris");
+        expect(geocoded.getSubLocalityLevels()).toEqual([
+          AdminLevel.create({ level: 1, name: "Quartier du Père-Lachaise" }),
+        ]);
         expect(geocoded.getPostalCode()).toEqual("75020");
         expect(geocoded.getRegion()).toEqual("Île-de-France");
         expect(geocoded.getAdminLevels()).toEqual([

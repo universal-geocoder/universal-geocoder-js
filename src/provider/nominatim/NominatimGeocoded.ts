@@ -1,4 +1,5 @@
 import Geocoded, { GeocodedObject } from "Geocoded";
+import AdminLevel from "AdminLevel";
 
 export interface NominatimGeocodedObject extends GeocodedObject {
   readonly displayName?: string;
@@ -7,6 +8,7 @@ export interface NominatimGeocodedObject extends GeocodedObject {
   readonly category?: string;
   readonly type?: string;
   readonly attribution?: string;
+  readonly subLocalityLevels?: AdminLevel[];
 }
 
 export default class NominatimGeocoded extends Geocoded {
@@ -22,6 +24,8 @@ export default class NominatimGeocoded extends Geocoded {
 
   private readonly attribution?: string;
 
+  private readonly subLocalityLevels: AdminLevel[];
+
   protected constructor({
     displayName,
     osmId,
@@ -29,6 +33,7 @@ export default class NominatimGeocoded extends Geocoded {
     category,
     type,
     attribution,
+    subLocalityLevels,
     ...geocodedObject
   }: NominatimGeocodedObject) {
     super(geocodedObject);
@@ -38,6 +43,7 @@ export default class NominatimGeocoded extends Geocoded {
     this.category = category;
     this.type = type;
     this.attribution = attribution;
+    this.subLocalityLevels = subLocalityLevels || [];
   }
 
   public static create(object: NominatimGeocodedObject): NominatimGeocoded {
@@ -53,6 +59,7 @@ export default class NominatimGeocoded extends Geocoded {
       category: this.category,
       type: this.type,
       attribution: this.attribution,
+      subLocalityLevels: this.subLocalityLevels,
     };
   }
 
@@ -120,5 +127,13 @@ export default class NominatimGeocoded extends Geocoded {
 
   public getAttribution(): undefined | string {
     return this.attribution;
+  }
+
+  public addSubLocalityLevel(subLocalityLevel: AdminLevel): void {
+    this.subLocalityLevels.push(subLocalityLevel);
+  }
+
+  public getSubLocalityLevels(): AdminLevel[] {
+    return this.subLocalityLevels;
   }
 }

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.0
+
+* [Nominatim] Add `subLocalityLevels`
+
 ## 0.9.0
 
 * Introduce async / await (or Promise) syntax (providers return a promise if no callback is given)

@@ -62,22 +62,47 @@ export interface NominatimResult {
   icon: string;
   address: {
     attraction?: string;
+    pedestrian?: string;
+    // eslint-disable-next-line camelcase
+    house_name?: string;
     // eslint-disable-next-line camelcase
     house_number?: string;
     road?: string;
-    pedestrian?: string;
+    retail?: string;
+    commercial?: string;
+    industrial?: string;
+    farmyard?: string;
+    farm?: string;
+    residental?: string;
+    // eslint-disable-next-line camelcase
+    city_block?: string;
+    quarter?: string;
+    allotments?: string;
     neighbourhood?: string;
+    // eslint-disable-next-line camelcase
+    isolated_dwelling?: string;
+    croft?: string;
+    hamlet?: string;
+    // eslint-disable-next-line camelcase
+    city_district?: string;
+    district?: string;
+    borough?: string;
+    subdivision?: string;
     suburb?: string;
+    municipality?: string;
     city?: string;
     town?: string;
     village?: string;
-    hamlet?: string;
+    region?: string;
+    // eslint-disable-next-line camelcase
+    state_district?: string;
     state?: string;
     county?: string;
     postcode?: string;
     country?: string;
     // eslint-disable-next-line camelcase
     country_code?: string;
+    continent?: string;
   };
 }
 
@@ -383,6 +408,56 @@ export default class NominatimProvider
           })
         );
       }
+    });
+
+    const subLocalityLevels: (
+      | "city_district"
+      | "district"
+      | "borough"
+      | "suburb"
+      | "subdivision"
+      | "hamlet"
+      | "croft"
+      | "isolated_dwelling"
+      | "neighbourhood"
+      | "allotments"
+      | "quarter"
+      | "city_block"
+      | "residental"
+      | "farm"
+      | "farmyard"
+      | "industrial"
+      | "commercial"
+      | "retail"
+      | "road"
+      | "house_name"
+    )[][] = [
+      ["city_district", "district", "borough", "suburb", "subdivision"],
+      ["hamlet", "croft", "isolated_dwelling"],
+      ["neighbourhood", "allotments", "quarter"],
+      [
+        "city_block",
+        "residental",
+        "farm",
+        "farmyard",
+        "industrial",
+        "commercial",
+        "retail",
+      ],
+      ["road"],
+      ["house_name"],
+    ];
+    subLocalityLevels.forEach((subLocalities, level) => {
+      subLocalities.forEach((subLocalityLevel) => {
+        if (result.address[subLocalityLevel]) {
+          geocoded.addSubLocalityLevel(
+            AdminLevel.create({
+              level: level + 1,
+              name: result.address[subLocalityLevel] || "",
+            })
+          );
+        }
+      });
     });
 
     return geocoded;
