@@ -7,8 +7,12 @@ Universal Geocoder
 [![codecov](https://img.shields.io/codecov/c/gh/universal-geocoder/universal-geocoder-js/main)](https://codecov.io/gh/universal-geocoder/universal-geocoder-js)
 
 [![npm](https://img.shields.io/npm/v/universal-geocoder)](https://www.npmjs.com/package/universal-geocoder)
-[![minified-size](https://img.shields.io/bundlephobia/min/universal-geocoder)](https://bundlephobia.com/result?p=universal-geocoder)
 [![downloads](https://img.shields.io/npm/dw/universal-geocoder)](https://www.npmjs.com/package/universal-geocoder)
+
+[![dependency-count](https://badgen.net/bundlephobia/dependency-count/universal-geocoder)](https://bundlephobia.com/result?p=universal-geocoder)
+[![minified-size](https://img.shields.io/bundlephobia/min/universal-geocoder)](https://bundlephobia.com/result?p=universal-geocoder)
+[![tree-shaking](https://badgen.net/bundlephobia/tree-shaking/universal-geocoder)](https://bundlephobia.com/result?p=universal-geocoder)
+![types](https://badgen.net/npm/types/universal-geocoder)
 
 Universal Geocoder is a universal JavaScript library for server-side and client-side geocoding applications with multiple built-in providers.
 
