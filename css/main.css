@@ -52,10 +52,19 @@ img[alt="codecov"] {
 img[alt="npm"] {
     display: none;
 }
+img[alt="downloads"] {
+    display: none;
+}
+img[alt="dependency-count"] {
+    display: none;
+}
 img[alt="minified-size"] {
     display: none;
 }
-img[alt="downloads"] {
+img[alt="tree-shaking"] {
+    display: none;
+}
+img[alt="types"] {
     display: none;
 }
 
