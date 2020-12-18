@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.0
+
+* Export ES module as well as CommonJS
+
 ## 0.10.0
 
 * [Nominatim] Add `subLocalityLevels`
