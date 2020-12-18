@@ -105,7 +105,7 @@ export default class ExternalLoader implements ExternalLoaderInterface {
       method,
       body: method === "POST" ? JSON.stringify(body) : undefined,
     })
-      .then((response) => {
+      .then((response: Response) => {
         if (!response.ok) {
           throw new ResponseError(
             `Received HTTP status code ${response.status} when attempting geocoding request.`,
@@ -114,8 +114,9 @@ export default class ExternalLoader implements ExternalLoaderInterface {
         }
         return response.json();
       })
-      .then((data) => callback(data))
-      .catch((error) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .then((data: any) => callback(data))
+      .catch((error: Error | ResponseError) => {
         if (errorCallback && error instanceof ResponseError) {
           errorCallback(error);
           return;

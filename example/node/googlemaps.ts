@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import UniversalGeocoder from "../../dist/UniversalGeocoder";
+import UniversalGeocoder from "../../dist/cjs/UniversalGeocoder";
 
 const googleGeocoder = UniversalGeocoder.createGeocoder({
   provider: "googlemaps",

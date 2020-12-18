@@ -1,7 +1,10 @@
 /* eslint-disable no-console */
-import UniversalGeocoder from "../../dist/UniversalGeocoder";
-import Geocoded from "../../dist/Geocoded";
-import { MapQuestGeocodeQuery, MapQuestLocation } from "../../dist/provider";
+import UniversalGeocoder from "../../dist/cjs/UniversalGeocoder";
+import Geocoded from "../../dist/cjs/Geocoded";
+import {
+  MapQuestGeocodeQuery,
+  MapQuestLocation,
+} from "../../dist/cjs/provider";
 
 let mapQuestGeocoder = UniversalGeocoder.createGeocoder({
   provider: "mapquest",

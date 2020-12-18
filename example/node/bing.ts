@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import UniversalGeocoder from "../../dist/UniversalGeocoder";
-import GeoJsonDumper from "../../dist/GeoJsonDumper";
+import UniversalGeocoder from "../../dist/cjs/UniversalGeocoder";
+import GeoJsonDumper from "../../dist/cjs/GeoJsonDumper";
 
 const bingGeocoder = UniversalGeocoder.createGeocoder({
   provider: "bing",

@@ -36,7 +36,7 @@ npm install --save universal-geocoder
 Usage
 -----
 
-You can either use Universal Geocoder as a module or as a direct dependency.
+You can either use Universal Geocoder as a module (both CommonJS and ES module syntaxes are provided) or as a direct dependency.
 
 As a module:
 

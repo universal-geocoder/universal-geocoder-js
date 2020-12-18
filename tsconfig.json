@@ -5,10 +5,12 @@
     "declarationDir": "types",
     "declarationMap": true,
     "esModuleInterop": true,
-    "outDir": "dist",
+    "outDir": "dist/esm",
     "sourceMap": true,
     "strict": true,
     "target": "ES5",
+    "module": "ES2020",
+    "moduleResolution": "node",
     "plugins": [
       {
         "transform": "@zerollup/ts-transform-paths",

@@ -26,7 +26,12 @@
     "type": "git",
     "url": "git+https://github.com/universal-geocoder/universal-geocoder-js.git"
   },
-  "main": "dist/index.js",
+  "main": "./dist/cjs/index.js",
+  "exports": {
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.js"
+  },
+  "module": "./dist/esm/index.js",
   "types": "types/index.d.ts",
   "files": [
     "/dist",
@@ -78,13 +83,13 @@
     "webpack-merge": "^5.1.0"
   },
   "scripts": {
-    "build": "rm -rf types && rm -rf dist && webpack --config webpack.dev.js && webpack --config webpack.prod.js && ttsc",
+    "build": "rm -rf types && rm -rf dist && webpack --config webpack.dev.js && webpack --config webpack.prod.js && ttsc -p tsconfig-cjs.json && ttsc",
     "coverage": "nyc npm test",
     "coverage-lcov": "nyc --reporter=lcov npm test",
     "lint": "eslint --fix --ext .ts .",
     "prepublishOnly": "npm run build",
     "serve": "http-server",
-    "test": "ts-node --compiler ttypescript -r tsconfig-paths/register node_modules/.bin/jasmine",
+    "test": "ts-node --project tsconfig-cjs.json --compiler ttypescript -r tsconfig-paths/register node_modules/.bin/jasmine",
     "test-record": "POLLY_RECORD=1 npm test",
     "ts-node": "ts-node --skip-project",
     "watch": "webpack --config webpack.dev.js --watch"
