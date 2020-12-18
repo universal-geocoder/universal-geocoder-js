@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.1
+
+* Module is side-effect free
+
 ## 0.11.0
 
 * Export ES module as well as CommonJS

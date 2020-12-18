@@ -38,6 +38,7 @@
     "/src",
     "/types"
   ],
+  "sideEffects": false,
   "dependencies": {
     "cross-fetch": "^3.0.0"
   },
