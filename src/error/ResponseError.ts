@@ -2,6 +2,7 @@ import {
   BingResponse,
   GeoPluginResult,
   GoogleMapsResponse,
+  LocationIQResponse,
   MapboxResponse,
   MapQuestResponse,
   NominatimResponse,
@@ -16,6 +17,7 @@ export default class ResponseError extends Error {
     | BingResponse
     | GeoPluginResult
     | GoogleMapsResponse
+    | LocationIQResponse
     | MapboxResponse
     | MapQuestResponse
     | NominatimResponse
@@ -28,6 +30,7 @@ export default class ResponseError extends Error {
       | BingResponse
       | GeoPluginResult
       | GoogleMapsResponse
+      | LocationIQResponse
       | MapboxResponse
       | MapQuestResponse
       | NominatimResponse
@@ -46,6 +49,7 @@ export default class ResponseError extends Error {
     | BingResponse
     | GeoPluginResult
     | GoogleMapsResponse
+    | LocationIQResponse
     | MapboxResponse
     | MapQuestResponse
     | NominatimResponse

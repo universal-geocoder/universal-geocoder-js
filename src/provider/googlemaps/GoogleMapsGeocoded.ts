@@ -1,11 +1,12 @@
 import Geocoded, { GeocodedObject } from "Geocoded";
 import AdminLevel from "AdminLevel";
+import { GoogleMapsPrecision } from "provider";
 
 export interface GoogleMapsGeocodedObject extends GeocodedObject {
   readonly placeId?: string;
   readonly partialMatch?: boolean;
-  readonly resultType?: string[];
-  readonly locationType?: string;
+  readonly types?: string[];
+  readonly precision?: GoogleMapsPrecision;
   readonly streetAddress?: string;
   readonly intersection?: string;
   readonly political?: string;
@@ -28,9 +29,9 @@ export default class GoogleMapsGeocoded extends Geocoded {
 
   private readonly partialMatch?: boolean;
 
-  private readonly resultType?: string[];
+  private readonly types?: string[];
 
-  private readonly locationType?: string;
+  private readonly precision?: GoogleMapsPrecision;
 
   private readonly streetAddress?: string;
 
@@ -65,8 +66,8 @@ export default class GoogleMapsGeocoded extends Geocoded {
   protected constructor({
     placeId,
     partialMatch,
-    resultType,
-    locationType,
+    types,
+    precision,
     streetAddress,
     intersection,
     political,
@@ -87,8 +88,8 @@ export default class GoogleMapsGeocoded extends Geocoded {
     super(geocodedObject);
     this.placeId = placeId;
     this.partialMatch = partialMatch;
-    this.resultType = resultType;
-    this.locationType = locationType;
+    this.types = types;
+    this.precision = precision;
     this.streetAddress = streetAddress;
     this.intersection = intersection;
     this.political = political;
@@ -115,8 +116,8 @@ export default class GoogleMapsGeocoded extends Geocoded {
       ...super.toObject(),
       placeId: this.placeId,
       partialMatch: this.partialMatch,
-      resultType: this.resultType,
-      locationType: this.locationType,
+      types: this.types,
+      precision: this.precision,
       streetAddress: this.streetAddress,
       intersection: this.intersection,
       political: this.political,
@@ -157,26 +158,26 @@ export default class GoogleMapsGeocoded extends Geocoded {
     return this.partialMatch;
   }
 
-  public withResultType(resultType: string[]): GoogleMapsGeocoded {
+  public withTypes(types: string[]): GoogleMapsGeocoded {
     return new GoogleMapsGeocoded({
       ...this.toObject(),
-      resultType,
+      types,
     });
   }
 
-  public getResultType(): undefined | string[] {
-    return this.resultType;
+  public getTypes(): undefined | string[] {
+    return this.types;
   }
 
-  public withLocationType(locationType: string): GoogleMapsGeocoded {
+  public withPrecision(precision: GoogleMapsPrecision): GoogleMapsGeocoded {
     return new GoogleMapsGeocoded({
       ...this.toObject(),
-      locationType,
+      precision,
     });
   }
 
-  public getLocationType(): undefined | string {
-    return this.locationType;
+  public getPrecision(): undefined | GoogleMapsPrecision {
+    return this.precision;
   }
 
   public withStreetAddress(streetAddress: string): GoogleMapsGeocoded {

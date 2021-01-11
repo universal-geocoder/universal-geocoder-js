@@ -273,8 +273,8 @@ export default class YandexProvider
         geocode: `${reverseQuery.getCoordinates().longitude},${
           reverseQuery.getCoordinates().latitude
         }`,
-        kind: (<YandexReverseQuery>reverseQuery).getLocationTypes()
-          ? (<YandexReverseQuery>reverseQuery).getLocationTypes()?.[0]
+        kind: (<YandexReverseQuery>reverseQuery).getTypes()
+          ? (<YandexReverseQuery>reverseQuery).getTypes()?.[0]
           : undefined,
       },
       <YandexReverseQuery>reverseQuery
@@ -356,7 +356,7 @@ export default class YandexProvider
     const region = addressDetails.AdministrativeAreaName;
     const country = addressDetails.CountryName;
     const countryCode = addressDetails.CountryNameCode;
-    const locationType = result.metaDataProperty.GeocoderMetaData.kind;
+    const types = [result.metaDataProperty.GeocoderMetaData.kind];
     const { precision } = result.metaDataProperty.GeocoderMetaData;
 
     let geocoded = YandexGeocoded.create({
@@ -371,7 +371,7 @@ export default class YandexProvider
       region,
       country,
       countryCode,
-      locationType,
+      types,
       precision,
     });
 

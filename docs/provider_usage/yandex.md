@@ -9,10 +9,10 @@
 
 ## `geodecode` parameters
 
-- `locationTypes` (possible values: "house", "street", "metro", "district", "locality", ...): to filter the results by location types
+- `types` (possible values: "house", "street", "metro", "district", "locality", ...): to filter the results by location types
 - `skip`: the number of items to skip in the response
 
 ## `Geocoded` properties
 
-- `locationType`: the type of location
+- `types`: the types of location (only one)
 - `precision`: the quality of the geocoding result

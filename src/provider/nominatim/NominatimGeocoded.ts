@@ -1,12 +1,13 @@
 import Geocoded, { GeocodedObject } from "Geocoded";
 import AdminLevel from "AdminLevel";
+import { NominatimOsmType } from "provider";
 
 export interface NominatimGeocodedObject extends GeocodedObject {
   readonly displayName?: string;
   readonly osmId?: number;
-  readonly osmType?: string;
-  readonly category?: string;
-  readonly type?: string;
+  readonly osmType?: NominatimOsmType;
+  readonly categories?: string[];
+  readonly types?: string[];
   readonly attribution?: string;
   readonly subLocalityLevels?: AdminLevel[];
 }
@@ -16,11 +17,11 @@ export default class NominatimGeocoded extends Geocoded {
 
   private readonly osmId?: number;
 
-  private readonly osmType?: string;
+  private readonly osmType?: NominatimOsmType;
 
-  private readonly category?: string;
+  private readonly categories?: string[];
 
-  private readonly type?: string;
+  private readonly types?: string[];
 
   private readonly attribution?: string;
 
@@ -30,8 +31,8 @@ export default class NominatimGeocoded extends Geocoded {
     displayName,
     osmId,
     osmType,
-    category,
-    type,
+    categories,
+    types,
     attribution,
     subLocalityLevels,
     ...geocodedObject
@@ -40,8 +41,8 @@ export default class NominatimGeocoded extends Geocoded {
     this.displayName = displayName;
     this.osmId = osmId;
     this.osmType = osmType;
-    this.category = category;
-    this.type = type;
+    this.categories = categories;
+    this.types = types;
     this.attribution = attribution;
     this.subLocalityLevels = subLocalityLevels || [];
   }
@@ -56,8 +57,8 @@ export default class NominatimGeocoded extends Geocoded {
       displayName: this.displayName,
       osmId: this.osmId,
       osmType: this.osmType,
-      category: this.category,
-      type: this.type,
+      categories: this.categories,
+      types: this.types,
       attribution: this.attribution,
       subLocalityLevels: this.subLocalityLevels,
     };
@@ -85,37 +86,37 @@ export default class NominatimGeocoded extends Geocoded {
     return this.osmId;
   }
 
-  public withOsmType(osmType: string): NominatimGeocoded {
+  public withOsmType(osmType: NominatimOsmType): NominatimGeocoded {
     return new NominatimGeocoded({
       ...this.toObject(),
       osmType,
     });
   }
 
-  public getOsmType(): undefined | string {
+  public getOsmType(): undefined | NominatimOsmType {
     return this.osmType;
   }
 
-  public withCategory(category: string): NominatimGeocoded {
+  public withCategories(categories: string[]): NominatimGeocoded {
     return new NominatimGeocoded({
       ...this.toObject(),
-      category,
+      categories,
     });
   }
 
-  public getCategory(): undefined | string {
-    return this.category;
+  public getCategories(): undefined | string[] {
+    return this.categories;
   }
 
-  public withType(type: string): NominatimGeocoded {
+  public withTypes(types: string[]): NominatimGeocoded {
     return new NominatimGeocoded({
       ...this.toObject(),
-      type,
+      types,
     });
   }
 
-  public getType(): undefined | string {
-    return this.type;
+  public getTypes(): undefined | string[] {
+    return this.types;
   }
 
   public withAttribution(attribution: string): NominatimGeocoded {

@@ -6,6 +6,7 @@ Each provider has its own options, parameters or results because of its specific
 - [OpenStreetMap (Nominatim)](provider_usage/nominatim.md)
 - [OpenCage](provider_usage/opencage.md)
 - [Google Maps (Geocoding API)](provider_usage/googlemaps.md)
+- [LocationIQ](provider_usage/locationiq.md)
 - [Mapbox](provider_usage/mapbox.md)
 - [MapQuest](provider_usage/mapquest.md)
 - [Bing Maps](provider_usage/bing.md)
@@ -28,7 +29,7 @@ Here is a table listing the parameters according to the providers:
       <td>option</td>
       <td>countryCodes</td>
       <td>Restrict the results to one or more countries</td>
-      <td>Google Maps, Mapbox, OpenCage</td>
+      <td>Google Maps, LocationIQ, Mapbox, Nominatim, OpenCage</td>
     </tr>
     <tr>
       <td>option</td>
@@ -50,15 +51,9 @@ Here is a table listing the parameters according to the providers:
     </tr>
     <tr>
       <td>option</td>
-      <td>geocodingMode</td>
-      <td>Geocoding mode to use</td>
-      <td>Mapbox</td>
-    </tr>
-    <tr>
-      <td>option</td>
-      <td>openDomain</td>
-      <td>To use the Open Geocoding API</td>
-      <td>MapQuest</td>
+      <td>source</td>
+      <td>Source to use</td>
+      <td>LocationIQ, Mapbox, MapQuest</td>
     </tr>
     <tr>
       <td>option</td>
@@ -82,13 +77,13 @@ Here is a table listing the parameters according to the providers:
       <td>geocode</td>
       <td>countryCodes</td>
       <td>Restrict the results to one or more countries</td>
-      <td>Google Maps, Mapbox, Nominatim, OpenCage</td>
+      <td>Google Maps, LocationIQ, Mapbox, Nominatim, OpenCage</td>
     </tr>
     <tr>
       <td>geocode</td>
       <td>bounded</td>
       <td>Restrict the results to items within the bounds</td>
-      <td>Nominatim, Yandex</td>
+      <td>LocationIQ, Nominatim, Yandex</td>
     </tr>
     <tr>
       <td>geocode</td>
@@ -122,7 +117,7 @@ Here is a table listing the parameters according to the providers:
     </tr>
     <tr>
       <td>geocode</td>
-      <td>locationTypes</td>
+      <td>types</td>
       <td>Filter the results to a subset of location types</td>
       <td>Mapbox</td>
     </tr>
@@ -130,13 +125,19 @@ Here is a table listing the parameters according to the providers:
       <td>geocode</td>
       <td>excludePlaceIds</td>
       <td>For excluding some locations from the results</td>
-      <td>Nominatim</td>
+      <td>LocationIQ, Nominatim</td>
     </tr>
     <tr>
       <td>geocode</td>
       <td>skip</td>
       <td>Number of items to skip in the response</td>
       <td>Yandex</td>
+    </tr>
+    <tr>
+      <td>geocode</td>
+      <td>dedupe</td>
+      <td>Remove the duplicates</td>
+      <td>LocationIQ, Nominatim</td>
     </tr>
     <tr>
       <td>geocode</td>
@@ -164,21 +165,21 @@ Here is a table listing the parameters according to the providers:
     </tr>
     <tr>
       <td>geodecode</td>
-      <td>locationTypes</td>
+      <td>precisions</td>
+      <td>Restrict the results by the given precisions</td>
+      <td>Google Maps</td>
+    </tr>
+    <tr>
+      <td>geodecode</td>
+      <td>types</td>
       <td>Filter the results by location types</td>
       <td>Google Maps, Mapbox, Yandex</td>
     </tr>
     <tr>
       <td>geodecode</td>
-      <td>resultTypes</td>
-      <td>Filter the results by address types</td>
-      <td>Google Maps</td>
-    </tr>
-    <tr>
-      <td>geodecode</td>
       <td>zoom</td>
       <td>Level of details required for the address</td>
-      <td>Npminatim</td>
+      <td>LocationIQ, Nominatim</td>
     </tr>
     <tr>
       <td>geodecode</td>
@@ -208,19 +209,31 @@ Here is a table listing the parameters according to the providers:
       <td>geocoded</td>
       <td>attribution</td>
       <td>Credit information</td>
-      <td>Bing, GeoPlugin, MapQuest, Nominatim</td>
+      <td>Bing, GeoPlugin, LocationIQ, MapQuest, Nominatim</td>
     </tr>
     <tr>
       <td>geocoded</td>
       <td>precision</td>
       <td>Quality of the geocoding result</td>
-      <td>Bing, MapQuest, Yandex</td>
+      <td>Bing, Google Maps, LocationIQ, MapQuest, Yandex</td>
     </tr>
     <tr>
       <td>geocoded</td>
       <td>precisionCode</td>
       <td>Quality code of the geocoding result</td>
-      <td>MapQuest</td>
+      <td>LocationIQ, MapQuest</td>
+    </tr>
+    <tr>
+      <td>geocoded</td>
+      <td>precisionType</td>
+      <td>Quality code of the geocoding result</td>
+      <td>LocationIQ</td>
+    </tr>
+    <tr>
+      <td>geocoded</td>
+      <td>distance</td>
+      <td>Distance between the input location and the result location</td>
+      <td>LocationIQ</td>
     </tr>
     <tr>
       <td>geocoded</td>
@@ -232,19 +245,19 @@ Here is a table listing the parameters according to the providers:
       <td>geocoded</td>
       <td>placeId</td>
       <td>Unique identifier for the location</td>
-      <td>Google Maps</td>
+      <td>Google Maps, LocationIQ</td>
     </tr>
     <tr>
       <td>geocoded</td>
       <td>osmId</td>
       <td>Reference to the OpenStreetMap object</td>
-      <td>Nominatim</td>
+      <td>LocationIQ, Nominatim</td>
     </tr>
     <tr>
       <td>geocoded</td>
       <td>osmType</td>
       <td>Reference to the OpenStreetMap object</td>
-      <td>Nominatim</td>
+      <td>LocationIQ, Nominatim</td>
     </tr>
     <tr>
       <td>geocoded</td>
@@ -260,18 +273,6 @@ Here is a table listing the parameters according to the providers:
     </tr>
     <tr>
       <td>geocoded</td>
-      <td>resultType</td>
-      <td>Result types</td>
-      <td>Google Maps, Mapbox</td>
-    </tr>
-    <tr>
-      <td>geocoded</td>
-      <td>locationType</td>
-      <td>Type representing the precision of the result</td>
-      <td>Google Maps, Yandex</td>
-    </tr>
-    <tr>
-      <td>geocoded</td>
       <td>streetAddress</td>
       <td>Street number with the street name</td>
       <td>Google Maps</td>
@@ -280,25 +281,25 @@ Here is a table listing the parameters according to the providers:
       <td>geocoded</td>
       <td>displayName</td>
       <td>Full comma-separated address</td>
-      <td>Google Maps</td>
+      <td>LocationIQ, Nominatim</td>
     </tr>
     <tr>
       <td>geocoded</td>
-      <td>category</td>
-      <td>Category of the location</td>
-      <td>Nominatim</td>
+      <td>categories</td>
+      <td>Categories of the location</td>
+      <td>LocationIQ, Nominatim</td>
     </tr>
     <tr>
       <td>geocoded</td>
-      <td>type</td>
-      <td>Type of the location</td>
-      <td>Nominatim</td>
+      <td>types</td>
+      <td>Types of the location</td>
+      <td>Google Maps, LocationIQ, Mapbox, Nominatim, Yandex</td>
     </tr>
     <tr>
       <td>geocoded</td>
       <td>subLocalityLevels</td>
       <td>Levels for the sublocality</td>
-      <td>Google Maps, Nominatim</td>
+      <td>Google Maps, LocationIQ, Nominatim</td>
     </tr>
     <tr>
       <td>geocoded</td>

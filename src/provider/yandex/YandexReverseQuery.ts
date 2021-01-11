@@ -2,27 +2,27 @@ import { ReverseQuery, ReverseQueryObject } from "query";
 import { YandexKind } from "provider";
 
 export interface YandexReverseQueryObject extends ReverseQueryObject {
-  readonly locationTypes?: YandexKind[];
+  readonly types?: YandexKind[];
   readonly skip?: number;
 }
 
 export default class YandexReverseQuery extends ReverseQuery {
-  private readonly locationTypes?: YandexKind[];
+  private readonly types?: YandexKind[];
 
   private readonly skip?: number;
 
   protected constructor({
-    locationTypes,
+    types,
     skip,
     ...reverseQueryObject
   }: YandexReverseQueryObject) {
     super(reverseQueryObject);
-    if (locationTypes && locationTypes.length > 1) {
+    if (types && types.length > 1) {
       throw new Error(
-        'The "locationTypes" parameter must contain only one location type.'
+        'The "types" parameter must contain only one location type.'
       );
     }
-    this.locationTypes = locationTypes;
+    this.types = types;
     this.skip = skip;
   }
 
@@ -33,17 +33,17 @@ export default class YandexReverseQuery extends ReverseQuery {
   public toObject(): YandexReverseQueryObject {
     return {
       ...super.toObject(),
-      locationTypes: this.locationTypes,
+      types: this.types,
       skip: this.skip,
     };
   }
 
-  public withLocationTypes(locationTypes: YandexKind[]): YandexReverseQuery {
-    return new YandexReverseQuery({ ...this.toObject(), locationTypes });
+  public withTypes(types: YandexKind[]): YandexReverseQuery {
+    return new YandexReverseQuery({ ...this.toObject(), types });
   }
 
-  public getLocationTypes(): undefined | YandexKind[] {
-    return this.locationTypes;
+  public getTypes(): undefined | YandexKind[] {
+    return this.types;
   }
 
   public withSkip(skip: number): YandexReverseQuery {

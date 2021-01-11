@@ -6,6 +6,8 @@ import {
   GeoPluginProvider,
   GoogleMapsProvider,
   GoogleMapsProviderOptionsInterface,
+  LocationIQProvider,
+  LocationIQProviderOptionsInterface,
   MapboxProvider,
   MapboxProviderOptionsInterface,
   MapQuestProvider,
@@ -19,6 +21,7 @@ import {
   ProviderOptionsInterface,
   defaultBingProviderOptions,
   defaultChainProviderOptions,
+  defaultLocationIQProviderOptions,
   defaultMapboxProviderOptions,
   defaultMapQuestProviderOptions,
   defaultNominatimProviderOptions,
@@ -36,6 +39,7 @@ interface ProviderOptionInterface {
     | "geoplugin"
     | "google"
     | "googlemaps"
+    | "locationiq"
     | "mapbox"
     | "mapquest"
     | "microsoft"
@@ -70,6 +74,12 @@ interface GoogleMapsGeocoderProviderFactoryOptions
   extends ProviderOptionInterface,
     GoogleMapsProviderOptionsInterface {
   provider: "google" | "googlemaps";
+}
+
+interface LocationIQGeocoderProviderFactoryOptions
+  extends ProviderOptionInterface,
+    LocationIQProviderOptionsInterface {
+  provider: "locationiq";
 }
 
 interface MapboxGeocoderProviderFactoryOptions
@@ -108,6 +118,7 @@ export type GeocoderProviderFactoryOptions =
   | BingGeocoderProviderFactoryOptions
   | GeoPluginGeocoderProviderFactoryOptions
   | GoogleMapsGeocoderProviderFactoryOptions
+  | LocationIQGeocoderProviderFactoryOptions
   | MapboxGeocoderProviderFactoryOptions
   | MapQuestGeocoderProviderFactoryOptions
   | NominatimGeocoderProviderFactoryOptions
@@ -119,6 +130,7 @@ export type GeocoderProvider =
   | ChainProvider
   | GeoPluginProvider
   | GoogleMapsProvider
+  | LocationIQProvider
   | MapboxProvider
   | MapQuestProvider
   | NominatimProvider
@@ -135,6 +147,8 @@ export type GeocoderProviderByOptionsType<
   ? GeoPluginProvider
   : O extends GoogleMapsGeocoderProviderFactoryOptions
   ? GoogleMapsProvider
+  : O extends LocationIQGeocoderProviderFactoryOptions
+  ? LocationIQProvider
   : O extends MapboxGeocoderProviderFactoryOptions
   ? MapboxProvider
   : O extends MapQuestGeocoderProviderFactoryOptions
@@ -192,6 +206,13 @@ export default class ProviderFactory {
       case "googlemaps":
         return <GeocoderProviderByOptionsType<O>>(
           new GoogleMapsProvider(externalLoader, providerOptions)
+        );
+      case "locationiq":
+        return <GeocoderProviderByOptionsType<O>>(
+          new LocationIQProvider(externalLoader, {
+            ...defaultLocationIQProviderOptions,
+            ...providerOptions,
+          })
         );
       case "mapbox":
         return <GeocoderProviderByOptionsType<O>>(

@@ -106,12 +106,12 @@ describe("Google Maps Geocoder Provider", () => {
       expect(geocoded.getCountry()).toEqual("United States");
       expect(geocoded.getCountryCode()).toEqual("US");
       expect(geocoded.getPlaceId()).toEqual("ChIJGVtI4by3t4kRr51d_Qm_x58");
-      expect(geocoded.getResultType()).toEqual([
+      expect(geocoded.getTypes()).toEqual([
         "establishment",
         "point_of_interest",
         "premise",
       ]);
-      expect(geocoded.getLocationType()).toEqual("ROOFTOP");
+      expect(geocoded.getPrecision()).toEqual("ROOFTOP");
       expect(geocoded.getPolitical()).toEqual("United States");
       expect(geocoded.getNeighborhood()).toEqual("Northwest Washington");
 
@@ -167,8 +167,8 @@ describe("Google Maps Geocoder Provider", () => {
         expect(geocoded.getCountry()).toEqual("France");
         expect(geocoded.getCountryCode()).toEqual("FR");
         expect(geocoded.getPlaceId()).toEqual("ChIJ9aLL3vJt5kcR61GCze3v6fg");
-        expect(geocoded.getResultType()).toEqual(["street_address"]);
-        expect(geocoded.getLocationType()).toEqual("ROOFTOP");
+        expect(geocoded.getTypes()).toEqual(["street_address"]);
+        expect(geocoded.getPrecision()).toEqual("ROOFTOP");
         expect(geocoded.getPolitical()).toEqual("France");
 
         done();

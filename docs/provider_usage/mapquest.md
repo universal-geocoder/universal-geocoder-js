@@ -3,7 +3,7 @@
 ## Options
 
 - `method` ("GET" or "POST", default: "GET"): the HTTP method to use when executing the query
-- `openDomain` (default: false): boolean to use the Open Geocoding API (relies solely on data contributed to OpenStreetMap)
+- `source` (default: "mapquest"): set it to "nominatim" to use the Open Geocoding API (relies solely on data contributed to OpenStreetMap)
 
 ## `geocode` parameters
 

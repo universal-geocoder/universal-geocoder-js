@@ -90,7 +90,7 @@ describe("MapQuest Geocoder Provider", () => {
       useSsl: true,
       apiKey: "api_key",
       method: "POST",
-      openDomain: true,
+      source: "nominatim",
     });
 
     provider?.geocode(
@@ -173,7 +173,7 @@ describe("MapQuest Geocoder Provider", () => {
       useSsl: true,
       apiKey: "api_key",
       method: "POST",
-      openDomain: true,
+      source: "nominatim",
     });
 
     provider?.geodecode(48.8631507, 2.388911, (results: MapQuestGeocoded[]) => {

@@ -76,7 +76,7 @@ describe("Mapbox Geocoder Provider", () => {
       ]);
       expect(geocoded.getCountry()).toEqual("United States");
       expect(geocoded.getCountryCode()).toEqual("us");
-      expect(geocoded.getResultType()).toEqual(["address"]);
+      expect(geocoded.getTypes()).toEqual(["address"]);
 
       done();
     });
@@ -146,7 +146,7 @@ describe("Mapbox Geocoder Provider", () => {
       ]);
       expect(geocoded.getCountry()).toEqual("France");
       expect(geocoded.getCountryCode()).toEqual("fr");
-      expect(geocoded.getResultType()).toEqual(["address"]);
+      expect(geocoded.getTypes()).toEqual(["address"]);
 
       done();
     });

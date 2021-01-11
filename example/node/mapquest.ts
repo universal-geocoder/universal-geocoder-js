@@ -50,7 +50,7 @@ mapQuestGeocoder = UniversalGeocoder.createGeocoder({
   provider: "mapquest",
   apiKey: "Fmjtd|luurnu6al1,bg=o5-9wbg94",
   method: "POST",
-  openDomain: true,
+  source: "nominatim",
 });
 
 mapQuestGeocoder.geocode(

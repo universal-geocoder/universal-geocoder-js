@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Universal Geocoder: LocationIQ Example</title>
+    <script src="../../dist/universal-geocoder.js"></script>
+    <script>
+      var locationIQGeocoder = UniversalGeocoder.createGeocoder({ provider: "locationiq" });
+
+      locationIQGeocoder.geocode("1600 Pennsylvania Ave NW, Washington, DC", function(result) {
+        console.log("geocode", result);
+      });
+
+      locationIQGeocoder.geodecode("44.915", "-93.21", function(result) {
+        console.log("geodecode", result);
+      });
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
