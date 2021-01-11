@@ -78,6 +78,11 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/locationiq.html" class="nav-link ">
+                                            📌️ LocationIQ
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
                                         <a href="/universal-geocoder-js/docs/provider_usage/mapbox.html" class="nav-link active">
                                             📌️ Mapbox
                                         </a>
@@ -109,7 +114,7 @@
                     <h1 id="mapbox-usage">Mapbox Usage</h1>
 <h2 id="options">Options</h2>
 <ul>
-<li><code>geocodingMode</code> (default: &quot;mapbox.places&quot;): the geocoding mode to use</li>
+<li><code>source</code> (default: &quot;mapbox.places&quot;): the endpoint to use</li>
 <li><code>countryCodes</code>: to restrict the results to one or more countries (ISO 3166 alpha 2 country codes)</li>
 </ul>
 <h2><code>geocode</code> parameters</h2>
@@ -117,17 +122,17 @@
 <li><code>countryCodes</code>: to restrict the results to one or more countries (ISO 3166 alpha 2 country codes)</li>
 <li><code>proximity</code> (object with <code>latitude</code> and <code>longitude</code> keys): to bias the response to favor results that are closer to the specified location</li>
 <li><code>fuzzyMatch</code>: to approximate the request terms or do an exact matching</li>
-<li><code>locationTypes</code> (possible values: &quot;country&quot;, &quot;region&quot;, &quot;postcode&quot;, &quot;district&quot;, &quot;place&quot;, &quot;locality&quot;, &quot;neighborhood&quot;, &quot;address&quot;, &quot;poi&quot;): to filter the results to a subset of location types</li>
+<li><code>types</code> (possible values: &quot;country&quot;, &quot;region&quot;, &quot;postcode&quot;, &quot;district&quot;, &quot;place&quot;, &quot;locality&quot;, &quot;neighborhood&quot;, &quot;address&quot;, &quot;poi&quot;): to filter the results to a subset of location types</li>
 </ul>
 <h2><code>geodecode</code> parameters</h2>
 <ul>
 <li><code>countryCodes</code>: to restrict the results to one or more countries (ISO 3166 alpha 2 country codes)</li>
 <li><code>reverseMode</code> (&quot;distance&quot; or &quot;score&quot;, default: &quot;distance&quot;): how results are sorted</li>
-<li><code>locationTypes</code> (possible values: &quot;country&quot;, &quot;region&quot;, &quot;postcode&quot;, &quot;district&quot;, &quot;place&quot;, &quot;locality&quot;, &quot;neighborhood&quot;, &quot;address&quot;, &quot;poi&quot;): to filter the results to a subset of location types</li>
+<li><code>types</code> (possible values: &quot;country&quot;, &quot;region&quot;, &quot;postcode&quot;, &quot;district&quot;, &quot;place&quot;, &quot;locality&quot;, &quot;neighborhood&quot;, &quot;address&quot;, &quot;poi&quot;): to filter the results to a subset of location types</li>
 </ul>
 <h2><code>Geocoded</code> properties</h2>
 <ul>
-<li><code>resultType</code>: an array of result types</li>
+<li><code>types</code>: the result types</li>
 </ul>
                 </section>
 

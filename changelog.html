@@ -78,6 +78,11 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/locationiq.html" class="nav-link ">
+                                            📌️ LocationIQ
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
                                         <a href="/universal-geocoder-js/docs/provider_usage/mapbox.html" class="nav-link ">
                                             📌️ Mapbox
                                         </a>
@@ -107,6 +112,24 @@
                 
                 <section id="content" class="col-sm-9 offset-sm-3 col-lg-10 offset-lg-2">
                     <h1 id="changelog">Changelog</h1>
+<h2 id="0120">0.12.0</h2>
+<ul>
+<li>Add LocationIQ provider</li>
+<li>[Nominatim] Add <code>countryCodes</code> to provider options</li>
+<li>[Nominatim] Add <code>dedupe</code> geocode parameter</li>
+<li>[Nominatim] Replace <code>type</code> with <code>types</code> (now an array) in geocoded object</li>
+<li>[Nominatim] Replace <code>category</code> with <code>categories</code> (now an array) in geocoded object</li>
+<li>[Mapbox] Replace <code>geocodingMode</code> with <code>source</code> in provider options</li>
+<li>[Mapbox] Replace <code>resultType</code> with <code>types</code> in geocoded object</li>
+<li>[Mapbox] Replace <code>locationTypes</code> with <code>types</code> for geocode and geodecode</li>
+<li>[MapQuest] Replace <code>openDomain</code> with <code>source</code> in provider options</li>
+<li>[GoogleMaps] Replace <code>locationType</code> with <code>precision</code> in geocoded object</li>
+<li>[GoogleMaps] Replace <code>resultType</code> with <code>types</code> in geocoded object</li>
+<li>[GoogleMaps] Replace <code>locationTypes</code> with <code>precisions</code> for geodecode</li>
+<li>[GoogleMaps] Replace <code>resultTypes</code> with <code>types</code> for geodecode</li>
+<li>[Yandex] Replace <code>locationType</code> with <code>types</code> (now an array) in geocoded object</li>
+<li>[Yandex] Replace <code>locationTypes</code> with <code>types</code> for geodecode</li>
+</ul>
 <h2 id="0111">0.11.1</h2>
 <ul>
 <li>Module is side-effect free</li>

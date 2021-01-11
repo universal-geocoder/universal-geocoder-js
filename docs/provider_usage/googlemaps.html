@@ -78,6 +78,11 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/locationiq.html" class="nav-link ">
+                                            📌️ LocationIQ
+                                        </a>
+                                    </li>
+                                                                    <li class="nav-item">
                                         <a href="/universal-geocoder-js/docs/provider_usage/mapbox.html" class="nav-link ">
                                             📌️ Mapbox
                                         </a>
@@ -121,16 +126,16 @@
 </ul>
 <h2><code>geodecode</code> parameters</h2>
 <ul>
-<li><code>resultTypes</code>: to filter the results by address types</li>
-<li><code>locationTypes</code> (possible values: &quot;ROOFTOP&quot;, &quot;RANGE_INTERPOLATED&quot;, &quot;GEOMETRIC_CENTER&quot;, &quot;APPROXIMATE&quot;): to filter the results by location types</li>
+<li><code>types</code>: to filter the results by address types</li>
+<li><code>precisions</code> (possible values: &quot;ROOFTOP&quot;, &quot;RANGE_INTERPOLATED&quot;, &quot;GEOMETRIC_CENTER&quot;, &quot;APPROXIMATE&quot;): to filter the results by precisions</li>
 <li><code>channel</code>: channel to use for this request (Premium only)</li>
 </ul>
 <h2><code>Geocoded</code> properties</h2>
 <ul>
 <li><code>placeId</code>: a unique identifier used with other Google APIs</li>
 <li><code>partialMatch</code>: to indicate the geocoder did not return an exact match</li>
-<li><code>resultType</code>: an array of result types</li>
-<li><code>locationType</code>: a type representing the precision of the result</li>
+<li><code>types</code>: the result types</li>
+<li><code>precision</code>: a type representing the precision of the result</li>
 <li><code>streetAddress</code>: the street number with the street name</li>
 <li><code>intersection</code>, <code>political</code>, <code>colloquialArea</code>, <code>ward</code>, <code>neighborhood</code>, <code>premise</code>, <code>subpremise</code>, <code>naturalFeature</code>, <code>airport</code>, <code>park</code>, <code>pointOfInterest</code>, <code>establishment</code>, <code>postalCodeSuffix</code>: additional address components</li>
 <li><code>subLocalityLevels</code>: levels for the sublocality (greater level number means smaller area)</li>

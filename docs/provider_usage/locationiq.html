@@ -63,7 +63,7 @@
                                 </p>
                                                         <ul class="nav nav-pills flex-column">
                                                                     <li class="nav-item">
-                                        <a href="/universal-geocoder-js/docs/provider_usage/nominatim.html" class="nav-link active">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/nominatim.html" class="nav-link ">
                                             📌️ OpenStreetMap (Nominatim)
                                         </a>
                                     </li>
@@ -78,7 +78,7 @@
                                         </a>
                                     </li>
                                                                     <li class="nav-item">
-                                        <a href="/universal-geocoder-js/docs/provider_usage/locationiq.html" class="nav-link ">
+                                        <a href="/universal-geocoder-js/docs/provider_usage/locationiq.html" class="nav-link active">
                                             📌️ LocationIQ
                                         </a>
                                     </li>
@@ -111,13 +111,11 @@
                                             </nav>
                 
                 <section id="content" class="col-sm-9 offset-sm-3 col-lg-10 offset-lg-2">
-                    <h1 id="openstreetmap-nominatim-usage">OpenStreetMap (Nominatim) Usage</h1>
+                    <h1 id="locationiq-usage">LocationIQ Usage</h1>
 <h2 id="options">Options</h2>
 <ul>
-<li><code>userAgent</code> (required if default host): a User-Agent identifying your application is needed to use Nominatim (see <a href="https://operations.osmfoundation.org/policies/nominatim/">https://operations.osmfoundation.org/policies/nominatim/</a>)</li>
-<li><code>referer</code>: if you want to set a Referer as well</li>
-<li><code>host</code> (default: &quot;nominatim.openstreetmap.org&quot;): to use another host</li>
 <li><code>countryCodes</code>: to restrict the results to one or more countries (ISO 3166 alpha 2 country codes)</li>
+<li><code>source</code> (default: &quot;locationiq&quot;): set it to &quot;nominatim&quot; to have only results from OpenStreetMap data</li>
 </ul>
 <h2><code>geocode</code> parameters</h2>
 <ul>
@@ -132,11 +130,15 @@
 </ul>
 <h2><code>Geocoded</code> properties</h2>
 <ul>
+<li><code>placeId</code>: an internal identifier</li>
 <li><code>displayName</code>: full comma-separated address</li>
 <li><code>osmId</code>, <code>osmType</code>: reference to the OpenStreetMap object</li>
 <li><code>categories</code>: keys of the main OpenStreetMap tag (only one)</li>
 <li><code>types</code>: values of the main OpenStreetMap tag (only one)</li>
-<li><code>attribution</code>: OpenStreetMap licensing information</li>
+<li><code>precision</code>: the most granular address element that matches the geocoding query</li>
+<li><code>precisionCode</code>: the quality of the returned address</li>
+<li><code>precisionType</code>: the quality of the returned location match</li>
+<li><code>attribution</code>: licensing information</li>
 <li><code>subLocalityLevels</code>: levels for the sublocality (greater level number means smaller area)</li>
 </ul>
                 </section>
