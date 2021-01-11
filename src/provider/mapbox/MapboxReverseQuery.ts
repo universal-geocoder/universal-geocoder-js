@@ -5,7 +5,7 @@ type ReverseMode = "distance" | "score";
 export interface MapboxReverseQueryObject extends ReverseQueryObject {
   readonly countryCodes?: string[];
   readonly reverseMode?: ReverseMode;
-  readonly locationTypes?: string[];
+  readonly types?: string[];
 }
 
 export default class MapboxReverseQuery extends ReverseQuery {
@@ -13,18 +13,18 @@ export default class MapboxReverseQuery extends ReverseQuery {
 
   private readonly reverseMode?: ReverseMode;
 
-  private readonly locationTypes?: string[];
+  private readonly types?: string[];
 
   protected constructor({
     countryCodes,
     reverseMode,
-    locationTypes,
+    types,
     ...reverseQueryObject
   }: MapboxReverseQueryObject) {
     super(reverseQueryObject);
     this.countryCodes = countryCodes;
     this.reverseMode = reverseMode;
-    this.locationTypes = locationTypes;
+    this.types = types;
   }
 
   public static create(object: MapboxReverseQueryObject): MapboxReverseQuery {
@@ -36,7 +36,7 @@ export default class MapboxReverseQuery extends ReverseQuery {
       ...super.toObject(),
       countryCodes: this.countryCodes,
       reverseMode: this.reverseMode,
-      locationTypes: this.locationTypes,
+      types: this.types,
     };
   }
 
@@ -56,11 +56,11 @@ export default class MapboxReverseQuery extends ReverseQuery {
     return this.reverseMode;
   }
 
-  public withLocationTypes(locationTypes: string[]): MapboxReverseQuery {
-    return new MapboxReverseQuery({ ...this.toObject(), locationTypes });
+  public withTypes(types: string[]): MapboxReverseQuery {
+    return new MapboxReverseQuery({ ...this.toObject(), types });
   }
 
-  public getLocationTypes(): undefined | string[] {
-    return this.locationTypes;
+  public getTypes(): undefined | string[] {
+    return this.types;
   }
 }

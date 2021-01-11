@@ -103,15 +103,17 @@ type GoogleMapsPlaceType =
   | "transit_station"
   | "ward";
 
+export type GoogleMapsPrecision =
+  | "ROOFTOP"
+  | "RANGE_INTERPOLATED"
+  | "GEOMETRIC_CENTER"
+  | "APPROXIMATE";
+
 export interface GoogleMapsResult {
   geometry: {
     location: GoogleMapsLatLng;
     // eslint-disable-next-line camelcase
-    location_type:
-      | "ROOFTOP"
-      | "RANGE_INTERPOLATED"
-      | "GEOMETRIC_CENTER"
-      | "APPROXIMATE";
+    location_type: GoogleMapsPrecision;
     viewport: {
       northeast: GoogleMapsLatLng;
       southwest: GoogleMapsLatLng;
@@ -300,11 +302,11 @@ export default class GoogleMapsProvider
         latlng: `${reverseQuery.getCoordinates().latitude},${
           reverseQuery.getCoordinates().longitude
         }`,
-        result_type: (<GoogleMapsReverseQuery>reverseQuery).getResultTypes()
-          ? (<GoogleMapsReverseQuery>reverseQuery).getResultTypes()?.join("|")
+        result_type: (<GoogleMapsReverseQuery>reverseQuery).getTypes()
+          ? (<GoogleMapsReverseQuery>reverseQuery).getTypes()?.join("|")
           : undefined,
-        location_type: (<GoogleMapsReverseQuery>reverseQuery).getLocationTypes()
-          ? (<GoogleMapsReverseQuery>reverseQuery).getLocationTypes()?.join("|")
+        location_type: (<GoogleMapsReverseQuery>reverseQuery).getPrecisions()
+          ? (<GoogleMapsReverseQuery>reverseQuery).getPrecisions()?.join("|")
           : undefined,
       },
       <GoogleMapsReverseQuery>reverseQuery
@@ -459,8 +461,8 @@ export default class GoogleMapsProvider
     const adminLevels: AdminLevel[] = [];
     const placeId = result.place_id;
     const partialMatch = result.partial_match;
-    const resultType = result.types;
-    const locationType = result.geometry.location_type;
+    const { types } = result;
+    const precision = result.geometry.location_type;
     let streetAddress;
     let intersection;
     let political;
@@ -594,8 +596,8 @@ export default class GoogleMapsProvider
       adminLevels,
       placeId,
       partialMatch,
-      resultType,
-      locationType,
+      types,
+      precision,
       streetAddress,
       intersection,
       political,
@@ -629,7 +631,7 @@ export default class GoogleMapsProvider
         latitudeNE: viewport.northeast.lat,
         longitudeNE: viewport.northeast.lng,
       });
-    } else if (result.geometry.location_type === "ROOFTOP") {
+    } else if (precision === "ROOFTOP") {
       // Fake bounds
       geocoded = <GoogleMapsGeocoded>geocoded.withBounds({
         latitudeSW: latitude,

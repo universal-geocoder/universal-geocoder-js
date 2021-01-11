@@ -223,6 +223,13 @@ The following table summarizes the features of each:
       <td>❌️ no</td>
     </tr>
     <tr>
+      <td>LocationIQ</td>
+      <td>locationiq</td>
+      <td>✅️ yes</td>
+      <td>✅️ yes</td>
+      <td>❌️ no</td>
+    </tr>
+    <tr>
       <td>Mapbox</td>
       <td>mapbox</td>
       <td>✅️ yes</td>

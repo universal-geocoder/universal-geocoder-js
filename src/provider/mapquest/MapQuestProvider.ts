@@ -91,14 +91,14 @@ export interface MapQuestProviderOptionsInterface
   extends ProviderOptionsInterface {
   readonly apiKey: string;
   readonly method?: "GET" | "POST";
-  readonly openDomain?: boolean;
+  readonly source?: "nominatim" | "mapquest";
 }
 
 export const defaultMapQuestProviderOptions: MapQuestProviderOptionsInterface = {
   ...defaultProviderOptions,
   apiKey: "",
   method: "GET",
-  openDomain: false,
+  source: "mapquest",
 };
 
 type MapQuestGeocodedResultsCallback = GeocodedResultsCallback<MapQuestGeocoded>;
@@ -120,8 +120,13 @@ export default class MapQuestProvider
         'An API key is required for the MapQuest provider. Please add it in the "apiKey" option.'
       );
     }
-    if (this.options.method && !["GET", "POST"].includes(this.options.method)) {
-      throw new Error('The "method" option can either be "GET" or "POST".');
+    if (!["GET", "POST"].includes(this.options.method || "")) {
+      throw new Error('The "method" option must either be "GET" or "POST".');
+    }
+    if (!["mapquest", "nominatim"].includes(this.options.source || "")) {
+      throw new Error(
+        'The "source" option must either be "mapquest" or "nominatim".'
+      );
     }
   }
 
@@ -144,9 +149,10 @@ export default class MapQuestProvider
     this.externalLoader.setOptions({
       method: this.options.method,
       protocol: this.options.useSsl ? "https" : "http",
-      host: this.options.openDomain
-        ? "open.mapquestapi.com"
-        : "www.mapquestapi.com",
+      host:
+        this.options.source === "nominatim"
+          ? "open.mapquestapi.com"
+          : "www.mapquestapi.com",
       pathname: "geocoding/v1/address",
     });
 
@@ -242,9 +248,10 @@ export default class MapQuestProvider
     this.externalLoader.setOptions({
       method: this.options.method,
       protocol: this.options.useSsl ? "https" : "http",
-      host: this.options.openDomain
-        ? "open.mapquestapi.com"
-        : "www.mapquestapi.com",
+      host:
+        this.options.source === "nominatim"
+          ? "open.mapquestapi.com"
+          : "www.mapquestapi.com",
       pathname: "geocoding/v1/reverse",
     });
 

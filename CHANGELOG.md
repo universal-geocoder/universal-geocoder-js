@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.12.0
+
+* Add LocationIQ provider
+* [Nominatim] Add `countryCodes` to provider options
+* [Nominatim] Add `dedupe` geocode parameter
+* [Nominatim] Replace `type` with `types` (now an array) in geocoded object
+* [Nominatim] Replace `category` with `categories` (now an array) in geocoded object
+* [Mapbox] Replace `geocodingMode` with `source` in provider options
+* [Mapbox] Replace `resultType` with `types` in geocoded object
+* [Mapbox] Replace `locationTypes` with `types` for geocode and geodecode
+* [MapQuest] Replace `openDomain` with `source` in provider options
+* [GoogleMaps] Replace `locationType` with `precision` in geocoded object
+* [GoogleMaps] Replace `resultType` with `types` in geocoded object
+* [GoogleMaps] Replace `locationTypes` with `precisions` for geodecode
+* [GoogleMaps] Replace `resultTypes` with `types` for geodecode
+* [Yandex] Replace `locationType` with `types` (now an array) in geocoded object
+* [Yandex] Replace `locationTypes` with `types` for geodecode
+
 ## 0.11.1
 
 * Module is side-effect free

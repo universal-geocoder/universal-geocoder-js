@@ -2,22 +2,22 @@ import Geocoded, { GeocodedObject } from "Geocoded";
 import { YandexKind, YandexPrecision } from "provider";
 
 export interface YandexGeocodedObject extends GeocodedObject {
-  readonly locationType?: YandexKind;
+  readonly types?: YandexKind[];
   readonly precision?: YandexPrecision;
 }
 
 export default class YandexGeocoded extends Geocoded {
-  private readonly locationType?: YandexKind;
+  private readonly types?: YandexKind[];
 
   private readonly precision?: YandexPrecision;
 
   protected constructor({
-    locationType,
+    types,
     precision,
     ...geocodedObject
   }: YandexGeocodedObject) {
     super(geocodedObject);
-    this.locationType = locationType;
+    this.types = types;
     this.precision = precision;
   }
 
@@ -28,20 +28,20 @@ export default class YandexGeocoded extends Geocoded {
   public toObject(): YandexGeocodedObject {
     return {
       ...super.toObject(),
-      locationType: this.locationType,
+      types: this.types,
       precision: this.precision,
     };
   }
 
-  public withLocationType(locationType: YandexKind): YandexGeocoded {
+  public withTypes(types: YandexKind[]): YandexGeocoded {
     return new YandexGeocoded({
       ...this.toObject(),
-      locationType,
+      types,
     });
   }
 
-  public getLocationType(): undefined | YandexKind {
-    return this.locationType;
+  public getTypes(): undefined | YandexKind[] {
+    return this.types;
   }
 
   public withPrecision(precision: YandexPrecision): YandexGeocoded {

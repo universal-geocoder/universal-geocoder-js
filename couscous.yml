@@ -35,6 +35,9 @@ menu:
         googlemaps:
           text: 📌️ Google Maps (Geocoding API)
           relativeUrl: docs/provider_usage/googlemaps.html
+        locationiq:
+          text: 📌️ LocationIQ
+          relativeUrl: docs/provider_usage/locationiq.html
         mapbox:
           text: 📌️ Mapbox
           relativeUrl: docs/provider_usage/mapbox.html

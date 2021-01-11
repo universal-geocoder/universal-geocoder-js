@@ -101,22 +101,22 @@ export interface MapboxResponse {
 }
 
 // eslint-disable-next-line no-shadow
-export enum MAPBOX_GEOCODING_MODES {
-  GEOCODING_MODE_PLACES = "mapbox.places",
-  GEOCODING_MODE_PLACES_PERMANENT = "mapbox.places-permanent",
+export enum MAPBOX_SOURCES {
+  SOURCE_PLACES = "mapbox.places",
+  SOURCE_PLACES_PERMANENT = "mapbox.places-permanent",
 }
 
 export interface MapboxProviderOptionsInterface
   extends ProviderOptionsInterface {
   readonly apiKey: string;
-  readonly geocodingMode?: MAPBOX_GEOCODING_MODES;
+  readonly source?: MAPBOX_SOURCES;
   readonly countryCodes?: string[];
 }
 
 export const defaultMapboxProviderOptions = {
   ...defaultProviderOptions,
   apiKey: "",
-  geocodingMode: MAPBOX_GEOCODING_MODES.GEOCODING_MODE_PLACES,
+  source: MAPBOX_SOURCES.SOURCE_PLACES,
 };
 
 type MapboxGeocodedResultsCallback = GeocodedResultsCallback<MapboxGeocoded>;
@@ -136,6 +136,16 @@ export default class MapboxProvider
     if (!this.options.apiKey) {
       throw new Error(
         'An API key is required for the Mapbox provider. Please add it in the "apiKey" option.'
+      );
+    }
+    if (
+      !(<string[]>[
+        MAPBOX_SOURCES.SOURCE_PLACES,
+        MAPBOX_SOURCES.SOURCE_PLACES_PERMANENT,
+      ]).includes(this.options.source || "")
+    ) {
+      throw new Error(
+        `The "source" option must either be "${MAPBOX_SOURCES.SOURCE_PLACES}" or "${MAPBOX_SOURCES.SOURCE_PLACES_PERMANENT}".`
       );
     }
   }
@@ -160,7 +170,7 @@ export default class MapboxProvider
       protocol: this.options.useSsl ? "https" : "http",
       host: "api.mapbox.com",
       pathname: `geocoding/v5/${
-        this.options.geocodingMode
+        this.options.source
       }/${geocodeQuery.getText()}.json`,
     });
 
@@ -185,8 +195,8 @@ export default class MapboxProvider
               (<MapboxGeocodeQuery>geocodeQuery).getProximity()?.latitude
             }`
           : undefined,
-        types: (<MapboxGeocodeQuery>geocodeQuery).getLocationTypes()
-          ? (<MapboxGeocodeQuery>geocodeQuery).getLocationTypes()?.join(",")
+        types: (<MapboxGeocodeQuery>geocodeQuery).getTypes()
+          ? (<MapboxGeocodeQuery>geocodeQuery).getTypes()?.join(",")
           : undefined,
       },
       <MapboxGeocodeQuery>geocodeQuery
@@ -234,7 +244,7 @@ export default class MapboxProvider
     this.externalLoader.setOptions({
       protocol: this.options.useSsl ? "https" : "http",
       host: "api.mapbox.com",
-      pathname: `geocoding/v5/${this.options.geocodingMode}/${
+      pathname: `geocoding/v5/${this.options.source}/${
         reverseQuery.getCoordinates().longitude
       },${reverseQuery.getCoordinates().latitude}.json`,
     });
@@ -244,8 +254,8 @@ export default class MapboxProvider
         reverseMode: (<MapboxReverseQuery>reverseQuery).getReverseMode()
           ? (<MapboxReverseQuery>reverseQuery).getReverseMode()
           : undefined,
-        types: (<MapboxReverseQuery>reverseQuery).getLocationTypes()
-          ? (<MapboxReverseQuery>reverseQuery).getLocationTypes()?.join(",")
+        types: (<MapboxReverseQuery>reverseQuery).getTypes()
+          ? (<MapboxReverseQuery>reverseQuery).getTypes()?.join(",")
           : "address",
       },
       <MapboxReverseQuery>reverseQuery
@@ -323,7 +333,7 @@ export default class MapboxProvider
     let country;
     let countryCode;
     const adminLevels: AdminLevel[] = [];
-    const resultType = result.place_type;
+    const types = result.place_type;
 
     let adminLevelCode: undefined | string;
     (result.context || []).forEach((feature) => {
@@ -380,7 +390,7 @@ export default class MapboxProvider
       adminLevels,
       country,
       countryCode,
-      resultType,
+      types,
     });
     if (result.bbox) {
       geocoded = <MapboxGeocoded>geocoded.withBounds({

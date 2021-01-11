@@ -1,11 +1,9 @@
-# OpenStreetMap (Nominatim) Usage
+# LocationIQ Usage
 
 ## Options
 
-- `userAgent` (required if default host): a User-Agent identifying your application is needed to use Nominatim (see https://operations.osmfoundation.org/policies/nominatim/)
-- `referer`: if you want to set a Referer as well
-- `host` (default: "nominatim.openstreetmap.org"): to use another host
 - `countryCodes`: to restrict the results to one or more countries (ISO 3166 alpha 2 country codes)
+- `source` (default: "locationiq"): set it to "nominatim" to have only results from OpenStreetMap data
 
 ## `geocode` parameters
 
@@ -20,9 +18,13 @@
 
 ## `Geocoded` properties
 
+- `placeId`: an internal identifier
 - `displayName`: full comma-separated address
 - `osmId`, `osmType`: reference to the OpenStreetMap object
 - `categories`: keys of the main OpenStreetMap tag (only one)
 - `types`: values of the main OpenStreetMap tag (only one)
-- `attribution`: OpenStreetMap licensing information
+- `precision`: the most granular address element that matches the geocoding query
+- `precisionCode`: the quality of the returned address
+- `precisionType`: the quality of the returned location match
+- `attribution`: licensing information
 - `subLocalityLevels`: levels for the sublocality (greater level number means smaller area)

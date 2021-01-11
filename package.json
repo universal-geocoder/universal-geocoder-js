@@ -60,6 +60,7 @@
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^4.0.0",
     "@zerollup/ts-transform-paths": "^1.7.0",
+    "concurrently": "^5.3.0",
     "eslint": "^7.0.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^7.0.0",
@@ -93,7 +94,7 @@
     "test": "ts-node --project tsconfig-cjs.json --compiler ttypescript -r tsconfig-paths/register node_modules/.bin/jasmine",
     "test-record": "POLLY_RECORD=1 npm test",
     "ts-node": "ts-node --skip-project",
-    "watch": "webpack --config webpack.dev.js --watch"
+    "watch": "concurrently -k \"webpack --config webpack.dev.js --watch\" \"ttsc -p tsconfig-cjs.json --watch\" \"ttsc --watch\""
   },
   "husky": {
     "hooks": {

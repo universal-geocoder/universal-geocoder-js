@@ -7,11 +7,11 @@ import {
 import {
   ErrorCallback,
   GeocodedResultsCallback,
-  NominatimGeocoded,
-  NominatimReverseQuery,
-  NominatimReverseQueryObject,
-  NominatimGeocodeQueryObject,
-  NominatimGeocodeQuery,
+  LocationIQGeocoded,
+  LocationIQGeocodeQuery,
+  LocationIQGeocodeQueryObject,
+  LocationIQReverseQuery,
+  LocationIQReverseQueryObject,
   ProviderHelpers,
   ProviderInterface,
   ProviderOptionsInterface,
@@ -20,8 +20,9 @@ import {
 import AdminLevel from "AdminLevel";
 import { ResponseError } from "error";
 
-interface NominatimRequestParams {
+interface LocationIQRequestParams {
   [param: string]: string | undefined;
+  readonly key: string;
   readonly q?: string;
   readonly lat?: string;
   readonly lon?: string;
@@ -31,20 +32,21 @@ interface NominatimRequestParams {
   readonly state?: string;
   readonly country?: string;
   readonly postalcode?: string;
-  readonly format: string;
-  readonly addressdetails: string;
-  readonly namedetails?: string;
-  readonly extratags?: string;
   readonly zoom?: string;
+  readonly format?: string;
+  readonly viewbox?: string;
+  readonly bounded?: string;
+  readonly addressdetails?: string;
   readonly limit?: string;
   // eslint-disable-next-line camelcase
   readonly "accept-language"?: string;
   readonly countrycodes?: string;
-  // eslint-disable-next-line camelcase
-  readonly exclude_place_ids?: string;
-  readonly viewbox?: string;
-  readonly bounded?: string;
+  readonly namedetails?: string;
   readonly dedupe?: string;
+  // eslint-disable-next-line camelcase
+  readonly osm_type?: string;
+  // eslint-disable-next-line camelcase
+  readonly osm_id?: string;
   // eslint-disable-next-line camelcase
   readonly polygon_geojson?: string;
   // eslint-disable-next-line camelcase
@@ -53,75 +55,81 @@ interface NominatimRequestParams {
   readonly polygon_svg?: string;
   // eslint-disable-next-line camelcase
   readonly polygon_text?: string;
+  readonly extratags?: string;
+  // eslint-disable-next-line camelcase
+  readonly exclude_place_ids?: string;
+  readonly normalizeaddress?: string;
+  readonly normalizecity?: string;
+  readonly statecode?: string;
+  readonly showdistance?: string;
+  readonly matchquality?: string;
+  readonly postaladdress?: string;
+  readonly source?: string;
   readonly jsonpCallback?: string;
 }
 
-interface NominatimErrorResponse {
+interface LocationIQErrorResponse {
   error: string;
 }
 
-export type NominatimOsmType = "node" | "way" | "relation";
+export type LocationIQOsmType = "node" | "way" | "relation";
+export type LocationIQPrecision =
+  | "venue"
+  | "building"
+  | "street"
+  | "neighbourhood"
+  | "island"
+  | "borough"
+  | "city"
+  | "county"
+  | "state"
+  | "country"
+  | "marine"
+  | "postalcode";
+export type LocationIQPrecisionCode = "exact" | "fallback" | "approximate";
+export type LocationIQPrecisionType = "point" | "centroid" | "interpolated";
 
-export interface NominatimResult {
+export interface LocationIQResult {
   // eslint-disable-next-line camelcase
-  place_id: number;
+  place_id: string;
   licence: string;
   // eslint-disable-next-line camelcase
-  osm_type: NominatimOsmType;
+  osm_type: LocationIQOsmType;
   // eslint-disable-next-line camelcase
-  osm_id: number;
+  osm_id: string;
   boundingbox: [string, string, string, string];
   lat: string;
   lon: string;
   // eslint-disable-next-line camelcase
   display_name: string;
-  category: string;
-  type: string;
+  class?: string;
+  type?: string;
   importance: number;
   icon: string;
   address: {
-    attraction?: string;
-    pedestrian?: string;
-    // eslint-disable-next-line camelcase
-    house_name?: string;
     // eslint-disable-next-line camelcase
     house_number?: string;
     road?: string;
-    retail?: string;
-    commercial?: string;
-    industrial?: string;
-    farmyard?: string;
-    farm?: string;
-    residental?: string;
-    // eslint-disable-next-line camelcase
-    city_block?: string;
-    quarter?: string;
-    allotments?: string;
     neighbourhood?: string;
-    // eslint-disable-next-line camelcase
-    isolated_dwelling?: string;
-    croft?: string;
     hamlet?: string;
+    suburb?: string;
+    village?: string;
+    town?: string;
     // eslint-disable-next-line camelcase
     city_district?: string;
-    district?: string;
-    borough?: string;
-    subdivision?: string;
-    suburb?: string;
-    municipality?: string;
     city?: string;
-    town?: string;
-    village?: string;
     region?: string;
+    county?: string;
     // eslint-disable-next-line camelcase
     state_district?: string;
     state?: string;
-    county?: string;
+    // eslint-disable-next-line camelcase
+    state_code?: string;
     postcode?: string;
     country?: string;
     // eslint-disable-next-line camelcase
     country_code?: string;
-    continent?: string;
+    name?: string;
   };
   extratags?: {
     phone?: string;
@@ -143,84 +151,94 @@ export interface NominatimResult {
   geokml?: string;
   svg?: string;
   geotext?: string;
+  statecode?: string;
+  distance?: number;
+  matchquality?: {
+    matchcode: LocationIQPrecisionCode;
+    matchtype: LocationIQPrecisionType;
+    matchlevel: LocationIQPrecision;
+  };
+  // eslint-disable-next-line camelcase
+  postal_address?: string;
 }
 
-export type NominatimResponse =
-  | NominatimErrorResponse
-  | NominatimResult
-  | NominatimResult[];
+export type LocationIQResponse =
+  | LocationIQErrorResponse
+  | LocationIQResult
+  | LocationIQResult[];
 
-export interface NominatimProviderOptionsInterface
+export interface LocationIQProviderOptionsInterface
   extends ProviderOptionsInterface {
-  readonly host?: string;
-  readonly userAgent: string;
-  readonly referer?: string;
+  readonly apiKey: string;
   readonly countryCodes?: string[];
+  readonly source?: "nominatim" | "locationiq";
 }
 
-export const defaultNominatimProviderOptions = {
+export const defaultLocationIQProviderOptions: LocationIQProviderOptionsInterface = {
   ...defaultProviderOptions,
-  host: "nominatim.openstreetmap.org",
-  userAgent: "",
+  apiKey: "",
+  source: "locationiq",
 };
 
-type NominatimGeocodedResultsCallback = GeocodedResultsCallback<NominatimGeocoded>;
+type LocationIQGeocodedResultsCallback = GeocodedResultsCallback<LocationIQGeocoded>;
 
-export default class NominatimProvider
-  implements ProviderInterface<NominatimGeocoded> {
+export default class LocationIQProvider
+  implements ProviderInterface<LocationIQGeocoded> {
   private externalLoader: ExternalLoaderInterface;
 
-  private options: NominatimProviderOptionsInterface;
+  private options: LocationIQProviderOptionsInterface;
 
   public constructor(
     _externalLoader: ExternalLoaderInterface,
-    options: NominatimProviderOptionsInterface = defaultNominatimProviderOptions
+    options: LocationIQProviderOptionsInterface = defaultLocationIQProviderOptions
   ) {
     this.externalLoader = _externalLoader;
-    this.options = { ...defaultNominatimProviderOptions, ...options };
-    if (
-      this.options.host === defaultNominatimProviderOptions.host &&
-      !this.options.userAgent
-    ) {
+    this.options = { ...defaultLocationIQProviderOptions, ...options };
+    if (!this.options.apiKey) {
       throw new Error(
-        'An User-Agent identifying your application is required for the OpenStreetMap / Nominatim provider when using the default host. Please add it in the "userAgent" option.'
+        'An API key is required for the LocationIQ provider. Please add it in the "apiKey" option.'
+      );
+    }
+    if (!["locationiq", "nominatim"].includes(this.options.source || "")) {
+      throw new Error(
+        'The "source" option must either be "locationiq" or "nominatim".'
       );
     }
   }
 
   public geocode(
-    query: string | NominatimGeocodeQuery | NominatimGeocodeQueryObject,
-    callback?: NominatimGeocodedResultsCallback,
+    query: string | LocationIQGeocodeQuery | LocationIQGeocodeQueryObject,
+    callback?: LocationIQGeocodedResultsCallback,
     errorCallback?: ErrorCallback
-  ): void | Promise<NominatimGeocoded[]> {
+  ): void | Promise<LocationIQGeocoded[]> {
     const geocodeQuery = ProviderHelpers.getGeocodeQueryFromParameter(
       query,
-      NominatimGeocodeQuery
+      LocationIQGeocodeQuery
     );
 
     if (geocodeQuery.getIp()) {
       throw new Error(
-        "The OpenStreetMap / Nominatim provider does not support IP geolocation, only location geocoding."
+        "The LocationIQ provider does not support IP geolocation, only location geocoding."
       );
     }
 
     this.externalLoader.setOptions({
       protocol: this.options.useSsl ? "https" : "http",
-      host: this.options.host,
-      pathname: "search",
+      host: "locationiq.com",
+      pathname: "v1/search.php",
     });
 
-    const params: NominatimRequestParams = this.withCommonParams(
+    const params: LocationIQRequestParams = this.withCommonParams(
       {
         q: geocodeQuery.getText(),
         limit: geocodeQuery.getLimit().toString(),
-        countrycodes: (<NominatimGeocodeQuery>geocodeQuery).getCountryCodes()
-          ? (<NominatimGeocodeQuery>geocodeQuery).getCountryCodes()?.join(",")
+        countrycodes: (<LocationIQGeocodeQuery>geocodeQuery).getCountryCodes()
+          ? (<LocationIQGeocodeQuery>geocodeQuery).getCountryCodes()?.join(",")
           : this.options.countryCodes?.join(","),
-        exclude_place_ids: (<NominatimGeocodeQuery>(
+        exclude_place_ids: (<LocationIQGeocodeQuery>(
           geocodeQuery
         )).getExcludePlaceIds()
-          ? (<NominatimGeocodeQuery>geocodeQuery)
+          ? (<LocationIQGeocodeQuery>geocodeQuery)
               .getExcludePlaceIds()
               ?.join(",")
           : undefined,
@@ -231,14 +249,15 @@ export default class NominatimProvider
               geocodeQuery.getBounds()?.latitudeNE
             }`
           : undefined,
-        bounded: (<NominatimGeocodeQuery>geocodeQuery).getBounded()
-          ? (<NominatimGeocodeQuery>geocodeQuery).getBounded()?.toString()
+        bounded: (<LocationIQGeocodeQuery>geocodeQuery).getBounded()
+          ? (<LocationIQGeocodeQuery>geocodeQuery).getBounded()?.toString()
           : undefined,
-        dedupe: (<NominatimGeocodeQuery>geocodeQuery).getDedupe()
-          ? (<NominatimGeocodeQuery>geocodeQuery).getDedupe()?.toString()
+        dedupe: (<LocationIQGeocodeQuery>geocodeQuery).getDedupe()
+          ? (<LocationIQGeocodeQuery>geocodeQuery).getDedupe()?.toString()
           : undefined,
+        matchquality: "1",
       },
-      <NominatimGeocodeQuery>geocodeQuery
+      <LocationIQGeocodeQuery>geocodeQuery
     );
 
     if (!callback) {
@@ -246,35 +265,29 @@ export default class NominatimProvider
         this.executeRequest(
           params,
           (results) => resolve(results),
-          this.getHeaders(),
+          {},
           {},
           (error) => reject(error)
         )
       );
     }
-    return this.executeRequest(
-      params,
-      callback,
-      this.getHeaders(),
-      {},
-      errorCallback
-    );
+    return this.executeRequest(params, callback, {}, {}, errorCallback);
   }
 
   public geodecode(
     latitudeOrQuery:
       | number
       | string
-      | NominatimReverseQuery
-      | NominatimReverseQueryObject,
-    longitudeOrCallback?: number | string | NominatimGeocodedResultsCallback,
-    callbackOrErrorCallback?: NominatimGeocodedResultsCallback | ErrorCallback,
+      | LocationIQReverseQuery
+      | LocationIQReverseQueryObject,
+    longitudeOrCallback?: number | string | LocationIQGeocodedResultsCallback,
+    callbackOrErrorCallback?: LocationIQGeocodedResultsCallback | ErrorCallback,
     errorCallback?: ErrorCallback
-  ): void | Promise<NominatimGeocoded[]> {
+  ): void | Promise<LocationIQGeocoded[]> {
     const reverseQuery = ProviderHelpers.getReverseQueryFromParameters(
       latitudeOrQuery,
       longitudeOrCallback,
-      NominatimReverseQuery
+      LocationIQReverseQuery
     );
     const reverseCallback = ProviderHelpers.getCallbackFromParameters(
       longitudeOrCallback,
@@ -288,18 +301,19 @@ export default class NominatimProvider
 
     this.externalLoader.setOptions({
       protocol: this.options.useSsl ? "https" : "http",
-      host: this.options.host,
-      pathname: "reverse",
+      host: "locationiq.com",
+      pathname: "v1/reverse.php",
     });
 
-    const params: NominatimRequestParams = this.withCommonParams(
+    const params: LocationIQRequestParams = this.withCommonParams(
       {
         lat: reverseQuery.getCoordinates().latitude.toString(),
         lon: reverseQuery.getCoordinates().longitude.toString(),
         zoom:
-          (<NominatimReverseQuery>reverseQuery).getZoom()?.toString() || "18",
+          (<LocationIQReverseQuery>reverseQuery).getZoom()?.toString() || "18",
+        showdistance: "1",
       },
-      <NominatimReverseQuery>reverseQuery
+      <LocationIQReverseQuery>reverseQuery
     );
 
     if (!reverseCallback) {
@@ -307,7 +321,7 @@ export default class NominatimProvider
         this.executeRequest(
           params,
           (results) => resolve(results),
-          this.getHeaders(),
+          {},
           {},
           (error) => reject(error)
         )
@@ -316,47 +330,68 @@ export default class NominatimProvider
     return this.executeRequest(
       params,
       reverseCallback,
-      this.getHeaders(),
+      {},
       {},
       reverseErrorCallback
     );
   }
 
   private withCommonParams(
-    params: Partial<NominatimRequestParams>,
-    query: NominatimGeocodeQuery | NominatimReverseQuery
-  ): NominatimRequestParams {
+    params: Pick<
+      LocationIQRequestParams,
+      | "q"
+      | "lat"
+      | "lon"
+      | "street"
+      | "city"
+      | "county"
+      | "state"
+      | "country"
+      | "postalcode"
+      | "zoom"
+      | "viewbox"
+      | "bounded"
+      | "limit"
+      | "countrycodes"
+      | "dedupe"
+      | "osm_type"
+      | "osm_id"
+      | "exclude_place_ids"
+      | "showdistance"
+      | "matchquality"
+    >,
+    query: LocationIQGeocodeQuery | LocationIQReverseQuery
+  ): LocationIQRequestParams {
     return {
       ...params,
-      format: "jsonv2",
+      key: this.options.apiKey || "",
+      format: "json",
       addressdetails: "1",
-      jsonpCallback: this.options.useJsonp ? "json_callback" : undefined,
       "accept-language": query.getLocale(),
-    };
-  }
-
-  private getHeaders(): ExternalLoaderHeaders {
-    return {
-      "User-Agent": this.options.userAgent || "",
-      Referer: this.options.referer,
+      jsonpCallback: this.options.useJsonp ? "json_callback" : undefined,
+      normalizeaddress: "1",
+      normalizecity: "1",
+      statecode: "1",
+      postaladdress: "1",
+      source: this.options.source === "nominatim" ? "nom" : undefined,
     };
   }
 
   public executeRequest(
     params: ExternalLoaderParams,
-    callback: NominatimGeocodedResultsCallback,
+    callback: LocationIQGeocodedResultsCallback,
     headers?: ExternalLoaderHeaders,
     body?: ExternalLoaderBody,
     errorCallback?: ErrorCallback
   ): void {
     this.externalLoader.executeRequest(
       params,
-      (data: NominatimResponse) => {
+      (data: LocationIQResponse) => {
         let results = data;
         if (!Array.isArray(data)) {
-          if ((<NominatimErrorResponse>data).error) {
+          if ((<LocationIQErrorResponse>data).error) {
             const errorMessage = `An error has occurred: ${
-              (<NominatimErrorResponse>data).error
+              (<LocationIQErrorResponse>data).error
             }`;
             if (errorCallback) {
               errorCallback(new ResponseError(errorMessage, data));
@@ -367,11 +402,11 @@ export default class NominatimProvider
             });
             return;
           }
-          results = [<NominatimResult>data];
+          results = [<LocationIQResult>data];
         }
         callback(
-          (<NominatimResult[]>results).map((result: NominatimResult) =>
-            NominatimProvider.mapToGeocoded(result)
+          (<LocationIQResult[]>results).map((result) =>
+            LocationIQProvider.mapToGeocoded(result)
           )
         );
       },
@@ -381,43 +416,38 @@ export default class NominatimProvider
     );
   }
 
-  public static mapToGeocoded(result: NominatimResult): NominatimGeocoded {
+  public static mapToGeocoded(result: LocationIQResult): LocationIQGeocoded {
     const latitude = parseFloat(result.lat);
     const longitude = parseFloat(result.lon);
+    const formattedAddress = result.postal_address;
     const displayName = result.display_name;
     const streetNumber = result.address.house_number;
-    const streetName = result.address.road || result.address.pedestrian;
+    const streetName = result.address.road;
     const subLocality = result.address.suburb;
-    let locality: string | undefined;
+    const locality = result.address.city;
     const postalCode = result.address.postcode
       ? result.address.postcode.split(";")[0]
       : undefined;
     const region = result.address.state;
     const { country } = result.address;
     const countryCode = result.address.country_code;
+    const placeId = result.place_id;
     const osmId = result.osm_id;
     const osmType = result.osm_type;
-    const categories = [result.category];
-    const types = [result.type];
+    const categories = result.class ? [result.class] : [];
+    const { distance } = result;
+    const types = result.type ? [result.type] : [];
+    const precision = result.matchquality?.matchlevel;
+    const precisionCode = result.matchquality?.matchcode;
+    const precisionType = result.matchquality?.matchtype;
     const attribution = result.licence;
 
-    const localityTypes: ("city" | "town" | "village" | "hamlet")[] = [
-      "city",
-      "town",
-      "village",
-      "hamlet",
-    ];
-    localityTypes.forEach((localityType) => {
-      if (result.address[localityType] && !locality) {
-        locality = result.address[localityType];
-      }
-    });
-
-    let geocoded = NominatimGeocoded.create({
+    let geocoded = LocationIQGeocoded.create({
       coordinates: {
         latitude,
         longitude,
       },
+      formattedAddress,
       displayName,
       streetNumber,
       streetName,
@@ -427,14 +457,19 @@ export default class NominatimProvider
       region,
       country,
       countryCode,
+      placeId,
       osmId,
       osmType,
       categories,
       types,
+      distance,
+      precision,
+      precisionCode,
+      precisionType,
       attribution,
     });
 
-    geocoded = <NominatimGeocoded>geocoded.withBounds({
+    geocoded = <LocationIQGeocoded>geocoded.withBounds({
       latitudeSW: parseFloat(result.boundingbox[0]),
       longitudeSW: parseFloat(result.boundingbox[2]),
       latitudeNE: parseFloat(result.boundingbox[1]),
@@ -448,59 +483,28 @@ export default class NominatimProvider
           AdminLevel.create({
             level: level + 1,
             name: result.address[adminLevel] || "",
+            code:
+              adminLevel === "state" ? result.address.state_code : undefined,
           })
         );
       }
     });
 
     const subLocalityLevels: (
-      | "city_district"
-      | "district"
-      | "borough"
       | "suburb"
-      | "subdivision"
-      | "hamlet"
-      | "croft"
-      | "isolated_dwelling"
       | "neighbourhood"
-      | "allotments"
-      | "quarter"
-      | "city_block"
-      | "residental"
-      | "farm"
-      | "farmyard"
-      | "industrial"
-      | "commercial"
-      | "retail"
       | "road"
-      | "house_name"
-    )[][] = [
-      ["city_district", "district", "borough", "suburb", "subdivision"],
-      ["hamlet", "croft", "isolated_dwelling"],
-      ["neighbourhood", "allotments", "quarter"],
-      [
-        "city_block",
-        "residental",
-        "farm",
-        "farmyard",
-        "industrial",
-        "commercial",
-        "retail",
-      ],
-      ["road"],
-      ["house_name"],
-    ];
-    subLocalityLevels.forEach((subLocalities, level) => {
-      subLocalities.forEach((subLocalityLevel) => {
-        if (result.address[subLocalityLevel]) {
-          geocoded.addSubLocalityLevel(
-            AdminLevel.create({
-              level: level + 1,
-              name: result.address[subLocalityLevel] || "",
-            })
-          );
-        }
-      });
+      | "name"
+    )[] = ["suburb", "neighbourhood", "road", "name"];
+    subLocalityLevels.forEach((subLocalityLevel, level) => {
+      if (result.address[subLocalityLevel]) {
+        geocoded.addSubLocalityLevel(
+          AdminLevel.create({
+            level: level + 1,
+            name: result.address[subLocalityLevel] || "",
+          })
+        );
+      }
     });
 
     return geocoded;

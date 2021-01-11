@@ -1,18 +1,15 @@
 import Geocoded, { GeocodedObject } from "Geocoded";
 
 export interface MapboxGeocodedObject extends GeocodedObject {
-  readonly resultType?: string[];
+  readonly types?: string[];
 }
 
 export default class MapboxGeocoded extends Geocoded {
-  private readonly resultType?: string[];
+  private readonly types?: string[];
 
-  protected constructor({
-    resultType,
-    ...geocodedObject
-  }: MapboxGeocodedObject) {
+  protected constructor({ types, ...geocodedObject }: MapboxGeocodedObject) {
     super(geocodedObject);
-    this.resultType = resultType;
+    this.types = types;
   }
 
   public static create(object: MapboxGeocodedObject): MapboxGeocoded {
@@ -22,18 +19,18 @@ export default class MapboxGeocoded extends Geocoded {
   public toObject(): MapboxGeocodedObject {
     return {
       ...super.toObject(),
-      resultType: this.resultType,
+      types: this.types,
     };
   }
 
-  public withResultType(resultType: string[]): MapboxGeocoded {
+  public withTypes(types: string[]): MapboxGeocoded {
     return new MapboxGeocoded({
       ...this.toObject(),
-      resultType,
+      types,
     });
   }
 
-  public getResultType(): undefined | string[] {
-    return this.resultType;
+  public getTypes(): undefined | string[] {
+    return this.types;
   }
 }

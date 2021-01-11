@@ -4,7 +4,7 @@ import { Coordinates } from "types";
 export interface MapboxGeocodeQueryObject extends GeocodeQueryObject {
   readonly countryCodes?: string[];
   readonly proximity?: Coordinates;
-  readonly locationTypes?: string[];
+  readonly types?: string[];
   readonly fuzzyMatch?: boolean;
 }
 
@@ -13,14 +13,14 @@ export default class MapboxGeocodeQuery extends GeocodeQuery {
 
   private readonly proximity?: Coordinates;
 
-  private readonly locationTypes?: string[];
+  private readonly types?: string[];
 
   private readonly fuzzyMatch?: boolean;
 
   protected constructor({
     countryCodes,
     proximity,
-    locationTypes,
+    types,
     fuzzyMatch,
     ...geocodeQueryObject
   }: MapboxGeocodeQueryObject) {
@@ -32,7 +32,7 @@ export default class MapboxGeocodeQuery extends GeocodeQuery {
       );
     }
     this.proximity = proximity;
-    this.locationTypes = locationTypes;
+    this.types = types;
     this.fuzzyMatch = fuzzyMatch;
   }
 
@@ -45,7 +45,7 @@ export default class MapboxGeocodeQuery extends GeocodeQuery {
       ...super.toObject(),
       countryCodes: this.countryCodes,
       proximity: this.proximity,
-      locationTypes: this.locationTypes,
+      types: this.types,
       fuzzyMatch: this.fuzzyMatch,
     };
   }
@@ -66,12 +66,12 @@ export default class MapboxGeocodeQuery extends GeocodeQuery {
     return this.proximity;
   }
 
-  public withLocationTypes(locationTypes: string[]): MapboxGeocodeQuery {
-    return new MapboxGeocodeQuery({ ...this.toObject(), locationTypes });
+  public withTypes(types: string[]): MapboxGeocodeQuery {
+    return new MapboxGeocodeQuery({ ...this.toObject(), types });
   }
 
-  public getLocationTypes(): undefined | string[] {
-    return this.locationTypes;
+  public getTypes(): undefined | string[] {
+    return this.types;
   }
 
   public withFuzzyMatch(fuzzyMatch: boolean): MapboxGeocodeQuery {

@@ -1,27 +1,28 @@
 import { ReverseQuery, ReverseQueryObject } from "query";
+import { GoogleMapsPrecision } from "provider";
 
 export interface GoogleMapsReverseQueryObject extends ReverseQueryObject {
-  readonly resultTypes?: string[];
-  readonly locationTypes?: string[];
+  readonly types?: string[];
+  readonly precisions?: GoogleMapsPrecision[];
   readonly channel?: string;
 }
 
 export default class GoogleMapsReverseQuery extends ReverseQuery {
-  private readonly resultTypes?: string[];
+  private readonly types?: string[];
 
-  private readonly locationTypes?: string[];
+  private readonly precisions?: GoogleMapsPrecision[];
 
   private readonly channel?: string;
 
   protected constructor({
-    resultTypes,
-    locationTypes,
+    types,
+    precisions,
     channel,
     ...reverseQueryObject
   }: GoogleMapsReverseQueryObject) {
     super(reverseQueryObject);
-    this.resultTypes = resultTypes;
-    this.locationTypes = locationTypes;
+    this.types = types;
+    this.precisions = precisions;
     this.channel = channel;
   }
 
@@ -34,26 +35,28 @@ export default class GoogleMapsReverseQuery extends ReverseQuery {
   public toObject(): GoogleMapsReverseQueryObject {
     return {
       ...super.toObject(),
-      resultTypes: this.resultTypes,
-      locationTypes: this.locationTypes,
+      types: this.types,
+      precisions: this.precisions,
       channel: this.channel,
     };
   }
 
-  public withResultTypes(resultTypes: string[]): GoogleMapsReverseQuery {
-    return new GoogleMapsReverseQuery({ ...this.toObject(), resultTypes });
+  public withTypes(types: string[]): GoogleMapsReverseQuery {
+    return new GoogleMapsReverseQuery({ ...this.toObject(), types });
   }
 
-  public getResultTypes(): undefined | string[] {
-    return this.resultTypes;
+  public getTypes(): undefined | string[] {
+    return this.types;
   }
 
-  public withLocationTypes(locationTypes: string[]): GoogleMapsReverseQuery {
-    return new GoogleMapsReverseQuery({ ...this.toObject(), locationTypes });
+  public withPrecisions(
+    precisions: GoogleMapsPrecision[]
+  ): GoogleMapsReverseQuery {
+    return new GoogleMapsReverseQuery({ ...this.toObject(), precisions });
   }
 
-  public getLocationTypes(): undefined | string[] {
-    return this.locationTypes;
+  public getPrecisions(): undefined | GoogleMapsPrecision[] {
+    return this.precisions;
   }
 
   public withChannel(channel: string): GoogleMapsReverseQuery {

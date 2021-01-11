@@ -81,7 +81,7 @@ describe("Yandex Geocoder Provider", () => {
         ]);
         expect(geocoded.getCountry()).toEqual("United States of America");
         expect(geocoded.getCountryCode()).toEqual("US");
-        expect(geocoded.getLocationType()).toEqual("street");
+        expect(geocoded.getTypes()).toEqual(["street"]);
         expect(geocoded.getPrecision()).toEqual("street");
 
         done();
@@ -130,7 +130,7 @@ describe("Yandex Geocoder Provider", () => {
         ]);
         expect(geocoded.getCountry()).toEqual("France");
         expect(geocoded.getCountryCode()).toEqual("FR");
-        expect(geocoded.getLocationType()).toEqual("house");
+        expect(geocoded.getTypes()).toEqual(["house"]);
         expect(geocoded.getPrecision()).toEqual("exact");
 
         done();

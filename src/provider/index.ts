@@ -6,6 +6,7 @@ export * from "provider/ChainProvider";
 export * from "provider/bing";
 export * from "provider/geoplugin";
 export * from "provider/googlemaps";
+export * from "provider/locationiq";
 export * from "provider/mapbox";
 export * from "provider/mapquest";
 export * from "provider/nominatim";

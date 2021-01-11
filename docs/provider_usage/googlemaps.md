@@ -14,16 +14,16 @@
 
 ## `geodecode` parameters
 
-- `resultTypes`: to filter the results by address types
-- `locationTypes` (possible values: "ROOFTOP", "RANGE_INTERPOLATED", "GEOMETRIC_CENTER", "APPROXIMATE"): to filter the results by location types
+- `types`: to filter the results by address types
+- `precisions` (possible values: "ROOFTOP", "RANGE_INTERPOLATED", "GEOMETRIC_CENTER", "APPROXIMATE"): to filter the results by precisions
 - `channel`: channel to use for this request (Premium only)
 
 ## `Geocoded` properties
 
 - `placeId`: a unique identifier used with other Google APIs
 - `partialMatch`: to indicate the geocoder did not return an exact match
-- `resultType`: an array of result types
-- `locationType`: a type representing the precision of the result
+- `types`: the result types
+- `precision`: a type representing the precision of the result
 - `streetAddress`: the street number with the street name
 - `intersection`, `political`, `colloquialArea`, `ward`, `neighborhood`, `premise`, `subpremise`, `naturalFeature`, `airport`, `park`, `pointOfInterest`, `establishment`, `postalCodeSuffix`: additional address components
 - `subLocalityLevels`: levels for the sublocality (greater level number means smaller area)
