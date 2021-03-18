@@ -261,57 +261,82 @@ const reverseQuery = ReverseQuery.create({
 <h2 id="providers">Providers</h2>
 <p>Universal Geocoder comes with modules to integrate with various geocoding providers.</p>
 <p>The following table summarizes the features of each:</p>
-<div class="table-hover table-responsive"><table class="table"><thead><tr><th>Provider</th>
+<div class="table-hover table-responsive"><table class="table">
+  <thead>
+    <tr>
+      <th>Provider</th>
       <th>Codename</th>
       <th>Supports location geocoding?</th>
       <th>Supports reverse geocoding?</th>
       <th>Supports IP geolocation?</th>
-    </tr></thead><tbody><tr><td>OpenStreetMap (Nominatim)</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OpenStreetMap (Nominatim)</td>
       <td>openstreetmap or nominatim</td>
       <td>✅️ yes</td>
       <td>✅️ yes</td>
       <td>❌️ no</td>
-    </tr><tr><td>OpenCage</td>
+    </tr>
+    <tr>
+      <td>OpenCage</td>
       <td>opencage</td>
       <td>✅️ yes</td>
       <td>✅️ yes</td>
       <td>❌️ no</td>
-    </tr><tr><td>Google Maps (Geocoding API)</td>
+    </tr>
+    <tr>
+      <td>Google Maps (Geocoding API)</td>
       <td>google or googlemaps</td>
       <td>✅️ yes</td>
       <td>✅️ yes</td>
       <td>❌️ no</td>
-    </tr><tr><td>LocationIQ</td>
+    </tr>
+    <tr>
+      <td>LocationIQ</td>
       <td>locationiq</td>
       <td>✅️ yes</td>
       <td>✅️ yes</td>
       <td>❌️ no</td>
-    </tr><tr><td>Mapbox</td>
+    </tr>
+    <tr>
+      <td>Mapbox</td>
       <td>mapbox</td>
       <td>✅️ yes</td>
       <td>✅️ yes</td>
       <td>❌️ no</td>
-    </tr><tr><td>MapQuest</td>
+    </tr>
+    <tr>
+      <td>MapQuest</td>
       <td>mapquest</td>
       <td>✅️ yes</td>
       <td>✅️ yes</td>
       <td>❌️ no</td>
-    </tr><tr><td>Bing</td>
+    </tr>
+    <tr>
+      <td>Bing</td>
       <td>bing</td>
       <td>✅️ yes</td>
       <td>✅️ yes</td>
       <td>❌️ no</td>
-    </tr><tr><td>Yandex</td>
+    </tr>
+    <tr>
+      <td>Yandex</td>
       <td>yandex</td>
       <td>✅️ yes</td>
       <td>✅️ yes</td>
       <td>❌️ no</td>
-    </tr><tr><td>GeoPlugin</td>
+    </tr>
+    <tr>
+      <td>GeoPlugin</td>
       <td>geoplugin</td>
       <td>❌️ no</td>
       <td>❌️ no</td>
       <td>✅️ yes</td>
-    </tr></tbody></table></div>
+    </tr>
+  </tbody>
+</table></div>
 <h3 id="specific-provider-usage">Specific Provider Usage</h3>
 <p>The documentation for specific provider options, parameters and results can be found <a href="docs/provider_usage.html">here</a>.</p>
 <h2 id="special-providers">Special Providers</h2>
@@ -349,6 +374,9 @@ const nominatimGeocoder = UniversalGeocoder.createGeocoder("nominatim");
 <p><strong>A:</strong> First of all, there are some providers that do not use an API key, like OpenStreetMap (Nominatim) or GeoPlugin.</p>
 <p>If you want to use a provider with an API key, the best approach is generally to use Universal Geocoder in the server-side (Node) and to call it from the client-side.
 This way the API key is not exposed directly.</p>
+<p>Some providers allow to add URL restrictions when generating a token, like <a href="https://docs.mapbox.com/help/getting-started/access-tokens/#url-restrictions">Mapbox</a>.
+Even if the token is visible, it mitigates its unwanted use since the <code>Origin</code> header <a href="https://developer.mozilla.org/en-US/docs/Glossary/Forbidden_header_name">cannot be changed</a> in a browser environment.
+However, the stolen token would be still usable in a server environment (for instance with cURL).</p>
                 </section>
 
             </div>
