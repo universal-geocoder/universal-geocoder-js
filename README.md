@@ -348,3 +348,7 @@ FAQ
 
 If you want to use a provider with an API key, the best approach is generally to use Universal Geocoder in the server-side (Node) and to call it from the client-side.
 This way the API key is not exposed directly.
+
+Some providers allow to add URL restrictions when generating a token, like [Mapbox](https://docs.mapbox.com/help/getting-started/access-tokens/#url-restrictions).
+Even if the token is visible, it mitigates its unwanted use since the `Origin` header [cannot be changed](https://developer.mozilla.org/en-US/docs/Glossary/Forbidden_header_name) in a browser environment.
+However, the stolen token would be still usable in a server environment (for instance with cURL).
