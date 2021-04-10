@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-unresolved
+import type * as GeoJson from "geojson";
 import Geocoded, { GeocodedObject } from "Geocoded";
 import AdminLevel from "AdminLevel";
 import { NominatimOsmType } from "provider";
@@ -10,6 +12,7 @@ export interface NominatimGeocodedObject extends GeocodedObject {
   readonly types?: string[];
   readonly attribution?: string;
   readonly subLocalityLevels?: AdminLevel[];
+  readonly shape?: GeoJson.Geometry | string;
 }
 
 export default class NominatimGeocoded extends Geocoded {
@@ -27,6 +30,8 @@ export default class NominatimGeocoded extends Geocoded {
 
   private readonly subLocalityLevels: AdminLevel[];
 
+  private readonly shape?: GeoJson.Geometry | string;
+
   protected constructor({
     displayName,
     osmId,
@@ -35,6 +40,7 @@ export default class NominatimGeocoded extends Geocoded {
     types,
     attribution,
     subLocalityLevels,
+    shape,
     ...geocodedObject
   }: NominatimGeocodedObject) {
     super(geocodedObject);
@@ -45,6 +51,7 @@ export default class NominatimGeocoded extends Geocoded {
     this.types = types;
     this.attribution = attribution;
     this.subLocalityLevels = subLocalityLevels || [];
+    this.shape = shape;
   }
 
   public static create(object: NominatimGeocodedObject): NominatimGeocoded {
@@ -61,6 +68,7 @@ export default class NominatimGeocoded extends Geocoded {
       types: this.types,
       attribution: this.attribution,
       subLocalityLevels: this.subLocalityLevels,
+      shape: this.shape,
     };
   }
 
@@ -136,5 +144,16 @@ export default class NominatimGeocoded extends Geocoded {
 
   public getSubLocalityLevels(): AdminLevel[] {
     return this.subLocalityLevels;
+  }
+
+  public withShape(shape: GeoJson.Geometry | string): NominatimGeocoded {
+    return new NominatimGeocoded({
+      ...this.toObject(),
+      shape,
+    });
+  }
+
+  public getShape(): undefined | GeoJson.Geometry | string {
+    return this.shape;
   }
 }

@@ -53,6 +53,8 @@ interface NominatimRequestParams {
   readonly polygon_svg?: string;
   // eslint-disable-next-line camelcase
   readonly polygon_text?: string;
+  // eslint-disable-next-line camelcase
+  readonly polygon_threshold?: string;
   readonly jsonpCallback?: string;
 }
 
@@ -330,6 +332,17 @@ export default class NominatimProvider
       ...params,
       format: "jsonv2",
       addressdetails: "1",
+      polygon_geojson:
+        query.getShape() && query.getShape() === "geojson" ? "1" : undefined,
+      polygon_kml:
+        query.getShape() && query.getShape() === "kml" ? "1" : undefined,
+      polygon_svg:
+        query.getShape() && query.getShape() === "svg" ? "1" : undefined,
+      polygon_text:
+        query.getShape() && query.getShape() === "text" ? "1" : undefined,
+      polygon_threshold: query.getShapeThreshold()
+        ? query.getShapeThreshold()?.toString()
+        : undefined,
       jsonpCallback: this.options.useJsonp ? "json_callback" : undefined,
       "accept-language": query.getLocale(),
     };
@@ -400,6 +413,8 @@ export default class NominatimProvider
     const categories = [result.category];
     const types = [result.type];
     const attribution = result.licence;
+    const shape =
+      result.geojson || result.geokml || result.svg || result.geotext;
 
     const localityTypes: ("city" | "town" | "village" | "hamlet")[] = [
       "city",
@@ -432,6 +447,7 @@ export default class NominatimProvider
       categories,
       types,
       attribution,
+      shape,
     });
 
     geocoded = <NominatimGeocoded>geocoded.withBounds({

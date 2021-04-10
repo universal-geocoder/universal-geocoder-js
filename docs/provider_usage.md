@@ -147,6 +147,18 @@ Here is a table listing the parameters according to the providers:
     </tr>
     <tr>
       <td>geocode</td>
+      <td>shape</td>
+      <td>Add the shape (geometry) to the results</td>
+      <td>Nominatim</td>
+    </tr>
+    <tr>
+      <td>geocode</td>
+      <td>shapeThreshold</td>
+      <td>Tolerance for simplifying the returned shape</td>
+      <td>Nominatim</td>
+    </tr>
+    <tr>
+      <td>geocode</td>
       <td>channel</td>
       <td>Channel to use for the request</td>
       <td>Google Maps</td>
@@ -198,6 +210,18 @@ Here is a table listing the parameters according to the providers:
       <td>noRecord</td>
       <td>Ask for the query to not be logged</td>
       <td>OpenCage</td>
+    </tr>
+    <tr>
+      <td>geodecode</td>
+      <td>shape</td>
+      <td>Add the shape (geometry) to the results</td>
+      <td>Nominatim</td>
+    </tr>
+    <tr>
+      <td>geodecode</td>
+      <td>shapeThreshold</td>
+      <td>Tolerance for simplifying the returned shape</td>
+      <td>Nominatim</td>
     </tr>
     <tr>
       <td>geodecode</td>
@@ -300,6 +324,12 @@ Here is a table listing the parameters according to the providers:
       <td>subLocalityLevels</td>
       <td>Levels for the sublocality</td>
       <td>Google Maps, LocationIQ, Nominatim</td>
+    </tr>
+    <tr>
+      <td>geocoded</td>
+      <td>shape</td>
+      <td>Shape (geometry) of the result</td>
+      <td>Nominatim</td>
     </tr>
     <tr>
       <td>geocoded</td>

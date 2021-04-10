@@ -1,5 +1,6 @@
+import type { Feature } from "geojson";
 import Geocoded from "Geocoded";
-import GeoJsonDumper, { GeoJson } from "GeoJsonDumper";
+import GeoJsonDumper from "GeoJsonDumper";
 
 describe("GeoJSON Dumper", () => {
   const geocoded = Geocoded.create({
@@ -17,7 +18,7 @@ describe("GeoJSON Dumper", () => {
       "1600 Pennsylvania Avenue Northwest, Washington, DC 20050",
   });
 
-  const expectedGeoJson: GeoJson = {
+  const expectedGeoJson: Feature = {
     type: "Feature",
     properties: {
       formattedAddress:

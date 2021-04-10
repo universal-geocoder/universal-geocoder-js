@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.13.0
+
+* [Nominatim] Add `shape` and `shapeThreshold` geocode and geodecode parameters
+* [Nominatim] Add `shape` in geocoded object
+
 ## 0.12.0
 
 * Add LocationIQ provider
