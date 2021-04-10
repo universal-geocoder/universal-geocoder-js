@@ -125,10 +125,14 @@
 <li><code>excludePlaceIds</code>: for excluding some OpenStreetMap objects from the results</li>
 <li><code>bounded</code> (only if <code>bounds</code> is used): boolean to restrict the results to items within the bounds</li>
 <li><code>dedupe</code>: boolean to remove the duplicates</li>
+<li><code>shape</code> (possible values: &quot;geojson&quot;, &quot;kml&quot;, &quot;svg&quot;, &quot;text&quot;): add the shape (geometry) to the results in the specified format</li>
+<li><code>shapeThreshold</code>: Tolerance in degrees for simplifying the returned shape</li>
 </ul>
 <h2><code>geodecode</code> parameters</h2>
 <ul>
 <li><code>zoom</code> (default: 18, from 0 to 18): the level of details required for the address</li>
+<li><code>shape</code> (possible values: &quot;geojson&quot;, &quot;kml&quot;, &quot;svg&quot;, &quot;text&quot;): add the shape (geometry) to the results in the specified format</li>
+<li><code>shapeThreshold</code>: Tolerance in degrees for simplifying the returned shape</li>
 </ul>
 <h2><code>Geocoded</code> properties</h2>
 <ul>
@@ -138,6 +142,7 @@
 <li><code>types</code>: values of the main OpenStreetMap tag (only one)</li>
 <li><code>attribution</code>: OpenStreetMap licensing information</li>
 <li><code>subLocalityLevels</code>: levels for the sublocality (greater level number means smaller area)</li>
+<li><code>shape</code>: shape (geometry) of the result if asked</li>
 </ul>
                 </section>
 
