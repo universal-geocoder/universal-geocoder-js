@@ -1,35 +1,9 @@
+// eslint-disable-next-line import/no-unresolved
+import type { Feature } from "geojson";
 import Geocoded from "Geocoded";
-import AdminLevel, { AdminLevelObject } from "AdminLevel";
-import {
-  BoundingBox,
-  Coordinates,
-  FlatBoundingBox,
-  FlatCoordinates,
-} from "types";
-
-export interface GeoJson {
-  readonly type: "Feature";
-  readonly properties: {
-    readonly [property: string]:
-      | string
-      | string[]
-      | number
-      | boolean
-      | Coordinates
-      | BoundingBox
-      | AdminLevel[]
-      | AdminLevelObject[]
-      | undefined;
-  };
-  readonly geometry: {
-    readonly type: "Point";
-    readonly coordinates: FlatCoordinates;
-  };
-  readonly bbox?: FlatBoundingBox;
-}
 
 export default class GeoJsonDumper {
-  private static baseGeoJson: GeoJson = {
+  private static baseGeoJson: Feature = {
     type: "Feature",
     properties: {},
     geometry: {
@@ -38,7 +12,7 @@ export default class GeoJsonDumper {
     },
   };
 
-  public static dump(geocoded: Geocoded): GeoJson {
+  public static dump(geocoded: Geocoded): Feature {
     let result = GeoJsonDumper.baseGeoJson;
     const {
       coordinates,
@@ -48,16 +22,8 @@ export default class GeoJsonDumper {
     } = geocoded.toObject();
 
     let properties: {
-      [property: string]:
-        | string
-        | string[]
-        | number
-        | boolean
-        | Coordinates
-        | BoundingBox
-        | AdminLevel[]
-        | AdminLevelObject[]
-        | undefined;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      [property: string]: any;
     } = { ...geocodedProperties };
     Object.keys(properties).forEach(
       (property) =>
@@ -79,6 +45,7 @@ export default class GeoJsonDumper {
         ...{
           geometry: {
             ...result.geometry,
+            type: "Point",
             coordinates: [
               parseFloat(coordinates.longitude.toString()),
               parseFloat(coordinates.latitude.toString()),

@@ -1,10 +1,14 @@
 import { GeocodeQuery, GeocodeQueryObject } from "query";
 
+type Shape = "geojson" | "kml" | "svg" | "text";
+
 export interface NominatimGeocodeQueryObject extends GeocodeQueryObject {
   readonly countryCodes?: string[];
   readonly excludePlaceIds?: number[];
   readonly bounded?: boolean;
   readonly dedupe?: boolean;
+  readonly shape?: Shape;
+  readonly shapeThreshold?: number;
 }
 
 export default class NominatimGeocodeQuery extends GeocodeQuery {
@@ -16,12 +20,18 @@ export default class NominatimGeocodeQuery extends GeocodeQuery {
 
   private readonly dedupe?: boolean;
 
+  private readonly shape?: Shape;
+
+  private readonly shapeThreshold?: number;
+
   protected constructor({
     countryCodes,
     excludePlaceIds,
     bounded,
     bounds,
     dedupe,
+    shape,
+    shapeThreshold,
     ...geocodeQueryObject
   }: NominatimGeocodeQueryObject) {
     super({ bounds, ...geocodeQueryObject });
@@ -34,6 +44,13 @@ export default class NominatimGeocodeQuery extends GeocodeQuery {
     }
     this.bounded = bounded;
     this.dedupe = dedupe;
+    if (shape && !["geojson", "kml", "svg", "text"].includes(shape)) {
+      throw new Error(
+        'The "shape" parameter can only have the following values: "geojson", "kml", "svg", "text".'
+      );
+    }
+    this.shape = shape;
+    this.shapeThreshold = shapeThreshold;
   }
 
   public static create(
@@ -49,6 +66,8 @@ export default class NominatimGeocodeQuery extends GeocodeQuery {
       excludePlaceIds: this.excludePlaceIds,
       bounded: this.bounded,
       dedupe: this.dedupe,
+      shape: this.shape,
+      shapeThreshold: this.shapeThreshold,
     };
   }
 
@@ -82,5 +101,21 @@ export default class NominatimGeocodeQuery extends GeocodeQuery {
 
   public getDedupe(): undefined | boolean {
     return this.dedupe;
+  }
+
+  public withShape(shape: Shape): NominatimGeocodeQuery {
+    return new NominatimGeocodeQuery({ ...this.toObject(), shape });
+  }
+
+  public getShape(): undefined | Shape {
+    return this.shape;
+  }
+
+  public withShapeThreshold(shapeThreshold: number): NominatimGeocodeQuery {
+    return new NominatimGeocodeQuery({ ...this.toObject(), shapeThreshold });
+  }
+
+  public getShapeThreshold(): undefined | number {
+    return this.shapeThreshold;
   }
 }

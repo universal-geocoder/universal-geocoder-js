@@ -13,10 +13,14 @@
 - `excludePlaceIds`: for excluding some OpenStreetMap objects from the results
 - `bounded` (only if `bounds` is used): boolean to restrict the results to items within the bounds
 - `dedupe`: boolean to remove the duplicates
+- `shape` (possible values: "geojson", "kml", "svg", "text"): add the shape (geometry) to the results in the specified format
+- `shapeThreshold`: Tolerance in degrees for simplifying the returned shape
 
 ## `geodecode` parameters
 
 - `zoom` (default: 18, from 0 to 18): the level of details required for the address
+- `shape` (possible values: "geojson", "kml", "svg", "text"): add the shape (geometry) to the results in the specified format
+- `shapeThreshold`: Tolerance in degrees for simplifying the returned shape
 
 ## `Geocoded` properties
 
@@ -26,3 +30,4 @@
 - `types`: values of the main OpenStreetMap tag (only one)
 - `attribution`: OpenStreetMap licensing information
 - `subLocalityLevels`: levels for the sublocality (greater level number means smaller area)
+- `shape`: shape (geometry) of the result if asked

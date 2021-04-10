@@ -2,15 +2,8 @@ import AdminLevel from "AdminLevel";
 import { BoundingBox, Coordinates } from "types";
 
 export interface GeocodedObject {
-  readonly [property: string]:
-    | string
-    | string[]
-    | number
-    | boolean
-    | Coordinates
-    | BoundingBox
-    | AdminLevel[]
-    | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  readonly [property: string]: any;
   readonly coordinates?: Coordinates;
   readonly bounds?: BoundingBox;
   readonly formattedAddress?: string;
