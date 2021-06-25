@@ -122,7 +122,8 @@ export const defaultMapboxProviderOptions = {
 type MapboxGeocodedResultsCallback = GeocodedResultsCallback<MapboxGeocoded>;
 
 export default class MapboxProvider
-  implements ProviderInterface<MapboxGeocoded> {
+  implements ProviderInterface<MapboxGeocoded>
+{
   private externalLoader: ExternalLoaderInterface;
 
   private options: MapboxProviderOptionsInterface;

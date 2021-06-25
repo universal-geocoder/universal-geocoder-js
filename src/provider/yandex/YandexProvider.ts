@@ -151,7 +151,8 @@ export const defaultYandexProviderOptions = {
 type YandexGeocodedResultsCallback = GeocodedResultsCallback<YandexGeocoded>;
 
 export default class YandexProvider
-  implements ProviderInterface<YandexGeocoded> {
+  implements ProviderInterface<YandexGeocoded>
+{
   private externalLoader: ExternalLoaderInterface;
 
   private options: YandexProviderOptionsInterface;

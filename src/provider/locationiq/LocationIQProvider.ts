@@ -174,16 +174,19 @@ export interface LocationIQProviderOptionsInterface
   readonly source?: "nominatim" | "locationiq";
 }
 
-export const defaultLocationIQProviderOptions: LocationIQProviderOptionsInterface = {
-  ...defaultProviderOptions,
-  apiKey: "",
-  source: "locationiq",
-};
+export const defaultLocationIQProviderOptions: LocationIQProviderOptionsInterface =
+  {
+    ...defaultProviderOptions,
+    apiKey: "",
+    source: "locationiq",
+  };
 
-type LocationIQGeocodedResultsCallback = GeocodedResultsCallback<LocationIQGeocoded>;
+type LocationIQGeocodedResultsCallback =
+  GeocodedResultsCallback<LocationIQGeocoded>;
 
 export default class LocationIQProvider
-  implements ProviderInterface<LocationIQGeocoded> {
+  implements ProviderInterface<LocationIQGeocoded>
+{
   private externalLoader: ExternalLoaderInterface;
 
   private options: LocationIQProviderOptionsInterface;
@@ -490,12 +493,8 @@ export default class LocationIQProvider
       }
     });
 
-    const subLocalityLevels: (
-      | "suburb"
-      | "neighbourhood"
-      | "road"
-      | "name"
-    )[] = ["suburb", "neighbourhood", "road", "name"];
+    const subLocalityLevels: ("suburb" | "neighbourhood" | "road" | "name")[] =
+      ["suburb", "neighbourhood", "road", "name"];
     subLocalityLevels.forEach((subLocalityLevel, level) => {
       if (result.address[subLocalityLevel]) {
         geocoded.addSubLocalityLevel(

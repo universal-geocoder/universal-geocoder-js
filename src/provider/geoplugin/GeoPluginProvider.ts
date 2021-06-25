@@ -78,10 +78,12 @@ export interface GeoPluginResult {
   geoplugin_currencyConverter: string;
 }
 
-type GeoPluginGeocodedResultsCallback = GeocodedResultsCallback<GeoPluginGeocoded>;
+type GeoPluginGeocodedResultsCallback =
+  GeocodedResultsCallback<GeoPluginGeocoded>;
 
 export default class GeoPluginProvider
-  implements ProviderInterface<GeoPluginGeocoded> {
+  implements ProviderInterface<GeoPluginGeocoded>
+{
   private externalLoader: ExternalLoaderInterface;
 
   private options: ProviderOptionsInterface;

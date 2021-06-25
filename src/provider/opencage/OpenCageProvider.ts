@@ -278,10 +278,12 @@ export const defaultOpenCageProviderOptions = {
   apiKey: "",
 };
 
-type OpenCageGeocodedResultsCallback = GeocodedResultsCallback<OpenCageGeocoded>;
+type OpenCageGeocodedResultsCallback =
+  GeocodedResultsCallback<OpenCageGeocoded>;
 
 export default class OpenCageProvider
-  implements ProviderInterface<OpenCageGeocoded> {
+  implements ProviderInterface<OpenCageGeocoded>
+{
   private externalLoader: ExternalLoaderInterface;
 
   private options: OpenCageProviderOptionsInterface;

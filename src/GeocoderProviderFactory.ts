@@ -137,29 +137,28 @@ export type GeocoderProvider =
   | OpenCageProvider
   | YandexProvider;
 
-export type GeocoderProviderByOptionsType<
-  O
-> = O extends ChainGeocoderProviderFactoryOptions
-  ? ChainProvider
-  : O extends BingGeocoderProviderFactoryOptions
-  ? BingProvider
-  : O extends GeoPluginGeocoderProviderFactoryOptions
-  ? GeoPluginProvider
-  : O extends GoogleMapsGeocoderProviderFactoryOptions
-  ? GoogleMapsProvider
-  : O extends LocationIQGeocoderProviderFactoryOptions
-  ? LocationIQProvider
-  : O extends MapboxGeocoderProviderFactoryOptions
-  ? MapboxProvider
-  : O extends MapQuestGeocoderProviderFactoryOptions
-  ? MapQuestProvider
-  : O extends NominatimGeocoderProviderFactoryOptions
-  ? NominatimProvider
-  : O extends OpenCageGeocoderProviderFactoryOptions
-  ? OpenCageProvider
-  : O extends YandexGeocoderProviderFactoryOptions
-  ? YandexProvider
-  : GeocoderProvider;
+export type GeocoderProviderByOptionsType<O> =
+  O extends ChainGeocoderProviderFactoryOptions
+    ? ChainProvider
+    : O extends BingGeocoderProviderFactoryOptions
+    ? BingProvider
+    : O extends GeoPluginGeocoderProviderFactoryOptions
+    ? GeoPluginProvider
+    : O extends GoogleMapsGeocoderProviderFactoryOptions
+    ? GoogleMapsProvider
+    : O extends LocationIQGeocoderProviderFactoryOptions
+    ? LocationIQProvider
+    : O extends MapboxGeocoderProviderFactoryOptions
+    ? MapboxProvider
+    : O extends MapQuestGeocoderProviderFactoryOptions
+    ? MapQuestProvider
+    : O extends NominatimGeocoderProviderFactoryOptions
+    ? NominatimProvider
+    : O extends OpenCageGeocoderProviderFactoryOptions
+    ? OpenCageProvider
+    : O extends YandexGeocoderProviderFactoryOptions
+    ? YandexProvider
+    : GeocoderProvider;
 
 export default class ProviderFactory {
   /**

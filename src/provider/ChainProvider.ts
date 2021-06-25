@@ -232,21 +232,20 @@ export default class ChainProvider implements ProviderInterface<Geocoded> {
         callbackCalled = true;
       }
     };
-    const resultProviderErrorCallback: (
-      providerName: string
-    ) => ErrorCallback = (providerName) => (responseError) => {
-      if (errorCallback) {
-        errorCallback(responseError);
-      }
-      if (!errorCallback) {
-        // eslint-disable-next-line no-console
-        console.error(
-          `An error has occurred when geocoding with the provider ${providerName}`,
-          responseError
-        );
-      }
-      resultProviderCallback(providerName)([]);
-    };
+    const resultProviderErrorCallback: (providerName: string) => ErrorCallback =
+      (providerName) => (responseError) => {
+        if (errorCallback) {
+          errorCallback(responseError);
+        }
+        if (!errorCallback) {
+          // eslint-disable-next-line no-console
+          console.error(
+            `An error has occurred when geocoding with the provider ${providerName}`,
+            responseError
+          );
+        }
+        resultProviderCallback(providerName)([]);
+      };
 
     this.options.providers.forEach((provider) => {
       const providerName = provider.constructor.name;
@@ -290,21 +289,20 @@ export default class ChainProvider implements ProviderInterface<Geocoded> {
         callbackCalled = true;
       }
     };
-    const resultProviderErrorCallback: (
-      providerName: string
-    ) => ErrorCallback = (providerName) => (responseError) => {
-      if (errorCallback) {
-        errorCallback(responseError);
-      }
-      if (!errorCallback) {
-        // eslint-disable-next-line no-console
-        console.error(
-          `An error has occurred when geodecoding with the provider ${providerName}`,
-          responseError
-        );
-      }
-      resultProviderCallback(providerName)([]);
-    };
+    const resultProviderErrorCallback: (providerName: string) => ErrorCallback =
+      (providerName) => (responseError) => {
+        if (errorCallback) {
+          errorCallback(responseError);
+        }
+        if (!errorCallback) {
+          // eslint-disable-next-line no-console
+          console.error(
+            `An error has occurred when geodecoding with the provider ${providerName}`,
+            responseError
+          );
+        }
+        resultProviderCallback(providerName)([]);
+      };
 
     this.options.providers.forEach((provider) => {
       const providerName = provider.constructor.name;

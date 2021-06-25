@@ -94,17 +94,20 @@ export interface MapQuestProviderOptionsInterface
   readonly source?: "nominatim" | "mapquest";
 }
 
-export const defaultMapQuestProviderOptions: MapQuestProviderOptionsInterface = {
-  ...defaultProviderOptions,
-  apiKey: "",
-  method: "GET",
-  source: "mapquest",
-};
+export const defaultMapQuestProviderOptions: MapQuestProviderOptionsInterface =
+  {
+    ...defaultProviderOptions,
+    apiKey: "",
+    method: "GET",
+    source: "mapquest",
+  };
 
-type MapQuestGeocodedResultsCallback = GeocodedResultsCallback<MapQuestGeocoded>;
+type MapQuestGeocodedResultsCallback =
+  GeocodedResultsCallback<MapQuestGeocoded>;
 
 export default class MapQuestProvider
-  implements ProviderInterface<MapQuestGeocoded> {
+  implements ProviderInterface<MapQuestGeocoded>
+{
   private externalLoader: ExternalLoaderInterface;
 
   private options: MapQuestProviderOptionsInterface;

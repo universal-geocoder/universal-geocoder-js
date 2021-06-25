@@ -14,12 +14,8 @@ export default class GeoJsonDumper {
 
   public static dump(geocoded: Geocoded): Feature {
     let result = GeoJsonDumper.baseGeoJson;
-    const {
-      coordinates,
-      bounds,
-      adminLevels,
-      ...geocodedProperties
-    } = geocoded.toObject();
+    const { coordinates, bounds, adminLevels, ...geocodedProperties } =
+      geocoded.toObject();
 
     let properties: {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
