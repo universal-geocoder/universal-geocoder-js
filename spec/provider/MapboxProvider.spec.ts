@@ -30,7 +30,7 @@ describe("Mapbox Geocoder Provider", () => {
     });
 
     expect(() =>
-      provider?.geocode(
+      provider.geocode(
         "66.147.244.214",
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         () => {}
@@ -48,7 +48,7 @@ describe("Mapbox Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geocode("1600 Pennsylvania Ave, Washington, DC", (results) => {
+    provider.geocode("1600 Pennsylvania Ave, Washington, DC", (results) => {
       const geocoded = results[0];
 
       expect(geocoded).toBeDefined();
@@ -96,7 +96,7 @@ describe("Mapbox Geocoder Provider", () => {
         numberResultsWithoutFuzzyMatch
       );
 
-    provider?.geocode({ text: "wahsington", fuzzyMatch: true }, (results) => {
+    provider.geocode({ text: "wahsington", fuzzyMatch: true }, (results) => {
       numberResultsWithFuzzyMatch = results.length;
       if (numberResultsWithoutFuzzyMatch !== -1) {
         assertion();
@@ -104,7 +104,7 @@ describe("Mapbox Geocoder Provider", () => {
       }
     });
 
-    provider?.geocode({ text: "wahsington", fuzzyMatch: false }, (results) => {
+    provider.geocode({ text: "wahsington", fuzzyMatch: false }, (results) => {
       numberResultsWithoutFuzzyMatch = results.length;
       if (numberResultsWithFuzzyMatch !== -1) {
         assertion();
@@ -120,7 +120,7 @@ describe("Mapbox Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geodecode(48.8631507, 2.388911, (results: MapboxGeocoded[]) => {
+    provider.geodecode(48.8631507, 2.388911, (results: MapboxGeocoded[]) => {
       const geocoded = results[0];
 
       expect(geocoded).toBeDefined();
@@ -159,7 +159,7 @@ describe("Mapbox Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geocode(
+    provider.geocode(
       "1600 Pennsylvania Ave, Washington, DC",
       () => {
         done();

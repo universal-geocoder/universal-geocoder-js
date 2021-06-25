@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
-import UniversalGeocoder from "../../dist/cjs/UniversalGeocoder";
-import GeoJsonDumper from "../../dist/cjs/GeoJsonDumper";
+import UniversalGeocoder from "UniversalGeocoder";
+import GeoJsonDumper from "GeoJsonDumper";
 
 const bingGeocoder = UniversalGeocoder.createGeocoder({
   provider: "bing",
+  apiKey: "api_key",
 });
 
 bingGeocoder.geocode("1600 Pennsylvania Ave NW, Washington, DC", (result) => {

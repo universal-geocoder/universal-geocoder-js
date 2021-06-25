@@ -135,7 +135,7 @@ describe("Chain Geocoder Provider", () => {
       providers: [yandexGeocoder, openStreetMapGeocoder],
     });
 
-    provider?.geocode(
+    provider.geocode(
       { text: "1600 Pennsylvania Ave, Washington, DC", locale: "en_US" },
       (results: Geocoded[]) => {
         const geocoded = results[0];
@@ -163,7 +163,7 @@ describe("Chain Geocoder Provider", () => {
       providers: [yandexGeocoder, openStreetMapGeocoder],
     });
 
-    provider?.geocode(
+    provider.geocode(
       { text: "1600 Pennsylvania Ave, Washington, DC", locale: "en_US" },
       (results: Geocoded[]) => {
         const geocoded = results[0];
@@ -192,7 +192,7 @@ describe("Chain Geocoder Provider", () => {
       parallelize: true,
     });
 
-    provider?.geocode(
+    provider.geocode(
       { text: "1600 Pennsylvania Ave, Washington, DC", locale: "en_US" },
       (results: Geocoded[]) => {
         const geocoded = results[0];
@@ -221,7 +221,7 @@ describe("Chain Geocoder Provider", () => {
       parallelize: true,
     });
 
-    provider?.geocode(
+    provider.geocode(
       { text: "1600 Pennsylvania Ave, Washington, DC", locale: "en_US" },
       (results: Geocoded[]) => {
         const geocoded = results[0];
@@ -250,7 +250,7 @@ describe("Chain Geocoder Provider", () => {
       first: true,
     });
 
-    provider?.geocode(
+    provider.geocode(
       { text: "1600 Pennsylvania Ave, Washington, DC", locale: "en_US" },
       (results: Geocoded[]) => {
         const geocoded = results[0];
@@ -278,7 +278,7 @@ describe("Chain Geocoder Provider", () => {
       providers: [yandexGeocoder, openStreetMapGeocoder],
     });
 
-    provider?.geodecode(
+    provider.geodecode(
       {
         coordinates: { latitude: 48.8631507, longitude: 2.388911 },
         locale: "en_US",
@@ -309,7 +309,7 @@ describe("Chain Geocoder Provider", () => {
       providers: [yandexGeocoder, openStreetMapGeocoder],
     });
 
-    provider?.geodecode(
+    provider.geodecode(
       {
         coordinates: { latitude: 48.8631507, longitude: 2.388911 },
         locale: "en_US",
@@ -341,7 +341,7 @@ describe("Chain Geocoder Provider", () => {
       parallelize: true,
     });
 
-    provider?.geodecode(
+    provider.geodecode(
       {
         coordinates: { latitude: 48.8631507, longitude: 2.388911 },
         locale: "en_US",
@@ -373,7 +373,7 @@ describe("Chain Geocoder Provider", () => {
       parallelize: true,
     });
 
-    provider?.geodecode(
+    provider.geodecode(
       {
         coordinates: { latitude: 48.8631507, longitude: 2.388911 },
         locale: "en_US",
@@ -405,7 +405,7 @@ describe("Chain Geocoder Provider", () => {
       first: true,
     });
 
-    provider?.geodecode(
+    provider.geodecode(
       {
         coordinates: { latitude: 48.8631507, longitude: 2.388911 },
         locale: "en_US",

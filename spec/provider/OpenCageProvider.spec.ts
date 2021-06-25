@@ -30,7 +30,7 @@ describe("OpenCage Geocoder Provider", () => {
     });
 
     expect(() =>
-      provider?.geocode(
+      provider.geocode(
         "66.147.244.214",
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         () => {}
@@ -48,7 +48,7 @@ describe("OpenCage Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geocode("1600 Pennsylvania Ave, Washington, DC", (results) => {
+    provider.geocode("1600 Pennsylvania Ave, Washington, DC", (results) => {
       const geocoded = results[0];
 
       expect(geocoded).toBeDefined();
@@ -101,7 +101,7 @@ describe("OpenCage Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geodecode(48.8631507, 2.388911, (results: OpenCageGeocoded[]) => {
+    provider.geodecode(48.8631507, 2.388911, (results: OpenCageGeocoded[]) => {
       const geocoded = results[0];
 
       expect(geocoded).toBeDefined();
@@ -149,7 +149,7 @@ describe("OpenCage Geocoder Provider", () => {
       apiKey: "4372eff77b8343cebfc843eb4da4ddc4",
     });
 
-    provider?.geocode(
+    provider.geocode(
       "1600 Pennsylvania Ave, Washington, DC",
       () => {
         done();
@@ -169,7 +169,7 @@ describe("OpenCage Geocoder Provider", () => {
       apiKey: "2e10e5e828262eb243ec0b54681d699a",
     });
 
-    provider?.geocode(
+    provider.geocode(
       "1600 Pennsylvania Ave, Washington, DC",
       () => {
         done();
@@ -189,7 +189,7 @@ describe("OpenCage Geocoder Provider", () => {
       apiKey: "6c79ee8e1ca44ad58ad1fc493ba9542f",
     });
 
-    provider?.geocode(
+    provider.geocode(
       "1600 Pennsylvania Ave, Washington, DC",
       () => {
         done();
@@ -209,7 +209,7 @@ describe("OpenCage Geocoder Provider", () => {
       apiKey: "d6d0f0065f4348a4bdfe4587ba02714b",
     });
 
-    provider?.geocode(
+    provider.geocode(
       "1600 Pennsylvania Ave, Washington, DC",
       () => {
         done();

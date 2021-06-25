@@ -193,6 +193,16 @@ export default class NominatimProvider
   }
 
   public geocode(
+    query: string | NominatimGeocodeQuery | NominatimGeocodeQueryObject
+  ): Promise<NominatimGeocoded[]>;
+
+  public geocode(
+    query: string | NominatimGeocodeQuery | NominatimGeocodeQueryObject,
+    callback: NominatimGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geocode(
     query: string | NominatimGeocodeQuery | NominatimGeocodeQueryObject,
     callback?: NominatimGeocodedResultsCallback,
     errorCallback?: ErrorCallback
@@ -264,6 +274,28 @@ export default class NominatimProvider
       errorCallback
     );
   }
+
+  public geodecode(
+    query: NominatimReverseQuery | NominatimReverseQueryObject
+  ): Promise<NominatimGeocoded[]>;
+
+  public geodecode(
+    query: NominatimReverseQuery | NominatimReverseQueryObject,
+    callback: NominatimGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string
+  ): Promise<NominatimGeocoded[]>;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string,
+    callback: NominatimGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
 
   public geodecode(
     latitudeOrQuery:

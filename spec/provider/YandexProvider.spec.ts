@@ -30,7 +30,7 @@ describe("Yandex Geocoder Provider", () => {
     });
 
     expect(() =>
-      provider?.geocode(
+      provider.geocode(
         "66.147.244.214",
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         () => {}
@@ -48,7 +48,7 @@ describe("Yandex Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geocode(
+    provider.geocode(
       { text: "1600 Pennsylvania Ave, Washington, DC", locale: "en_US" },
       (results: YandexGeocoded[]) => {
         const geocoded = results[0];
@@ -96,7 +96,7 @@ describe("Yandex Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geodecode(
+    provider.geodecode(
       {
         coordinates: { latitude: 48.8631507, longitude: 2.388911 },
         locale: "en_US",
@@ -145,7 +145,7 @@ describe("Yandex Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geocode(
+    provider.geocode(
       "1600 Pennsylvania Ave, Washington, DC",
       () => {
         done();

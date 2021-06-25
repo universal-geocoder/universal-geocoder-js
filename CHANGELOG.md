@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.14.0
+
+* Better TypeScript inference for `createGeocoder`, `geocode` and `geodecode`
+
 ## 0.13.0
 
 * [Nominatim] Add `shape` and `shapeThreshold` geocode and geodecode parameters

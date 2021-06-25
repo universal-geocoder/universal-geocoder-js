@@ -30,7 +30,7 @@ describe("Bing Geocoder Provider", () => {
     });
 
     expect(() =>
-      provider?.geocode(
+      provider.geocode(
         "66.147.244.214",
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         () => {}
@@ -48,7 +48,7 @@ describe("Bing Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geocode(
+    provider.geocode(
       "1600 Pennsylvania Ave, Washington, DC",
       (results: BingGeocoded[]) => {
         const geocoded = results[0];
@@ -102,7 +102,7 @@ describe("Bing Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geodecode(48.8631507, 2.388911, (results: BingGeocoded[]) => {
+    provider.geodecode(48.8631507, 2.388911, (results: BingGeocoded[]) => {
       const geocoded = results[0];
 
       expect(geocoded).toBeDefined();
@@ -153,7 +153,7 @@ describe("Bing Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geocode(
+    provider.geocode(
       "1600 Pennsylvania Ave, Washington, DC",
       () => {
         done();

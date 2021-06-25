@@ -152,6 +152,16 @@ export default class MapboxProvider
   }
 
   public geocode(
+    query: string | MapboxGeocodeQuery | MapboxGeocodeQueryObject
+  ): Promise<MapboxGeocoded[]>;
+
+  public geocode(
+    query: string | MapboxGeocodeQuery | MapboxGeocodeQueryObject,
+    callback: MapboxGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geocode(
     query: string | MapboxGeocodeQuery | MapboxGeocodeQueryObject,
     callback?: MapboxGeocodedResultsCallback,
     errorCallback?: ErrorCallback
@@ -216,6 +226,28 @@ export default class MapboxProvider
     }
     return this.executeRequest(params, callback, {}, {}, errorCallback);
   }
+
+  public geodecode(
+    query: MapboxReverseQuery | MapboxReverseQueryObject
+  ): Promise<MapboxGeocoded[]>;
+
+  public geodecode(
+    query: MapboxReverseQuery | MapboxReverseQueryObject,
+    callback: MapboxGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string
+  ): Promise<MapboxGeocoded[]>;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string,
+    callback: MapboxGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
 
   public geodecode(
     latitudeOrQuery:

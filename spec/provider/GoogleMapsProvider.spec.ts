@@ -55,7 +55,7 @@ describe("Google Maps Geocoder Provider", () => {
     });
 
     expect(() =>
-      provider?.geocode(
+      provider.geocode(
         "66.147.244.214",
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         () => {}
@@ -73,7 +73,7 @@ describe("Google Maps Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geocode("1600 Pennsylvania Ave, Washington, DC", (results) => {
+    provider.geocode("1600 Pennsylvania Ave, Washington, DC", (results) => {
       const geocoded = results[0];
 
       expect(geocoded).toBeDefined();
@@ -126,7 +126,7 @@ describe("Google Maps Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geodecode(
+    provider.geodecode(
       48.8631507,
       2.388911,
       (results: GoogleMapsGeocoded[]) => {
@@ -183,7 +183,7 @@ describe("Google Maps Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geocode(
+    provider.geocode(
       "1600 Pennsylvania Ave, Washington, DC",
       () => {
         done();

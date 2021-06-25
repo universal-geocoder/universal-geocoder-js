@@ -16,9 +16,9 @@ import {
   NominatimProviderOptionsInterface,
   OpenCageProvider,
   OpenCageProviderOptionsInterface,
+  ProviderInterface,
   YandexProvider,
   YandexProviderOptionsInterface,
-  ProviderOptionsInterface,
   defaultBingProviderOptions,
   defaultChainProviderOptions,
   defaultLocationIQProviderOptions,
@@ -29,138 +29,148 @@ import {
   defaultYandexProviderOptions,
   defaultProviderOptions,
 } from "provider";
+import Geocoded from "Geocoded";
 import ExternalLoader from "ExternalLoader";
 
-interface ProviderOptionInterface {
-  provider:
-    | "bing"
-    | "bingmaps"
-    | "chain"
-    | "geoplugin"
-    | "google"
-    | "googlemaps"
-    | "locationiq"
-    | "mapbox"
-    | "mapquest"
-    | "microsoft"
-    | "nominatim"
-    | "opencage"
-    | "openstreetmap"
-    | "yandex";
+export type ProviderName =
+  | "chain"
+  | "bing"
+  | "bingmaps"
+  | "microsoft"
+  | "geoplugin"
+  | "google"
+  | "googlemaps"
+  | "locationiq"
+  | "mapbox"
+  | "mapquest"
+  | "nominatim"
+  | "openstreetmap"
+  | "opencage"
+  | "yandex";
+
+export interface ProviderOptionInterface {
+  provider: string;
 }
 
-interface ProviderFactoryOptions
-  extends ProviderOptionsInterface,
-    ProviderOptionInterface {}
+export interface RestrictedProviderOptionInterface {
+  provider: ProviderName;
+}
 
-interface ChainGeocoderProviderFactoryOptions
-  extends ProviderOptionInterface,
+export interface ChainGeocoderProviderFactoryOptions
+  extends RestrictedProviderOptionInterface,
     ChainProviderOptionsInterface {
   provider: "chain";
 }
 
-interface BingGeocoderProviderFactoryOptions
-  extends ProviderOptionInterface,
+export interface BingGeocoderProviderFactoryOptions
+  extends RestrictedProviderOptionInterface,
     BingProviderOptionsInterface {
   provider: "bing" | "bingmaps" | "microsoft";
 }
 
-interface GeoPluginGeocoderProviderFactoryOptions
-  extends ProviderOptionInterface {
+export interface GeoPluginGeocoderProviderFactoryOptions
+  extends RestrictedProviderOptionInterface {
   provider: "geoplugin";
 }
 
-interface GoogleMapsGeocoderProviderFactoryOptions
-  extends ProviderOptionInterface,
+export interface GoogleMapsGeocoderProviderFactoryOptions
+  extends RestrictedProviderOptionInterface,
     GoogleMapsProviderOptionsInterface {
   provider: "google" | "googlemaps";
 }
 
-interface LocationIQGeocoderProviderFactoryOptions
-  extends ProviderOptionInterface,
+export interface LocationIQGeocoderProviderFactoryOptions
+  extends RestrictedProviderOptionInterface,
     LocationIQProviderOptionsInterface {
   provider: "locationiq";
 }
 
-interface MapboxGeocoderProviderFactoryOptions
-  extends ProviderOptionInterface,
+export interface MapboxGeocoderProviderFactoryOptions
+  extends RestrictedProviderOptionInterface,
     MapboxProviderOptionsInterface {
   provider: "mapbox";
 }
 
-interface MapQuestGeocoderProviderFactoryOptions
-  extends ProviderOptionInterface,
+export interface MapQuestGeocoderProviderFactoryOptions
+  extends RestrictedProviderOptionInterface,
     MapQuestProviderOptionsInterface {
   provider: "mapquest";
 }
 
-interface NominatimGeocoderProviderFactoryOptions
-  extends ProviderOptionInterface,
+export interface NominatimGeocoderProviderFactoryOptions
+  extends RestrictedProviderOptionInterface,
     NominatimProviderOptionsInterface {
   provider: "nominatim" | "openstreetmap";
 }
 
-interface OpenCageGeocoderProviderFactoryOptions
-  extends ProviderOptionInterface,
+export interface OpenCageGeocoderProviderFactoryOptions
+  extends RestrictedProviderOptionInterface,
     OpenCageProviderOptionsInterface {
   provider: "opencage";
 }
 
-interface YandexGeocoderProviderFactoryOptions
-  extends ProviderOptionInterface,
+export interface YandexGeocoderProviderFactoryOptions
+  extends RestrictedProviderOptionInterface,
     YandexProviderOptionsInterface {
   provider: "yandex";
 }
 
-export type GeocoderProviderFactoryOptions =
-  | ProviderFactoryOptions
-  | ChainGeocoderProviderFactoryOptions
-  | BingGeocoderProviderFactoryOptions
-  | GeoPluginGeocoderProviderFactoryOptions
-  | GoogleMapsGeocoderProviderFactoryOptions
-  | LocationIQGeocoderProviderFactoryOptions
-  | MapboxGeocoderProviderFactoryOptions
-  | MapQuestGeocoderProviderFactoryOptions
-  | NominatimGeocoderProviderFactoryOptions
-  | OpenCageGeocoderProviderFactoryOptions
-  | YandexGeocoderProviderFactoryOptions;
-
-export type GeocoderProvider =
-  | BingProvider
-  | ChainProvider
-  | GeoPluginProvider
-  | GoogleMapsProvider
-  | LocationIQProvider
-  | MapboxProvider
-  | MapQuestProvider
-  | NominatimProvider
-  | OpenCageProvider
-  | YandexProvider;
-
-export type GeocoderProviderByOptionsType<O> =
-  O extends ChainGeocoderProviderFactoryOptions
-    ? ChainProvider
-    : O extends BingGeocoderProviderFactoryOptions
-    ? BingProvider
-    : O extends GeoPluginGeocoderProviderFactoryOptions
-    ? GeoPluginProvider
-    : O extends GoogleMapsGeocoderProviderFactoryOptions
-    ? GoogleMapsProvider
-    : O extends LocationIQGeocoderProviderFactoryOptions
-    ? LocationIQProvider
-    : O extends MapboxGeocoderProviderFactoryOptions
-    ? MapboxProvider
-    : O extends MapQuestGeocoderProviderFactoryOptions
-    ? MapQuestProvider
-    : O extends NominatimGeocoderProviderFactoryOptions
-    ? NominatimProvider
-    : O extends OpenCageGeocoderProviderFactoryOptions
-    ? OpenCageProvider
-    : O extends YandexGeocoderProviderFactoryOptions
-    ? YandexProvider
-    : GeocoderProvider;
-
 export default class ProviderFactory {
+  public static createProvider(
+    options: "chain" | ChainGeocoderProviderFactoryOptions
+  ): ChainProvider;
+
+  public static createProvider(
+    options:
+      | "bing"
+      | "bingmaps"
+      | "microsoft"
+      | BingGeocoderProviderFactoryOptions
+  ): BingProvider;
+
+  public static createProvider(
+    options: "geoplugin" | GeoPluginGeocoderProviderFactoryOptions
+  ): GeoPluginProvider;
+
+  public static createProvider(
+    options: "google" | "googlemaps" | GoogleMapsGeocoderProviderFactoryOptions
+  ): GoogleMapsProvider;
+
+  public static createProvider(
+    options: "locationiq" | LocationIQGeocoderProviderFactoryOptions
+  ): LocationIQProvider;
+
+  public static createProvider(
+    options: "mapbox" | MapboxGeocoderProviderFactoryOptions
+  ): MapboxProvider;
+
+  public static createProvider(
+    options: "mapquest" | MapQuestGeocoderProviderFactoryOptions
+  ): MapQuestProvider;
+
+  public static createProvider(
+    options:
+      | "nominatim"
+      | "openstreetmap"
+      | NominatimGeocoderProviderFactoryOptions
+  ): NominatimProvider;
+
+  public static createProvider(
+    options: "opencage" | OpenCageGeocoderProviderFactoryOptions
+  ): OpenCageProvider;
+
+  public static createProvider(
+    options: "yandex" | YandexGeocoderProviderFactoryOptions
+  ): YandexProvider;
+
+  public static createProvider<O extends RestrictedProviderOptionInterface>(
+    options: ProviderName | O
+  ): ProviderInterface<Geocoded>;
+
+  public static createProvider<O extends ProviderOptionInterface>(
+    options: string | O
+  ): ProviderInterface<Geocoded> | undefined;
+
   /**
    * Creates Geocoder Provider instances.
    * @param options
@@ -171,9 +181,9 @@ export default class ProviderFactory {
    *   An object compatible with ProviderInterface, or undefined if there's not a
    *   registered provider.
    */
-  public static createProvider<O extends GeocoderProviderFactoryOptions>(
-    options: string | O
-  ): GeocoderProviderByOptionsType<O> | undefined {
+  public static createProvider<O extends RestrictedProviderOptionInterface>(
+    options: ProviderName | O
+  ): ProviderInterface<Geocoded> | undefined {
     const createProviderOptions = {
       ...defaultProviderOptions,
       ...(typeof options === "string" ? { provider: options } : options),
@@ -186,69 +196,51 @@ export default class ProviderFactory {
       case "bing":
       case "bingmaps":
       case "microsoft":
-        return <GeocoderProviderByOptionsType<O>>(
-          new BingProvider(externalLoader, {
-            ...defaultBingProviderOptions,
-            ...providerOptions,
-          })
-        );
+        return new BingProvider(externalLoader, {
+          ...defaultBingProviderOptions,
+          ...providerOptions,
+        });
       case "chain":
-        return <GeocoderProviderByOptionsType<O>>new ChainProvider({
+        return new ChainProvider({
           ...defaultChainProviderOptions,
           ...providerOptions,
         });
       case "geoplugin":
-        return <GeocoderProviderByOptionsType<O>>(
-          new GeoPluginProvider(externalLoader, providerOptions)
-        );
+        return new GeoPluginProvider(externalLoader, providerOptions);
       case "google":
       case "googlemaps":
-        return <GeocoderProviderByOptionsType<O>>(
-          new GoogleMapsProvider(externalLoader, providerOptions)
-        );
+        return new GoogleMapsProvider(externalLoader, providerOptions);
       case "locationiq":
-        return <GeocoderProviderByOptionsType<O>>(
-          new LocationIQProvider(externalLoader, {
-            ...defaultLocationIQProviderOptions,
-            ...providerOptions,
-          })
-        );
+        return new LocationIQProvider(externalLoader, {
+          ...defaultLocationIQProviderOptions,
+          ...providerOptions,
+        });
       case "mapbox":
-        return <GeocoderProviderByOptionsType<O>>(
-          new MapboxProvider(externalLoader, {
-            ...defaultMapboxProviderOptions,
-            ...providerOptions,
-          })
-        );
+        return new MapboxProvider(externalLoader, {
+          ...defaultMapboxProviderOptions,
+          ...providerOptions,
+        });
       case "mapquest":
-        return <GeocoderProviderByOptionsType<O>>(
-          new MapQuestProvider(externalLoader, {
-            ...defaultMapQuestProviderOptions,
-            ...providerOptions,
-          })
-        );
+        return new MapQuestProvider(externalLoader, {
+          ...defaultMapQuestProviderOptions,
+          ...providerOptions,
+        });
       case "openstreetmap":
       case "nominatim":
-        return <GeocoderProviderByOptionsType<O>>(
-          new NominatimProvider(externalLoader, {
-            ...defaultNominatimProviderOptions,
-            ...providerOptions,
-          })
-        );
+        return new NominatimProvider(externalLoader, {
+          ...defaultNominatimProviderOptions,
+          ...providerOptions,
+        });
       case "opencage":
-        return <GeocoderProviderByOptionsType<O>>(
-          new OpenCageProvider(externalLoader, {
-            ...defaultOpenCageProviderOptions,
-            ...providerOptions,
-          })
-        );
+        return new OpenCageProvider(externalLoader, {
+          ...defaultOpenCageProviderOptions,
+          ...providerOptions,
+        });
       case "yandex":
-        return <GeocoderProviderByOptionsType<O>>(
-          new YandexProvider(externalLoader, {
-            ...defaultYandexProviderOptions,
-            ...providerOptions,
-          })
-        );
+        return new YandexProvider(externalLoader, {
+          ...defaultYandexProviderOptions,
+          ...providerOptions,
+        });
       default:
     }
 
