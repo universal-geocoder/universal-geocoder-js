@@ -115,6 +115,18 @@ export interface YandexGeocoderProviderFactoryOptions
   provider: "yandex";
 }
 
+export type GeocoderProvider =
+  | BingProvider
+  | ChainProvider
+  | GeoPluginProvider
+  | GoogleMapsProvider
+  | LocationIQProvider
+  | MapboxProvider
+  | MapQuestProvider
+  | NominatimProvider
+  | OpenCageProvider
+  | YandexProvider;
+
 export default class ProviderFactory {
   public static createProvider(
     options: "chain" | ChainGeocoderProviderFactoryOptions
@@ -165,7 +177,7 @@ export default class ProviderFactory {
 
   public static createProvider<O extends RestrictedProviderOptionInterface>(
     options: ProviderName | O
-  ): ProviderInterface<Geocoded>;
+  ): GeocoderProvider;
 
   public static createProvider<O extends ProviderOptionInterface>(
     options: string | O
@@ -183,7 +195,7 @@ export default class ProviderFactory {
    */
   public static createProvider<O extends RestrictedProviderOptionInterface>(
     options: ProviderName | O
-  ): ProviderInterface<Geocoded> | undefined {
+  ): GeocoderProvider | undefined {
     const createProviderOptions = {
       ...defaultProviderOptions,
       ...(typeof options === "string" ? { provider: options } : options),
