@@ -1,13 +1,11 @@
 /* eslint-disable no-console */
-import UniversalGeocoder from "../../dist/cjs/UniversalGeocoder";
-import Geocoded from "../../dist/cjs/Geocoded";
-import {
-  MapQuestGeocodeQuery,
-  MapQuestLocation,
-} from "../../dist/cjs/provider";
+import UniversalGeocoder from "UniversalGeocoder";
+import Geocoded from "Geocoded";
+import { MapQuestGeocodeQuery, MapQuestLocation } from "provider";
 
 let mapQuestGeocoder = UniversalGeocoder.createGeocoder({
   provider: "mapquest",
+  apiKey: "api_key",
 });
 
 mapQuestGeocoder.geocode(
@@ -36,7 +34,7 @@ asyncGeodecode();
 mapQuestGeocoder.geocode(
   MapQuestGeocodeQuery.create({
     location: Geocoded.create({
-      streetNumber: 1600,
+      streetNumber: "1600",
       streetName: "Pennsylvania Ave NW",
       locality: "Washington",
     }),

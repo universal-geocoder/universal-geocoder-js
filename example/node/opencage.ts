@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
-import UniversalGeocoder from "../../dist/cjs/UniversalGeocoder";
+import UniversalGeocoder from "UniversalGeocoder";
 
 const openCageGeocoder = UniversalGeocoder.createGeocoder({
   provider: "opencage",
+  apiKey: "api_key",
 });
 
 openCageGeocoder.geocode(

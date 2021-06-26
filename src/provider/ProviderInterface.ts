@@ -32,16 +32,31 @@ export type ErrorCallback = (responseError: ResponseError) => void;
 
 export default interface ProviderInterface<G extends Geocoded> {
   geocode(
+    query: string | GeocodeQuery | GeocodeQueryObject
+  ): Promise<Geocoded[]>;
+  geocode(
     query: string | GeocodeQuery | GeocodeQueryObject,
     callback: GeocodedResultsCallback<G>,
     errorCallback?: ErrorCallback
   ): void;
+
+  geodecode(query: ReverseQuery | ReverseQueryObject): Promise<Geocoded[]>;
   geodecode(
-    latitudeOrQuery: number | string | ReverseQuery | ReverseQueryObject,
-    longitudeOrCallback: number | string | GeocodedResultsCallback<G>,
-    callbackOrErrorCallback?: GeocodedResultsCallback<G> | ErrorCallback,
+    query: ReverseQuery | ReverseQueryObject,
+    callback: GeocodedResultsCallback<G>,
     errorCallback?: ErrorCallback
   ): void;
+  geodecode(
+    latitude: number | string,
+    longitude: number | string
+  ): Promise<Geocoded[]>;
+  geodecode(
+    latitude: number | string,
+    longitude: number | string,
+    callback: GeocodedResultsCallback<G>,
+    errorCallback?: ErrorCallback
+  ): void;
+
   executeRequest(
     params: ExternalLoaderParams,
     callback: GeocodedResultsCallback<G>,

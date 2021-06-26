@@ -35,7 +35,7 @@ describe("OpenStreetMap / Nominatim Geocoder Provider", () => {
     });
 
     expect(() =>
-      provider?.geocode(
+      provider.geocode(
         "66.147.244.214",
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         () => {}
@@ -53,7 +53,7 @@ describe("OpenStreetMap / Nominatim Geocoder Provider", () => {
       userAgent: "Universal Geocoder Example",
     });
 
-    provider?.geocode(
+    provider.geocode(
       NominatimGeocodeQuery.create({
         text: "1600 Pennsylvania Ave, Washington, DC",
         shape: "geojson",
@@ -124,7 +124,7 @@ describe("OpenStreetMap / Nominatim Geocoder Provider", () => {
       userAgent: "Universal Geocoder Example",
     });
 
-    provider?.geodecode(
+    provider.geodecode(
       NominatimReverseQuery.create({
         coordinates: { latitude: 48.8631507, longitude: 2.388911 },
         shape: "kml",

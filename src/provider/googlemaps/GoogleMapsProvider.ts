@@ -210,6 +210,16 @@ export default class GoogleMapsProvider
   }
 
   public geocode(
+    query: string | GoogleMapsGeocodeQuery | GoogleMapsGeocodeQueryObject
+  ): Promise<GoogleMapsGeocoded[]>;
+
+  public geocode(
+    query: string | GoogleMapsGeocodeQuery | GoogleMapsGeocodeQueryObject,
+    callback: GoogleMapsGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geocode(
     query: string | GoogleMapsGeocodeQuery | GoogleMapsGeocodeQueryObject,
     callback?: GoogleMapsGeocodedResultsCallback,
     errorCallback?: ErrorCallback
@@ -267,6 +277,28 @@ export default class GoogleMapsProvider
     }
     return this.executeRequest(params, callback, {}, {}, errorCallback);
   }
+
+  public geodecode(
+    query: GoogleMapsReverseQuery | GoogleMapsReverseQueryObject
+  ): Promise<GoogleMapsGeocoded[]>;
+
+  public geodecode(
+    query: GoogleMapsReverseQuery | GoogleMapsReverseQueryObject,
+    callback: GoogleMapsGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string
+  ): Promise<GoogleMapsGeocoded[]>;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string,
+    callback: GoogleMapsGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
 
   public geodecode(
     latitudeOrQuery:

@@ -30,7 +30,7 @@ describe("LocationIQ Geocoder Provider", () => {
     });
 
     expect(() =>
-      provider?.geocode(
+      provider.geocode(
         "66.147.244.214",
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         () => {}
@@ -48,7 +48,7 @@ describe("LocationIQ Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geocode(
+    provider.geocode(
       "1600 Pennsylvania Ave, Washington, DC",
       (results: LocationIQGeocoded[]) => {
         const geocoded = results[0];
@@ -107,7 +107,7 @@ describe("LocationIQ Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geodecode(
+    provider.geodecode(
       48.8631507,
       2.388911,
       (results: LocationIQGeocoded[]) => {
@@ -165,7 +165,7 @@ describe("LocationIQ Geocoder Provider", () => {
       apiKey: "api_key",
     });
 
-    provider?.geocode(
+    provider.geocode(
       "1600 Pennsylvania Ave, Washington, DC",
       () => {
         done();

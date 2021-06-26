@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
-import UniversalGeocoder from "../../dist/cjs/UniversalGeocoder";
+import UniversalGeocoder from "UniversalGeocoder";
 
 const locationIQGeocoder = UniversalGeocoder.createGeocoder({
   provider: "locationiq",
+  apiKey: "api_key",
 });
 
 const asyncGeocode = async () => {

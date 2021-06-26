@@ -97,6 +97,16 @@ export default class GeoPluginProvider
   }
 
   public geocode(
+    query: string | GeocodeQuery | GeocodeQueryObject
+  ): Promise<GeoPluginGeocoded[]>;
+
+  public geocode(
+    query: string | GeocodeQuery | GeocodeQueryObject,
+    callback: GeoPluginGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geocode(
     query: string | GeocodeQuery | GeocodeQueryObject,
     callback?: GeoPluginGeocodedResultsCallback,
     errorCallback?: ErrorCallback
@@ -143,6 +153,28 @@ export default class GeoPluginProvider
     }
     return this.executeRequest(params, callback, {}, {}, errorCallback);
   }
+
+  public geodecode(
+    query: ReverseQuery | ReverseQueryObject
+  ): Promise<GeoPluginGeocoded[]>;
+
+  public geodecode(
+    query: ReverseQuery | ReverseQueryObject,
+    callback: GeoPluginGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string
+  ): Promise<GeoPluginGeocoded[]>;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string,
+    callback: GeoPluginGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
 
   // eslint-disable-next-line class-methods-use-this
   public geodecode(

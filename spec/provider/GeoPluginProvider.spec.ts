@@ -20,7 +20,7 @@ describe("GeoPlugin Geocoder Provider", () => {
     });
 
     expect(() =>
-      provider?.geocode(
+      provider.geocode(
         "1600 Pennsylvania Ave, Washington, DC",
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         () => {}
@@ -37,7 +37,7 @@ describe("GeoPlugin Geocoder Provider", () => {
     });
 
     expect(() =>
-      provider?.geodecode(
+      provider.geodecode(
         48.8631507,
         2.388911,
         // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -54,7 +54,7 @@ describe("GeoPlugin Geocoder Provider", () => {
       provider: "geoplugin",
     });
 
-    provider?.geocode("190.226.155.134", (results: GeoPluginGeocoded[]) => {
+    provider.geocode("190.226.155.134", (results: GeoPluginGeocoded[]) => {
       const geocoded = results[0];
 
       expect(geocoded).toBeDefined();
@@ -85,7 +85,7 @@ describe("GeoPlugin Geocoder Provider", () => {
       provider: "geoplugin",
     });
 
-    provider?.geocode("127.0.0.1", (results: GeoPluginGeocoded[]) => {
+    provider.geocode("127.0.0.1", (results: GeoPluginGeocoded[]) => {
       const geocoded = results[0];
 
       expect(geocoded).toBeDefined();
@@ -111,7 +111,7 @@ describe("GeoPlugin Geocoder Provider", () => {
       provider: "geoplugin",
     });
 
-    provider?.geocode(
+    provider.geocode(
       "192.168.1.10",
       () => {
         done();

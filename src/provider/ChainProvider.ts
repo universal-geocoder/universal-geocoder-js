@@ -43,6 +43,16 @@ export default class ChainProvider implements ProviderInterface<Geocoded> {
   }
 
   public geocode(
+    query: string | GeocodeQuery | GeocodeQueryObject
+  ): Promise<Geocoded[]>;
+
+  public geocode(
+    query: string | GeocodeQuery | GeocodeQueryObject,
+    callback: ChainGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geocode(
     query: string | GeocodeQuery | GeocodeQueryObject,
     callback?: ChainGeocodedResultsCallback,
     errorCallback?: ErrorCallback
@@ -77,6 +87,28 @@ export default class ChainProvider implements ProviderInterface<Geocoded> {
       errorCallback
     );
   }
+
+  public geodecode(
+    query: ReverseQuery | ReverseQueryObject
+  ): Promise<Geocoded[]>;
+
+  public geodecode(
+    query: ReverseQuery | ReverseQueryObject,
+    callback: ChainGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string
+  ): Promise<Geocoded[]>;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string,
+    callback: ChainGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
 
   public geodecode(
     latitudeOrQuery: number | string | ReverseQuery | ReverseQueryObject,

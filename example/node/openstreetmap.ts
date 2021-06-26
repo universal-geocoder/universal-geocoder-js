@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import UniversalGeocoder from "../../dist/cjs/UniversalGeocoder";
+import UniversalGeocoder from "UniversalGeocoder";
 
 const openStreetMapGeocoder = UniversalGeocoder.createGeocoder({
   provider: "openstreetmap",

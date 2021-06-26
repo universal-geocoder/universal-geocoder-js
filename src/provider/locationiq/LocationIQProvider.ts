@@ -210,6 +210,16 @@ export default class LocationIQProvider
   }
 
   public geocode(
+    query: string | LocationIQGeocodeQuery | LocationIQGeocodeQueryObject
+  ): Promise<LocationIQGeocoded[]>;
+
+  public geocode(
+    query: string | LocationIQGeocodeQuery | LocationIQGeocodeQueryObject,
+    callback: LocationIQGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geocode(
     query: string | LocationIQGeocodeQuery | LocationIQGeocodeQueryObject,
     callback?: LocationIQGeocodedResultsCallback,
     errorCallback?: ErrorCallback
@@ -276,6 +286,28 @@ export default class LocationIQProvider
     }
     return this.executeRequest(params, callback, {}, {}, errorCallback);
   }
+
+  public geodecode(
+    query: LocationIQReverseQuery | LocationIQReverseQueryObject
+  ): Promise<LocationIQGeocoded[]>;
+
+  public geodecode(
+    query: LocationIQReverseQuery | LocationIQReverseQueryObject,
+    callback: LocationIQGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string
+  ): Promise<LocationIQGeocoded[]>;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string,
+    callback: LocationIQGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
 
   public geodecode(
     latitudeOrQuery:

@@ -302,6 +302,16 @@ export default class OpenCageProvider
   }
 
   public geocode(
+    query: string | OpenCageGeocodeQuery | OpenCageGeocodeQueryObject
+  ): Promise<OpenCageGeocoded[]>;
+
+  public geocode(
+    query: string | OpenCageGeocodeQuery | OpenCageGeocodeQueryObject,
+    callback: OpenCageGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geocode(
     query: string | OpenCageGeocodeQuery | OpenCageGeocodeQueryObject,
     callback?: OpenCageGeocodedResultsCallback,
     errorCallback?: ErrorCallback
@@ -355,6 +365,28 @@ export default class OpenCageProvider
     }
     return this.executeRequest(params, callback, {}, {}, errorCallback);
   }
+
+  public geodecode(
+    query: OpenCageReverseQuery | OpenCageReverseQueryObject
+  ): Promise<OpenCageGeocoded[]>;
+
+  public geodecode(
+    query: OpenCageReverseQuery | OpenCageReverseQueryObject,
+    callback: OpenCageGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string
+  ): Promise<OpenCageGeocoded[]>;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string,
+    callback: OpenCageGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
 
   public geodecode(
     latitudeOrQuery:

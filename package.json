@@ -95,7 +95,7 @@
     "serve": "http-server",
     "test": "ts-node --project tsconfig-cjs.json --compiler ttypescript -r tsconfig-paths/register node_modules/.bin/jasmine",
     "test-record": "POLLY_RECORD=1 npm test",
-    "ts-node": "ts-node --project example/node/tsconfig.json",
+    "ts-node": "ts-node --project tsconfig-cjs.json --compiler ttypescript -r tsconfig-paths/register",
     "watch": "concurrently -k \"webpack --config webpack.dev.js --watch\" \"ttsc -p tsconfig-cjs.json --watch\" \"ttsc --watch\""
   },
   "lint-staged": {

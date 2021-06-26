@@ -171,6 +171,16 @@ export default class YandexProvider
   }
 
   public geocode(
+    query: string | YandexGeocodeQuery | YandexGeocodeQueryObject
+  ): Promise<YandexGeocoded[]>;
+
+  public geocode(
+    query: string | YandexGeocodeQuery | YandexGeocodeQueryObject,
+    callback: YandexGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geocode(
     query: string | YandexGeocodeQuery | YandexGeocodeQueryObject,
     callback?: YandexGeocodedResultsCallback,
     errorCallback?: ErrorCallback
@@ -237,6 +247,28 @@ export default class YandexProvider
     }
     return this.executeRequest(params, callback, {}, {}, errorCallback);
   }
+
+  public geodecode(
+    query: YandexReverseQuery | YandexReverseQueryObject
+  ): Promise<YandexGeocoded[]>;
+
+  public geodecode(
+    query: YandexReverseQuery | YandexReverseQueryObject,
+    callback: YandexGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string
+  ): Promise<YandexGeocoded[]>;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string,
+    callback: YandexGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
 
   public geodecode(
     latitudeOrQuery:

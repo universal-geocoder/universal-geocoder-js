@@ -1,7 +1,10 @@
 /* eslint-disable no-console */
-import UniversalGeocoder from "../../dist/cjs/UniversalGeocoder";
+import UniversalGeocoder from "UniversalGeocoder";
 
-const mapboxGeocoder = UniversalGeocoder.createGeocoder({ provider: "mapbox" });
+const mapboxGeocoder = UniversalGeocoder.createGeocoder({
+  provider: "mapbox",
+  apiKey: "api_key",
+});
 
 mapboxGeocoder.geocode("1600 Pennsylvania Ave NW, Washington, DC", (result) => {
   console.log("geocode", result);

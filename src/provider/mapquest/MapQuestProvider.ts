@@ -134,6 +134,16 @@ export default class MapQuestProvider
   }
 
   public geocode(
+    query: string | MapQuestGeocodeQuery | MapQuestGeocodeQueryObject
+  ): Promise<MapQuestGeocoded[]>;
+
+  public geocode(
+    query: string | MapQuestGeocodeQuery | MapQuestGeocodeQueryObject,
+    callback: MapQuestGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geocode(
     query: string | MapQuestGeocodeQuery | MapQuestGeocodeQueryObject,
     callback?: MapQuestGeocodedResultsCallback,
     errorCallback?: ErrorCallback
@@ -227,6 +237,28 @@ export default class MapQuestProvider
     }
     return this.executeRequest(params, callback, {}, body, errorCallback);
   }
+
+  public geodecode(
+    query: ReverseQuery | ReverseQueryObject
+  ): Promise<MapQuestGeocoded[]>;
+
+  public geodecode(
+    query: ReverseQuery | ReverseQueryObject,
+    callback: MapQuestGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string
+  ): Promise<MapQuestGeocoded[]>;
+
+  public geodecode(
+    latitude: number | string,
+    longitude: number | string,
+    callback: MapQuestGeocodedResultsCallback,
+    errorCallback?: ErrorCallback
+  ): void;
 
   public geodecode(
     latitudeOrQuery: number | string | ReverseQuery | ReverseQueryObject,
