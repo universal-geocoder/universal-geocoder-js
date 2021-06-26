@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.14.1
+
+* Export missing types
+
 ## 0.14.0
 
 * Better TypeScript inference for `createGeocoder`, `geocode` and `geodecode`

@@ -12,3 +12,4 @@ export * from "GeocoderProviderFactory";
 export { default as GeoJsonDumper } from "GeoJsonDumper";
 export * from "GeoJsonDumper";
 export { default } from "UniversalGeocoder";
+export * from "UniversalGeocoder";

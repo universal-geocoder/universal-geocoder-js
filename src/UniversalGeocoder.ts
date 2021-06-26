@@ -26,9 +26,12 @@ import ProviderFactory, {
   RestrictedProviderOptionInterface,
   YandexGeocoderProviderFactoryOptions,
 } from "GeocoderProviderFactory";
-import type { ProviderName as GeocoderName } from "GeocoderProviderFactory";
+import type {
+  ProviderName as GeocoderName,
+  GeocoderProvider as Geocoder,
+} from "GeocoderProviderFactory";
 
-export type { GeocoderName };
+export type { GeocoderName, Geocoder };
 
 export default class UniversalGeocoder {
   public version = "0.1.0";
@@ -82,7 +85,7 @@ export default class UniversalGeocoder {
 
   public static createGeocoder<O extends RestrictedProviderOptionInterface>(
     options: GeocoderName | O
-  ): ProviderInterface<Geocoded>;
+  ): Geocoder;
 
   public static createGeocoder<O extends ProviderOptionInterface>(
     options: string | O
@@ -90,7 +93,7 @@ export default class UniversalGeocoder {
 
   public static createGeocoder<O extends RestrictedProviderOptionInterface>(
     options: GeocoderName | O
-  ): ProviderInterface<Geocoded> | undefined {
+  ): Geocoder | undefined {
     return ProviderFactory.createProvider(options);
   }
 }
