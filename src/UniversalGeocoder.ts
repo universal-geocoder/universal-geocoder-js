@@ -26,12 +26,11 @@ import ProviderFactory, {
   RestrictedProviderOptionInterface,
   YandexGeocoderProviderFactoryOptions,
 } from "GeocoderProviderFactory";
-import type {
-  ProviderName as GeocoderName,
-  GeocoderProvider as Geocoder,
-} from "GeocoderProviderFactory";
+import type { ProviderName as GeocoderName } from "GeocoderProviderFactory";
 
-export type { GeocoderName, Geocoder };
+export type Geocoder = ProviderInterface<Geocoded>;
+
+export type { GeocoderName };
 
 export default class UniversalGeocoder {
   public version = "0.1.0";
